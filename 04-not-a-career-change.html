@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Kapitał Życia — AD 4 — Not a Career Change</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@400;500;600;700&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root {
@@ -273,6 +273,194 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.bright .stamp, .ad.warning .stamp { border-color: var(--green-night); color: var(--green-night); }
 .ad.green .stamp { border-color: var(--cream); color: var(--cream); }
 
+/* ============= LAYOUT: UGC-STORY (Iman Gadzhi style) ============= */
+.layout-ugc { padding: 0; position: relative; height: 100%; overflow: hidden; }
+.layout-ugc .photo-fullbleed { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+.layout-ugc .photo-fullbleed::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.5) 100%); }
+.layout-ugc .ugc-content { position: relative; z-index: 1; height: 100%;
+  padding: 70px 60px; display: flex; flex-direction: column; }
+.ugc-question-sticker { background: #1A1A1A; color: white; align-self: center;
+  padding: 14px 32px; border-radius: 100px; font-family: 'Inter', sans-serif;
+  font-size: 22px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 18px; }
+.ugc-question-bubble { background: white; padding: 24px 30px; border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-size: 30px; line-height: 1.3; font-weight: 600;
+  color: #1A1A1A; margin: 0 auto 36px; max-width: 80%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.ugc-message { background: white; padding: 18px 26px; border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-size: 24px; line-height: 1.35; color: #1A1A1A;
+  margin-bottom: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.14); max-width: 88%; align-self: flex-start; }
+.ugc-message.right { align-self: flex-end; }
+.ugc-message.bold-answer { font-weight: 800; align-self: center; padding: 14px 24px; }
+.ugc-message .red { color: #C0392B; font-weight: 700; }
+.ugc-message .underline-red { text-decoration: underline; text-decoration-color: #C0392B;
+  text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.layout-ugc .ugc-cta-row { margin-top: auto; padding-top: 20px;
+  display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.96);
+  margin: 0 -60px -70px; padding: 24px 60px; }
+.layout-ugc .ugc-cta-row .url-text { flex: 1; font-family: 'Inter', sans-serif;
+  font-size: 18px; color: #1A1A1A; }
+.layout-ugc .ugc-cta-row .url-text strong { display: block; font-size: 20px; }
+.layout-ugc .ugc-cta-row .cta-button { padding: 14px 22px; font-size: 18px;
+  background: white; color: var(--green-deep); border: 2px solid var(--green-deep); border-radius: 6px; }
+
+/* ============= LAYOUT: BOLD-NUMBERED (FR ETF style) ============= */
+.layout-numbered { padding: 80px 70px; position: relative; }
+.layout-numbered .layout-numbered-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.layout-numbered .layout-numbered-bg::before, .layout-numbered .layout-numbered-bg::after {
+  content: ''; position: absolute; border-radius: 50%; border: 2px solid rgba(107,194,59,0.15); }
+.layout-numbered .layout-numbered-bg::before { width: 1200px; height: 1200px; bottom: -700px; right: -400px; }
+.layout-numbered .layout-numbered-bg::after { width: 800px; height: 800px; bottom: -400px; right: -200px; border-color: rgba(107,194,59,0.25); }
+.layout-numbered .numbered-headline { font-family: 'Anton', sans-serif; font-size: 110px; line-height: 0.92;
+  letter-spacing: -0.01em; color: white; margin: 30px 0; text-transform: uppercase; }
+.ad.cream .layout-numbered .numbered-headline, .ad.bright .layout-numbered .numbered-headline { color: var(--green-night); }
+.layout-numbered .numbered-headline .magenta { color: #FF3D8B; }
+.layout-numbered .numbered-headline .bright-green { color: var(--green-bright); }
+.layout-numbered .numbered-subtitle { font-family: 'Inter', sans-serif; font-size: 24px;
+  color: rgba(255,255,255,0.7); font-weight: 500; margin-bottom: 40px; font-style: italic; }
+.ad.cream .layout-numbered .numbered-subtitle, .ad.bright .layout-numbered .numbered-subtitle { color: rgba(14,45,34,0.65); }
+.numbered-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 50px; margin: 24px 0; }
+.numbered-item { display: flex; flex-direction: column; gap: 8px; }
+.numbered-item .num { font-family: 'Anton', sans-serif; font-size: 70px; line-height: 1;
+  color: var(--green-bright); }
+.ad.cream .numbered-item .num, .ad.bright .numbered-item .num { color: var(--green); }
+.numbered-item .item-text { font-family: 'Inter', sans-serif; font-size: 22px;
+  line-height: 1.35; color: rgba(255,255,255,0.95); font-weight: 500; }
+.ad.cream .numbered-item .item-text, .ad.bright .numbered-item .item-text { color: var(--green-night); }
+.layout-numbered .pill-cta { background: rgba(255,255,255,0.15); color: white;
+  border: 2px solid rgba(255,255,255,0.4); padding: 22px 40px; border-radius: 100px;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px;
+  align-self: flex-start; margin-top: auto; backdrop-filter: blur(10px); }
+.ad.cream .layout-numbered .pill-cta, .ad.bright .layout-numbered .pill-cta {
+  background: var(--green-deep); color: white; border-color: var(--green-deep); }
+
+/* ============= LAYOUT: BOLD-STATEMENT (Atria text-only) ============= */
+.layout-bold-stmt { padding: 80px 70px; }
+.layout-bold-stmt .massive-statement { font-family: 'Anton', sans-serif; font-size: 150px;
+  line-height: 0.9; letter-spacing: -0.02em; margin: auto 0; }
+.ad.format-1-1 .layout-bold-stmt .massive-statement { font-size: 110px; }
+.ad.format-9-16 .layout-bold-stmt .massive-statement { font-size: 170px; }
+.layout-bold-stmt .massive-statement .accent { color: var(--green); font-style: italic; }
+.ad.dark .layout-bold-stmt .massive-statement, .ad.deep .layout-bold-stmt .massive-statement,
+.ad.charcoal .layout-bold-stmt .massive-statement, .ad.green .layout-bold-stmt .massive-statement { color: white; }
+.ad.dark .layout-bold-stmt .massive-statement .accent, .ad.deep .layout-bold-stmt .massive-statement .accent,
+.ad.charcoal .layout-bold-stmt .massive-statement .accent { color: var(--green-bright); }
+.ad.bright .layout-bold-stmt .massive-statement, .ad.warning .layout-bold-stmt .massive-statement { color: var(--green-night); }
+.ad.bright .layout-bold-stmt .massive-statement .accent { color: white; }
+.layout-bold-stmt .stmt-supporting { font-family: 'Inter', sans-serif; font-size: 28px;
+  line-height: 1.4; margin-bottom: 32px; max-width: 80%; opacity: 0.85; }
+
+/* ============= LAYOUT: HANDWRITTEN-NOTES (Napkin-Math/Private-Notes) ============= */
+.layout-notes { padding: 90px 80px; position: relative;
+  background: #F5EFE3 !important;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(0,0,0,0.06) 38px, rgba(0,0,0,0.06) 39px) !important;
+}
+.ad.dark .layout-notes, .ad.deep .layout-notes, .ad.charcoal .layout-notes { background: #2C2419 !important; color: white; }
+.layout-notes::before { content: ''; position: absolute; left: 80px; top: 0; bottom: 0;
+  width: 3px; background: rgba(192,57,43,0.4); pointer-events: none; }
+.layout-notes .notes-title { font-family: 'Caveat', cursive; font-size: 64px; font-weight: 700;
+  color: var(--green-deep); margin-bottom: 20px; transform: rotate(-2deg); }
+.ad.dark .layout-notes .notes-title { color: var(--green-bright); }
+.layout-notes .notes-body { font-family: 'Caveat', cursive; font-size: 38px; line-height: 1.4;
+  color: #1A1A1A; }
+.ad.dark .layout-notes .notes-body { color: rgba(255,255,255,0.92); }
+.notes-list { list-style: none; padding: 0; margin: 16px 0; }
+.notes-list li { font-family: 'Caveat', cursive; font-size: 36px; padding: 8px 0 8px 50px;
+  position: relative; line-height: 1.3; }
+.notes-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green);
+  font-weight: 700; font-size: 44px; transform: rotate(-8deg); }
+.notes-list li.crossed { text-decoration: line-through; text-decoration-color: var(--red);
+  text-decoration-thickness: 3px; opacity: 0.7; }
+.notes-list li.crossed::before { content: '✗'; color: var(--red); }
+.notes-math { font-family: 'Caveat', cursive; font-size: 56px; line-height: 1.2;
+  margin: 20px 0; color: var(--green-deep); }
+.ad.dark .notes-math { color: var(--green-bright); }
+.notes-math .calc-line { display: block; padding-left: 20px; }
+.notes-math .equals { color: var(--red); font-weight: 700; }
+.layout-notes .notes-cta { font-family: 'Caveat', cursive; font-size: 44px; color: var(--green);
+  margin-top: 30px; font-weight: 700; }
+.layout-notes .notes-cta::before { content: '→ '; }
+
+/* ============= LAYOUT: CHALKBOARD (Cafe-Chalkboard-Menu) ============= */
+.layout-chalkboard { padding: 80px 70px; position: relative;
+  background: #1F2823 !important; color: white; }
+.layout-chalkboard::before { content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.4) 100%),
+                    repeating-linear-gradient(0deg, transparent 0 80px, rgba(255,255,255,0.015) 80px 81px);
+  pointer-events: none; }
+.chalk-frame { border: 14px solid #5C3D26; border-radius: 4px; padding: 50px 60px;
+  position: relative; z-index: 1; min-height: 90%;
+  background: linear-gradient(135deg, #1F2823 0%, #1A2620 50%, #243029 100%);
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.6); }
+.chalk-eyebrow { font-family: 'Caveat', cursive; font-size: 36px; color: rgba(255,255,255,0.6);
+  margin-bottom: 14px; transform: rotate(-1deg); }
+.chalk-headline { font-family: 'Permanent Marker', cursive; font-size: 78px; line-height: 1.05;
+  margin-bottom: 32px; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+.chalk-headline .accent { color: var(--green-bright); }
+.chalk-menu { list-style: none; padding: 0; margin: 28px 0; }
+.chalk-menu li { font-family: 'Caveat', cursive; font-size: 38px; line-height: 1.4;
+  padding: 14px 0; border-bottom: 2px dashed rgba(255,255,255,0.2);
+  display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.chalk-menu li .price { font-family: 'Permanent Marker', cursive;
+  color: var(--green-bright); font-size: 42px; }
+.chalk-cta { font-family: 'Permanent Marker', cursive; font-size: 44px;
+  color: var(--green-bright); margin-top: 30px; padding: 16px 28px;
+  border: 3px solid var(--green-bright); border-radius: 8px;
+  align-self: flex-start; transform: rotate(-1.5deg); }
+
+/* ============= LAYOUT: REDACTED-DOC (Redacted-Checklist) ============= */
+.layout-redacted { padding: 100px 90px;
+  background: #FBFBF8 !important; color: #1A1A1A; }
+.redacted-stamp { position: absolute; top: 80px; right: 80px;
+  border: 3px solid #C0392B; color: #C0392B; padding: 8px 18px;
+  font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 700;
+  letter-spacing: 0.16em; transform: rotate(-8deg); text-transform: uppercase;
+  background: rgba(192,57,43,0.04); }
+.redacted-doc-title { font-family: 'Playfair Display', serif; font-size: 52px;
+  line-height: 1.15; margin-bottom: 12px; color: #1A1A1A; font-weight: 700; }
+.redacted-doc-meta { font-family: 'Inter', sans-serif; font-size: 16px;
+  color: #6B6B6B; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 36px;
+  padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.15); }
+.redacted-list { list-style: none; padding: 0; margin: 24px 0; }
+.redacted-list li { font-family: 'Inter', sans-serif; font-size: 24px;
+  line-height: 1.6; padding: 12px 0 12px 36px; position: relative;
+  border-bottom: 1px solid rgba(0,0,0,0.08); }
+.redacted-list li::before { content: '☐'; position: absolute; left: 0; color: #1A1A1A;
+  font-size: 24px; font-weight: 700; }
+.redacted-list li.checked::before { content: '✗'; color: var(--green); }
+.redact-bar { display: inline-block; background: #1A1A1A; color: #1A1A1A;
+  padding: 0 6px; user-select: none; font-weight: 700; }
+.redact-bar.red { background: #C0392B; color: #C0392B; }
+.redacted-cta { background: #1A1A1A; color: white; padding: 18px 30px;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 22px;
+  letter-spacing: 0.06em; align-self: flex-start; margin-top: 30px;
+  text-transform: uppercase; border-radius: 0; }
+
+/* ============= LAYOUT: WATERCOLOR (Watercolor-Invitation) ============= */
+.layout-watercolor { padding: 100px 90px; position: relative;
+  background: #FAF6EE !important; color: #2A2419;
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(107,194,59,0.18) 0%, transparent 30%),
+    radial-gradient(circle at 80% 85%, rgba(0,150,57,0.15) 0%, transparent 35%),
+    radial-gradient(circle at 60% 30%, rgba(192,57,43,0.08) 0%, transparent 25%) !important;
+}
+.watercolor-eyebrow { font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 30px; color: var(--green-deep); margin-bottom: 18px;
+  letter-spacing: 0.05em; }
+.watercolor-headline { font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 84px; line-height: 1.05; margin-bottom: 28px; color: #2A2419; }
+.watercolor-headline .accent { color: var(--green-deep); font-style: italic; font-weight: 400; }
+.watercolor-divider { width: 80px; height: 3px; background: var(--green); margin: 24px 0; }
+.watercolor-body { font-family: 'Inter', sans-serif; font-size: 26px; line-height: 1.5;
+  color: rgba(42,36,25,0.85); margin-bottom: 16px; max-width: 90%; }
+.watercolor-body strong { color: var(--green-deep); font-weight: 700; }
+.watercolor-cta { font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 30px; color: var(--green-deep); padding: 18px 36px;
+  border: 2px solid var(--green-deep); border-radius: 100px;
+  align-self: flex-start; margin-top: 30px; background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(4px); }
+
 /* DRAG / EDIT */
 .drag-mode .draggable { cursor: move; outline: 2px dashed transparent; }
 .drag-mode .draggable:hover { outline-color: var(--red); }
@@ -363,32 +551,27 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 4B">
   <div class="format-bar">
-    <span class="label">AD 4B — Mega 5+ lat</span>
-    <span class="layout-tag">MEGA-NUMBER</span>
+    <span class="label">AD 4B — Handwritten — sieć kontaktów math</span>
+    <span class="layout-tag">HANDWRITTEN-NOTES</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="active" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-9-16 bright">
-    <div class="layout layout-mega">
+  <div class="ad format-9-16 cream">
+    <div class="layout layout-notes">
       <div class="brand-logo draggable">
       <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
       <span>KAPITAŁ ŻYCIA</span>
     </div>
-      <div class="draggable" style="margin-top: 30px;">
-        <div class="eyebrow">TWOJA SIEĆ</div>
-        <div class="mega-hero">5+ LAT</div>
-        <div class="mega-after">i tylko jedna prowizja?</div>
+      <div class="draggable" style="margin-top: 40px;">
+        <div class="notes-title">Twoja sieć (od 5 lat)</div>
+        <div class="notes-body">Liczę na serwetce, ile zarabiasz na 1 kontakcie:</div>
       </div>
-      <div class="draggable"><p class="body-text">Klient kupuje nieruchomość przeważnie <strong>raz w życiu</strong>. Twoja prowizja jest jednorazowa. Potem cisza.</p>
-<p class="body-text"><strong>A gdyby ta sama osoba generowała prowizję jeszcze przez 2 lata?</strong></p>
-<p class="body-text">Nie porzucasz nieruchomości. Budujesz drugi strumień z tej samej sieci.</p></div>
-      <div class="cta draggable">
-      <div class="cta-button">Aplikuj <span>→</span></div>
-      <div class="cta-url">kapitalzycia.pl/cv</div>
-      
-      <div class="brand-footer">
+      <ul class="notes-list"><li>Tej samej rozmowie</li><li>Z tej samej sieci kontaktów</li><li class="">Bez porzucania nieruchomości</li></ul>
+      <div class="notes-math draggable"><span class="calc-line">Nieruchomość × 1 prowizja = jednorazowo</span><span class="calc-line"><span class='equals'>+ Polisa życie × 3 prowizje</span></span><span class="calc-line"><span class='equals'>= 4 wypłaty z 1 klienta</span></span></div>
+      <div class="notes-cta draggable">Sprawdź jak</div>
+      <div class="cta-url" style="margin-top: 8px;">kapitalzycia.pl/cv</div>
+      <div class="brand-footer" style="margin-top: 20px;">
         <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
       </div>
-    </div>
     </div>
   </div>
   <div class="ad-actions">
@@ -407,29 +590,27 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 4C">
   <div class="format-bar">
-    <span class="label">AD 4C — Plus equation</span>
-    <span class="layout-tag">MINIMALIST</span>
+    <span class="label">AD 4C — Watercolor — premium invitation</span>
+    <span class="layout-tag">WATERCOLOR</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="active" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-1-1 green">
-    <div class="layout layout-min">
+  <div class="ad format-1-1">
+    <div class="layout layout-watercolor">
       <div class="brand-logo draggable">
       <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
       <span>KAPITAŁ ŻYCIA</span>
     </div>
-      <div class="draggable" style="margin-top: 60px;">
-        <div class="eyebrow">NIE ALBO-ALBO</div>
+      <div class="draggable" style="margin-top: 50px;">
+        <div class="watercolor-eyebrow">Zaproszenie dla agentów nieruchomości</div>
+        <h1 class="watercolor-headline">Nie zmiana <span class='accent'>kariery</span>.</h1>
+        <div class="watercolor-divider"></div>
       </div>
-      <div class="minimalist-main draggable">Nieruchomości<br><span class='plus'>+</span><br>Ubezpieczenia.</div>
-      <div class="footer-text draggable">Jeden klient. Dwa strumienie prowizji. B2B. 100% online. Bez porzucania rynku nieruchomości.</div>
-      <div class="cta draggable">
-      <div class="cta-button">Sprawdź model <span>→</span></div>
-      <div class="cta-url">kapitalzycia.pl/cv</div>
-      
-      <div class="brand-footer">
+      <div class="draggable"><p class="watercolor-body">Drugi strumień przychodu z tej samej sieci kontaktów, którą już masz.</p><p class="watercolor-body">Prowizja przy zawarciu + w 2. i 3. roku trwania umowy. <strong>B2B. 100% online.</strong></p><p class="watercolor-body">Wybieramy niewiele osób z 5+ latami w branży.</p></div>
+      <div class="watercolor-cta draggable">Aplikuj →</div>
+      <div class="cta-url" style="margin-top: 16px;">kapitalzycia.pl/cv</div>
+      <div class="brand-footer" style="margin-top: 20px;">
         <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
       </div>
-    </div>
     </div>
   </div>
   <div class="ad-actions">
@@ -462,7 +643,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   let editMode = false;
   function toggleEdit() {
     editMode = !editMode;
-    document.querySelectorAll('.ad .headline, .ad .body-text, .ad .eyebrow, .ad .quote-mega, .ad .quote-response, .ad .stat, .ad .compare-row, .ad .cta-button, .ad .cta-url, .ad .brand-tagline, .ad .disclaimer, .ad .mega-hero, .ad .mega-after, .ad .minimalist-main, .ad .footer-text, .ad .stamp, .ad .check-label, .ad .check-value, .ad .split-label, .ad .split-items li, .ad .split-footer, .ad .bar-label, .ad .warning-bar').forEach(el => {
+    document.querySelectorAll('.ad .headline, .ad .body-text, .ad .eyebrow, .ad .quote-mega, .ad .quote-response, .ad .stat, .ad .compare-row, .ad .cta-button, .ad .cta-url, .ad .brand-tagline, .ad .disclaimer, .ad .mega-hero, .ad .mega-after, .ad .minimalist-main, .ad .footer-text, .ad .stamp, .ad .check-label, .ad .check-value, .ad .split-label, .ad .split-items li, .ad .split-footer, .ad .bar-label, .ad .warning-bar, .ad .ugc-question-sticker, .ad .ugc-question-bubble, .ad .ugc-message, .ad .url-text, .ad .numbered-headline, .ad .numbered-subtitle, .ad .numbered-item .num, .ad .numbered-item .item-text, .ad .pill-cta, .ad .massive-statement, .ad .stmt-supporting, .ad .notes-title, .ad .notes-body, .ad .notes-list li, .ad .notes-math, .ad .notes-math .calc-line, .ad .notes-cta, .ad .chalk-eyebrow, .ad .chalk-headline, .ad .chalk-menu li, .ad .chalk-cta, .ad .redacted-stamp, .ad .redacted-doc-meta, .ad .redacted-doc-title, .ad .redacted-list li, .ad .redacted-cta, .ad .watercolor-eyebrow, .ad .watercolor-headline, .ad .watercolor-body, .ad .watercolor-cta').forEach(el => {
       el.contentEditable = editMode;
     });
     document.getElementById('formatToolbar').classList.toggle('visible', editMode);
