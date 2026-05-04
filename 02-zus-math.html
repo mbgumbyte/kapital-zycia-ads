@@ -4,188 +4,284 @@
 <meta charset="UTF-8">
 <title>Kapitał Życia — AD 2 — The ZUS Math</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-  :root {
-    /* 3 brand greens iš Kapitał Życia logo */
-    --green-bright: #6BC23B;
-    --green: #009639;
-    --green-deep: #0E5C2F;
-    --green-night: #052D1A;
-    --cream: #F5EFE3;
-    --sand: #EAE0CC;
-    --white: #FFFFFF;
-    --black: #0F0F0F;
-    --charcoal: #1A1A1A;
-    --gray: #6B6B6B;
-    --red: #C0392B;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
+:root {
+  --green-bright: #6BC23B; --green: #009639; --green-deep: #0E5C2F; --green-night: #052D1A;
+  --cream: #F5EFE3; --sand: #EAE0CC; --white: #FFFFFF; --black: #0F0F0F;
+  --charcoal: #1A1A1A; --gray: #6B6B6B;
+  --warning-bg: #FFE94A; --warning-text: #1A1A1A;
+  --red: #C0392B;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
 
-  .toolbar { position: sticky; top: 0; z-index: 1000; background: #1a1a1a; color: white;
-    padding: 14px 20px; margin: -40px -20px 30px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
-  .toolbar h1 { font-family: 'Anton', sans-serif; letter-spacing: 0.05em; font-size: 22px; margin-right: auto; }
-  .toolbar .persona { font-size: 12px; color: #aaa; font-weight: 400; margin-left: 14px; }
-  .toolbar button, .toolbar label { background: var(--green); color: white; border: none; padding: 9px 14px;
-    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; white-space: nowrap; }
-  .toolbar button:hover, .toolbar label:hover { background: var(--green-light); }
-  .toolbar button.alt { background: #444; }
-  .toolbar button.alt:hover { background: #666; }
+/* TOOLBAR */
+.toolbar { position: sticky; top: 0; z-index: 1000; background: #1a1a1a; color: white;
+  padding: 14px 20px; margin: -40px -20px 30px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.toolbar h1 { font-family: 'Anton', sans-serif; letter-spacing: 0.05em; font-size: 22px; margin-right: auto; }
+.toolbar .persona { font-size: 12px; color: #aaa; font-weight: 400; margin-left: 14px; }
+.toolbar button { background: var(--green); color: white; border: none; padding: 9px 14px;
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+.toolbar button:hover { background: var(--green-bright); color: var(--green-night); }
+.toolbar button.alt { background: #444; }
+.toolbar button.alt:hover { background: #666; color: white; }
 
-  .format-bar { background: white; padding: 10px 16px; margin-bottom: 8px; border-radius: 8px 8px 0 0;
-    display: flex; gap: 8px; align-items: center; flex-wrap: wrap; box-shadow: 0 -2px 8px rgba(0,0,0,0.04); }
-  .format-bar .label { font-family: 'Anton', sans-serif; letter-spacing: 0.05em; font-size: 16px; color: var(--green); margin-right: auto; }
-  .format-bar button { background: #ddd; color: #333; border: none; padding: 6px 12px; font-size: 12px; border-radius: 4px; cursor: pointer; font-weight: 600; }
-  .format-bar button.active { background: var(--green); color: white; }
+.format-bar { background: white; padding: 10px 16px; margin-bottom: 8px; border-radius: 8px 8px 0 0;
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap; box-shadow: 0 -2px 8px rgba(0,0,0,0.04); }
+.format-bar .label { font-family: 'Anton', sans-serif; letter-spacing: 0.05em; font-size: 16px; color: var(--green-deep); margin-right: auto; }
+.format-bar .layout-tag { background: var(--green-bright); color: var(--green-night);
+  padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-right: 12px; }
+.format-bar button { background: #ddd; color: #333; border: none; padding: 6px 12px; font-size: 12px; border-radius: 4px; cursor: pointer; font-weight: 600; }
+.format-bar button.active { background: var(--green); color: white; }
 
-  .format-toolbar { background: #f5f5f5; padding: 8px 12px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
-    border-bottom: 1px solid #ddd; display: none; position: sticky; top: 60px; z-index: 999; }
-  .format-toolbar.visible { display: flex; }
-  .format-toolbar button { background: white; border: 1px solid #ccc; padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer; font-weight: 600; }
+.format-toolbar { background: #f5f5f5; padding: 8px 12px; display: none; gap: 6px; flex-wrap: wrap; align-items: center;
+  border-bottom: 1px solid #ddd; position: sticky; top: 60px; z-index: 999; }
+.format-toolbar.visible { display: flex; }
+.format-toolbar button { background: white; border: 1px solid #ccc; padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer; font-weight: 600; }
 
-  .ad-wrapper { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
-  .ad { background: var(--white); box-shadow: 0 8px 32px rgba(0,0,0,0.15); overflow: hidden; position: relative; transform-origin: top center; }
-  .ad.format-4-5 { width: 1080px; height: 1350px; transform: scale(0.5); margin-bottom: -675px; }
-  .ad.format-9-16 { width: 1080px; height: 1920px; transform: scale(0.4); margin-bottom: -1152px; }
-  .ad.format-1-1 { width: 1080px; height: 1080px; transform: scale(0.55); margin-bottom: -486px; }
+.ad-wrapper { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
+.ad { background: var(--white); box-shadow: 0 8px 32px rgba(0,0,0,0.15); overflow: hidden; position: relative; transform-origin: top center; }
+.ad.format-4-5 { width: 1080px; height: 1350px; transform: scale(0.5); margin-bottom: -675px; }
+.ad.format-9-16 { width: 1080px; height: 1920px; transform: scale(0.4); margin-bottom: -1152px; }
+.ad.format-1-1 { width: 1080px; height: 1080px; transform: scale(0.55); margin-bottom: -486px; }
 
-  .ad .layout { width: 100%; height: 100%; padding: 80px 70px; display: flex; flex-direction: column; background: var(--white); position: relative; }
-  .ad.dark .layout { background: var(--green-night); color: var(--white); }
-  .ad.deep .layout { background: var(--green-deep); color: var(--white); }
-  .ad.cream .layout { background: var(--cream); }
-  .ad.sand .layout { background: var(--sand); }
-  .ad.green .layout { background: var(--green); color: var(--white); }
-  .ad.bright .layout { background: var(--green-bright); color: var(--green-night); }
-  .ad.charcoal .layout { background: var(--charcoal); color: var(--white); }
+.layout { width: 100%; height: 100%; padding: 80px 70px; display: flex; flex-direction: column;
+  background: var(--white); position: relative; }
+.ad.dark .layout { background: var(--green-night); color: var(--white); }
+.ad.deep .layout { background: var(--green-deep); color: var(--white); }
+.ad.charcoal .layout { background: var(--charcoal); color: var(--white); }
+.ad.cream .layout { background: var(--cream); }
+.ad.green .layout { background: var(--green); color: var(--white); }
+.ad.bright .layout { background: var(--green-bright); color: var(--green-night); }
+.ad.warning .layout { background: var(--warning-bg); color: var(--warning-text); }
 
-  .leaf-decor { position: absolute; pointer-events: none; }
-  .leaf-decor.tr { top: -40px; right: -30px; width: 240px; transform: rotate(20deg); opacity: 0.9; }
-  .leaf-decor.bl { bottom: -40px; left: -30px; width: 200px; transform: rotate(200deg); opacity: 0.85; }
-  .ad.dark .leaf-decor, .ad.deep .leaf-decor, .ad.charcoal .leaf-decor { opacity: 0.35; }
-  .ad.green .leaf-decor, .ad.bright .leaf-decor { opacity: 0.5; }
+/* BRAND LOGO */
+.brand-logo { display: flex; align-items: center; gap: 14px; font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 22px; letter-spacing: 0.08em; color: var(--black); }
+.brand-logo .logo-mark { width: 44px; height: 54px; }
+.ad.dark .brand-logo, .ad.deep .brand-logo, .ad.green .brand-logo, .ad.charcoal .brand-logo { color: var(--white); }
+.ad.bright .brand-logo, .ad.warning .brand-logo { color: var(--green-night); }
 
-  .brand-logo { display: flex; align-items: center; gap: 14px; font-family: 'Inter', sans-serif; font-weight: 800;
-    font-size: 24px; letter-spacing: 0.08em; color: var(--black); }
-  .brand-logo .logo-mark { width: 50px; height: 60px; }
-  .brand-logo .logo-mark svg { width: 100%; height: 100%; }
-  .ad.dark .brand-logo, .ad.deep .brand-logo, .ad.green .brand-logo, .ad.charcoal .brand-logo { color: var(--white); }
-  .ad.bright .brand-logo { color: var(--green-night); }
-  .ad.dark .brand-logo .logo-flame-1, .ad.deep .brand-logo .logo-flame-1, .ad.charcoal .brand-logo .logo-flame-1 { fill: rgba(255,255,255,0.85); }
-  .ad.dark .brand-logo .logo-flame-2, .ad.deep .brand-logo .logo-flame-2, .ad.charcoal .brand-logo .logo-flame-2 { fill: rgba(255,255,255,0.65); }
-  .ad.dark .brand-logo .logo-flame-3, .ad.deep .brand-logo .logo-flame-3, .ad.charcoal .brand-logo .logo-flame-3 { fill: rgba(255,255,255,0.45); }
-  .ad.green .brand-logo .logo-flame-1 { fill: var(--white); }
-  .ad.green .brand-logo .logo-flame-2 { fill: var(--green-bright); }
-  .ad.green .brand-logo .logo-flame-3 { fill: var(--green-night); }
+/* COMMON */
+.eyebrow { font-family: 'Anton', sans-serif; font-size: 24px; letter-spacing: 0.18em;
+  color: var(--green-deep); text-transform: uppercase; margin-bottom: 24px; }
+.ad.dark .eyebrow, .ad.deep .eyebrow, .ad.charcoal .eyebrow, .ad.green .eyebrow { color: var(--green-bright); }
+.ad.bright .eyebrow, .ad.warning .eyebrow { color: var(--green-night); }
 
-  .eyebrow { font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 0.18em;
-    color: var(--green-deep); text-transform: uppercase; margin-bottom: 22px; }
-  .ad.dark .eyebrow, .ad.deep .eyebrow, .ad.charcoal .eyebrow { color: var(--green-bright); }
-  .ad.green .eyebrow { color: var(--cream); }
-  .ad.bright .eyebrow { color: var(--green-night); }
+.headline { font-family: 'Anton', sans-serif; font-size: 86px; line-height: 0.98;
+  letter-spacing: -0.01em; color: var(--black); margin-bottom: 28px; }
+.ad.dark .headline, .ad.deep .headline, .ad.green .headline, .ad.charcoal .headline { color: var(--white); }
+.ad.bright .headline, .ad.warning .headline { color: var(--green-night); }
+.headline .accent { color: var(--green); font-style: italic; }
+.ad.dark .headline .accent, .ad.deep .headline .accent, .ad.charcoal .headline .accent { color: var(--green-bright); }
+.ad.green .headline .accent, .ad.bright .headline .accent { color: var(--cream); font-style: italic; }
+.ad.warning .headline .accent { color: var(--red); font-style: italic; }
+.headline .strike { text-decoration: line-through; text-decoration-thickness: 4px; opacity: 0.7; }
 
-  .headline { font-family: 'Anton', sans-serif; font-size: 82px; line-height: 0.98;
-    letter-spacing: -0.01em; color: var(--black); margin-bottom: 30px; }
-  .ad.dark .headline, .ad.deep .headline, .ad.green .headline, .ad.charcoal .headline { color: var(--white); }
-  .ad.bright .headline { color: var(--green-night); }
-  .headline .accent { color: var(--green); }
-  .ad.dark .headline .accent, .ad.deep .headline .accent, .ad.charcoal .headline .accent { color: var(--green-bright); }
-  .ad.green .headline .accent { color: var(--green-bright); }
-  .ad.bright .headline .accent { color: var(--white); }
+.body-text { font-family: 'Inter', sans-serif; font-size: 28px; line-height: 1.42;
+  color: var(--black); margin-bottom: 16px; font-weight: 400; }
+.ad.dark .body-text, .ad.deep .body-text, .ad.green .body-text, .ad.charcoal .body-text { color: rgba(255,255,255,0.92); }
+.ad.bright .body-text, .ad.warning .body-text { color: var(--green-night); }
+.body-text strong { font-weight: 700; color: var(--green-deep); }
+.ad.dark .body-text strong, .ad.deep .body-text strong, .ad.charcoal .body-text strong { color: var(--green-bright); }
+.ad.green .body-text strong { color: var(--cream); }
+.ad.bright .body-text strong, .ad.warning .body-text strong { color: var(--green-night); text-decoration: underline; text-decoration-color: var(--green); text-decoration-thickness: 3px; }
 
-  .hook-large { font-family: 'Anton', sans-serif; font-size: 140px; line-height: 0.92;
-    letter-spacing: -0.02em; margin-bottom: 32px; color: var(--black); }
-  .ad.dark .hook-large, .ad.deep .hook-large, .ad.green .hook-large, .ad.charcoal .hook-large { color: var(--white); }
-  .ad.bright .hook-large { color: var(--green-night); }
-  .hook-large .green { color: var(--green); }
-  .ad.dark .hook-large .green, .ad.deep .hook-large .green, .ad.charcoal .hook-large .green { color: var(--green-bright); }
-  .ad.bright .hook-large .green { color: var(--white); }
+/* CTA */
+.cta { margin-top: auto; padding-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+.cta-button { display: inline-flex; align-items: center; gap: 12px; padding: 20px 32px; background: var(--green-deep);
+  color: white; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px; align-self: flex-start; border-radius: 6px; }
+.ad.green .cta-button { background: var(--white); color: var(--green-deep); }
+.ad.dark .cta-button, .ad.deep .cta-button, .ad.charcoal .cta-button { background: var(--green-bright); color: var(--green-night); }
+.ad.bright .cta-button { background: var(--green-night); color: var(--white); }
+.ad.warning .cta-button { background: var(--green-night); color: var(--warning-bg); }
+.cta-url { font-family: 'Inter', sans-serif; font-size: 22px; color: var(--gray); font-weight: 500; }
+.ad.dark .cta-url, .ad.deep .cta-url, .ad.green .cta-url, .ad.charcoal .cta-url { color: rgba(255,255,255,0.7); }
+.ad.bright .cta-url, .ad.warning .cta-url { color: var(--green-night); opacity: 0.7; }
 
-  .body-text { font-family: 'Inter', sans-serif; font-size: 28px; line-height: 1.42;
-    color: var(--black); margin-bottom: 18px; font-weight: 400; }
-  .ad.dark .body-text, .ad.deep .body-text, .ad.green .body-text, .ad.charcoal .body-text { color: rgba(255,255,255,0.92); }
-  .ad.bright .body-text { color: var(--green-night); }
-  .body-text strong { font-weight: 700; color: var(--green); }
-  .ad.dark .body-text strong, .ad.deep .body-text strong, .ad.charcoal .body-text strong { color: var(--green-bright); }
-  .ad.green .body-text strong { color: var(--green-bright); }
-  .ad.bright .body-text strong { color: var(--white); }
+.disclaimer { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.4; color: var(--gray);
+  font-weight: 300; font-style: italic; margin-top: 14px; }
+.ad.dark .disclaimer, .ad.deep .disclaimer, .ad.green .disclaimer, .ad.charcoal .disclaimer { color: rgba(255,255,255,0.55); }
+.ad.bright .disclaimer, .ad.warning .disclaimer { color: var(--green-night); opacity: 0.55; }
 
-  .quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 44px; line-height: 1.25;
-    margin-bottom: 28px; color: var(--black); }
-  .ad.dark .quote, .ad.deep .quote, .ad.green .quote, .ad.charcoal .quote { color: var(--cream); }
-  .ad.bright .quote { color: var(--green-night); }
+.brand-footer { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.1);
+  display: flex; align-items: center; justify-content: space-between; }
+.ad.dark .brand-footer, .ad.deep .brand-footer, .ad.green .brand-footer, .ad.charcoal .brand-footer { border-top-color: rgba(255,255,255,0.18); }
+.ad.bright .brand-footer, .ad.warning .brand-footer { border-top-color: rgba(14,45,34,0.2); }
+.brand-tagline { font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: 0.14em;
+  color: var(--gray); text-transform: uppercase; font-weight: 700; }
+.ad.dark .brand-tagline, .ad.deep .brand-tagline, .ad.green .brand-tagline, .ad.charcoal .brand-tagline { color: rgba(255,255,255,0.65); }
+.ad.bright .brand-tagline, .ad.warning .brand-tagline { color: var(--green-night); opacity: 0.7; }
 
-  .compare { margin: 20px 0 28px; display: flex; flex-direction: column; gap: 10px; }
-  .compare-row { font-family: 'Inter', sans-serif; font-size: 26px; line-height: 1.35;
-    padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
-  .ad.dark .compare-row, .ad.deep .compare-row, .ad.charcoal .compare-row { border-bottom-color: rgba(255,255,255,0.12); }
-  .compare-row.bad { color: var(--red); }
-  .compare-row.good { color: var(--green); font-weight: 600; }
-  .ad.dark .compare-row.good, .ad.deep .compare-row.good, .ad.charcoal .compare-row.good { color: var(--green-bright); }
-  .ad.bright .compare-row.good { color: var(--white); }
-  .compare-row .icon { display: inline-block; width: 36px; font-weight: 700; }
+/* ============= LAYOUT: MEGA-NUMBER ============= */
+.layout-mega { padding: 70px 60px 60px; }
+.mega-hero { font-family: 'Anton', sans-serif; font-size: 280px; line-height: 0.85; letter-spacing: -0.04em;
+  color: var(--green); margin: 30px 0; word-break: break-word; }
+.ad.dark .mega-hero, .ad.deep .mega-hero, .ad.charcoal .mega-hero { color: var(--green-bright); }
+.ad.bright .mega-hero, .ad.warning .mega-hero { color: var(--green-night); }
+.ad.green .mega-hero { color: var(--cream); }
+.ad.cream .mega-hero { color: var(--green-deep); }
+.ad.format-9-16 .mega-hero { font-size: 320px; }
+.ad.format-1-1 .mega-hero { font-size: 240px; }
+.mega-hero.strike { text-decoration: line-through; text-decoration-thickness: 12px; }
+.mega-after { font-family: 'Anton', sans-serif; font-size: 56px; line-height: 1; letter-spacing: -0.01em;
+  margin-bottom: 36px; }
+.ad.format-9-16 .mega-after { font-size: 64px; }
 
-  .stats-block { margin: 22px 0; padding: 26px 28px; background: var(--cream); border-left: 6px solid var(--green); }
-  .ad.dark .stats-block, .ad.deep .stats-block, .ad.charcoal .stats-block { background: rgba(255,255,255,0.06); border-left-color: var(--green-bright); }
-  .ad.cream .stats-block { background: var(--white); }
-  .ad.green .stats-block { background: rgba(255,255,255,0.12); border-left-color: var(--green-bright); }
-  .ad.bright .stats-block { background: rgba(255,255,255,0.85); border-left-color: var(--green-night); }
-  .stats-block .stat { font-family: 'Inter', sans-serif; font-size: 26px; line-height: 1.45; margin-bottom: 10px; }
-  .stats-block .stat:last-child { margin-bottom: 0; }
-  .stats-block .stat strong { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 32px; color: var(--green); letter-spacing: 0.02em; }
-  .ad.dark .stats-block .stat strong, .ad.deep .stats-block .stat strong, .ad.charcoal .stats-block .stat strong { color: var(--green-bright); }
+/* ============= LAYOUT: QUOTE-HERO ============= */
+.layout-quote { padding: 80px 70px; }
+.quote-mega { font-family: 'Playfair Display', serif; font-style: italic; font-size: 78px; line-height: 1.1;
+  margin: 30px 0 40px; color: var(--green-deep); }
+.quote-mega::before { content: '"'; font-size: 1.8em; line-height: 0; vertical-align: -0.4em; color: var(--green-bright); }
+.quote-mega::after { content: '"'; font-size: 1.8em; line-height: 0; vertical-align: -0.4em; color: var(--green-bright); }
+.ad.dark .quote-mega, .ad.deep .quote-mega, .ad.charcoal .quote-mega { color: var(--cream); }
+.ad.bright .quote-mega, .ad.warning .quote-mega { color: var(--green-night); }
+.ad.format-9-16 .quote-mega { font-size: 88px; }
+.ad.format-1-1 .quote-mega { font-size: 60px; }
+.quote-response { font-family: 'Inter', sans-serif; font-size: 28px; line-height: 1.5;
+  border-left: 6px solid var(--green-bright); padding-left: 24px; margin-bottom: 28px; }
+.ad.dark .quote-response strong, .ad.deep .quote-response strong, .ad.charcoal .quote-response strong { color: var(--green-bright); }
+.quote-response strong { color: var(--green-deep); font-weight: 700; }
 
-  .cta { margin-top: auto; padding-top: 32px; display: flex; flex-direction: column; gap: 14px; }
-  .cta-button { display: inline-flex; align-items: center; gap: 12px; padding: 20px 30px; background: var(--green);
-    color: white; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px; align-self: flex-start; border-radius: 4px; }
-  .ad.green .cta-button { background: var(--white); color: var(--green); }
-  .ad.dark .cta-button, .ad.deep .cta-button, .ad.charcoal .cta-button { background: var(--green-bright); color: var(--green-night); }
-  .ad.bright .cta-button { background: var(--green-night); color: var(--white); }
-  .cta-url { font-family: 'Inter', sans-serif; font-size: 22px; color: var(--gray); font-weight: 500; }
-  .ad.dark .cta-url, .ad.deep .cta-url, .ad.green .cta-url, .ad.charcoal .cta-url { color: rgba(255,255,255,0.75); }
-  .ad.bright .cta-url { color: var(--green-night); opacity: 0.7; }
+/* ============= LAYOUT: SPLIT-SCREEN ============= */
+.layout-split .splits { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 30px -70px;
+  border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; }
+.layout-split .split-col { padding: 36px 32px; }
+.layout-split .split-col.left { background: rgba(192, 57, 43, 0.06); border-right: 2px solid currentColor; }
+.layout-split .split-col.right { background: rgba(0, 150, 57, 0.08); }
+.ad.dark .layout-split .split-col.left, .ad.deep .layout-split .split-col.left, .ad.charcoal .layout-split .split-col.left { background: rgba(192, 57, 43, 0.18); }
+.ad.dark .layout-split .split-col.right, .ad.deep .layout-split .split-col.right, .ad.charcoal .layout-split .split-col.right { background: rgba(107, 194, 59, 0.15); }
+.split-label { font-family: 'Anton', sans-serif; font-size: 36px; letter-spacing: 0.1em; margin-bottom: 22px; text-transform: uppercase; }
+.split-col.left .split-label { color: var(--red); }
+.split-col.right .split-label { color: var(--green); }
+.ad.dark .split-col.right .split-label, .ad.deep .split-col.right .split-label, .ad.charcoal .split-col.right .split-label { color: var(--green-bright); }
+.split-items { list-style: none; padding: 0; }
+.split-items li { font-family: 'Inter', sans-serif; font-size: 22px; line-height: 1.4;
+  padding: 10px 0 10px 28px; position: relative; }
+.split-col.left .split-items li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+.split-col.right .split-items li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+.ad.dark .split-col.right .split-items li::before, .ad.deep .split-col.right .split-items li::before, .ad.charcoal .split-col.right .split-items li::before { color: var(--green-bright); }
+.split-footer { font-family: 'Inter', sans-serif; font-size: 22px; line-height: 1.4; margin-top: 24px; opacity: 0.85; }
 
-  .disclaimer { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.4; color: var(--gray);
-    font-weight: 300; margin-top: 16px; font-style: italic; }
-  .ad.dark .disclaimer, .ad.deep .disclaimer, .ad.green .disclaimer, .ad.charcoal .disclaimer { color: rgba(255,255,255,0.55); }
-  .ad.bright .disclaimer { color: var(--green-night); opacity: 0.6; }
+/* ============= LAYOUT: PHOTO-BG ============= */
+.layout-photo .photo-bg-layer { position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(107, 194, 59, 0.35), transparent 60%),
+              radial-gradient(circle at 80% 80%, rgba(14, 92, 47, 0.5), transparent 50%),
+              linear-gradient(135deg, #052D1A 0%, #0E5C2F 60%, #1A1A1A 100%); }
+.layout-photo .photo-bg-layer::after { content: ''; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 80px),
+    radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 100%);
+}
+.layout-photo .layout { position: relative; z-index: 1; background: transparent; color: white; }
+.layout-photo .headline { color: white; font-size: 96px; }
+.layout-photo .headline .accent { color: var(--green-bright); }
+.layout-photo .body-text { color: rgba(255,255,255,0.92); font-size: 30px; }
+.layout-photo .body-text strong { color: var(--green-bright); }
+.layout-photo .eyebrow { color: var(--green-bright); }
+.layout-photo .cta-button { background: var(--green-bright); color: var(--green-night); }
+.layout-photo .cta-url { color: rgba(255,255,255,0.7); }
+.layout-photo .brand-tagline { color: rgba(255,255,255,0.65); }
+.layout-photo .brand-footer { border-top-color: rgba(255,255,255,0.2); }
+.layout-photo.format-9-16 .headline { font-size: 110px; }
 
-  .brand-footer { margin-top: 22px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1);
-    display: flex; align-items: center; justify-content: space-between; }
-  .ad.dark .brand-footer, .ad.deep .brand-footer, .ad.green .brand-footer, .ad.charcoal .brand-footer { border-top-color: rgba(255,255,255,0.18); }
-  .ad.bright .brand-footer { border-top-color: rgba(14,45,34,0.2); }
-  .brand-tagline { font-family: 'Inter', sans-serif; font-size: 14px; letter-spacing: 0.12em;
-    color: var(--gray); text-transform: uppercase; font-weight: 600; }
-  .ad.dark .brand-tagline, .ad.deep .brand-tagline, .ad.green .brand-tagline, .ad.charcoal .brand-tagline { color: rgba(255,255,255,0.65); }
-  .ad.bright .brand-tagline { color: var(--green-night); opacity: 0.7; }
+/* ============= LAYOUT: WARNING ============= */
+.layout-warning .layout { padding-top: 60px; }
+.warning-bar { background: var(--green-night); color: var(--warning-bg); padding: 14px 24px;
+  font-family: 'Anton', sans-serif; font-size: 24px; letter-spacing: 0.2em;
+  align-self: flex-start; margin-bottom: 28px; text-transform: uppercase; }
+.layout-warning .headline { font-size: 92px; }
+.layout-warning .headline .strike { text-decoration: line-through; text-decoration-color: var(--red);
+  text-decoration-thickness: 6px; }
 
-  .ad.format-9-16 .layout { padding: 110px 70px; }
-  .ad.format-9-16 .headline { font-size: 96px; }
-  .ad.format-9-16 .body-text { font-size: 32px; }
-  .ad.format-1-1 .layout { padding: 70px 60px; }
-  .ad.format-1-1 .headline { font-size: 70px; }
+/* ============= LAYOUT: DATA-BARS ============= */
+.bars-block { margin: 30px 0; display: flex; flex-direction: column; gap: 18px; }
+.bar-row { display: flex; flex-direction: column; gap: 8px; }
+.bar-label { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 600;
+  display: flex; justify-content: space-between; }
+.bar-label .bar-value { font-family: 'Anton', sans-serif; font-size: 28px;
+  letter-spacing: 0.04em; color: var(--green); }
+.ad.dark .bar-value, .ad.deep .bar-value, .ad.charcoal .bar-value { color: var(--green-bright); }
+.bar-track { height: 18px; background: rgba(0,0,0,0.08); border-radius: 9px; overflow: hidden; }
+.ad.dark .bar-track, .ad.deep .bar-track, .ad.charcoal .bar-track { background: rgba(255,255,255,0.1); }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--green-bright), var(--green));
+  border-radius: 9px; }
+.ad.dark .bar-fill, .ad.deep .bar-fill, .ad.charcoal .bar-fill { background: linear-gradient(90deg, var(--green), var(--green-bright)); }
 
-  .drag-mode .draggable { cursor: move; outline: 2px dashed transparent; }
-  .drag-mode .draggable:hover { outline-color: var(--red); }
-  [contenteditable="true"] { outline: 2px dashed rgba(31,77,61,0.3); outline-offset: 4px; }
+/* ============= LAYOUT: MINIMALIST ============= */
+.layout-min .minimalist-main { font-family: 'Anton', sans-serif; font-size: 200px; line-height: 0.92;
+  letter-spacing: -0.02em; color: var(--black); margin: auto 0; }
+.ad.format-1-1 .layout-min .minimalist-main { font-size: 150px; }
+.ad.format-9-16 .layout-min .minimalist-main { font-size: 220px; }
+.ad.dark .layout-min .minimalist-main, .ad.deep .layout-min .minimalist-main { color: var(--white); }
+.ad.green .layout-min .minimalist-main { color: var(--white); }
+.ad.bright .layout-min .minimalist-main { color: var(--green-night); }
+.ad.cream .layout-min .minimalist-main { color: var(--green-night); }
+.layout-min .minimalist-main .accent { color: var(--green); font-style: italic; }
+.ad.dark .layout-min .minimalist-main .accent, .ad.deep .layout-min .minimalist-main .accent { color: var(--green-bright); }
+.ad.green .layout-min .minimalist-main .accent { color: var(--cream); }
+.ad.bright .layout-min .minimalist-main .accent { color: var(--white); }
+.layout-min .minimalist-main .strike { text-decoration: line-through; text-decoration-thickness: 8px; opacity: 0.55; }
+.layout-min .minimalist-main .plus { color: var(--green-bright); font-style: normal; padding: 0 20px; }
+.layout-min .footer-text { font-family: 'Inter', sans-serif; font-size: 24px; line-height: 1.4;
+  margin: 30px 0; opacity: 0.85; max-width: 80%; }
 
-  .ad-actions { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
-  .ad-actions button { background: #333; color: white; border: none; padding: 8px 14px; font-size: 12px;
-    border-radius: 4px; cursor: pointer; font-weight: 600; }
-  .ad-actions button:hover { background: #555; }
+/* ============= LAYOUT: CHECKLIST ============= */
+.checklist-block { margin: 32px 0; display: flex; flex-direction: column; gap: 22px; }
+.check-row { display: flex; align-items: flex-start; gap: 22px; padding: 22px 28px;
+  background: rgba(0,0,0,0.03); border-left: 6px solid var(--green); border-radius: 4px; }
+.ad.dark .check-row, .ad.deep .check-row, .ad.charcoal .check-row { background: rgba(255,255,255,0.06); border-left-color: var(--green-bright); }
+.ad.cream .check-row { background: var(--white); }
+.ad.green .check-row { background: rgba(255,255,255,0.12); border-left-color: var(--cream); }
+.ad.bright .check-row { background: rgba(255,255,255,0.85); border-left-color: var(--green-night); }
+.check-icon { font-family: 'Anton', sans-serif; font-size: 42px; color: var(--green-bright);
+  background: var(--green-deep); width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ad.bright .check-icon, .ad.warning .check-icon { background: var(--green-night); color: var(--green-bright); }
+.check-content { flex: 1; }
+.check-label { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 500; opacity: 0.7; margin-bottom: 4px; }
+.check-value { font-family: 'Anton', sans-serif; font-size: 38px; letter-spacing: 0.02em; }
+.ad.dark .check-value, .ad.deep .check-value { color: var(--green-bright); }
 
-  @media print {
-    .toolbar, .format-bar, .format-toolbar, .ad-actions { display: none; }
-    .ad { box-shadow: none; transform: none !important; margin: 0 !important; page-break-after: always; }
-    body { background: white; padding: 0; }
-  }
+/* ============= LAYOUT: DRAMATIC-DARK ============= */
+.layout-dramatic .layout { background: radial-gradient(ellipse at top, #1A1A1A 0%, #052D1A 100%); }
+.layout-dramatic .headline { font-size: 110px; line-height: 0.92; }
+.layout-dramatic .headline::before { content: ''; display: block; width: 80px; height: 6px;
+  background: var(--green-bright); margin-bottom: 32px; }
+
+/* ============= LAYOUT: STAMP-BADGE ============= */
+.stamp { position: absolute; top: 60px; right: 60px; width: 220px; height: 220px;
+  border: 4px solid var(--green-deep); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Anton', sans-serif; font-size: 22px; line-height: 1.05;
+  letter-spacing: 0.1em; color: var(--green-deep); text-align: center;
+  text-transform: uppercase; padding: 28px;
+  transform: rotate(-12deg);
+}
+.ad.dark .stamp, .ad.deep .stamp, .ad.charcoal .stamp { border-color: var(--green-bright); color: var(--green-bright); }
+.ad.bright .stamp, .ad.warning .stamp { border-color: var(--green-night); color: var(--green-night); }
+.ad.green .stamp { border-color: var(--cream); color: var(--cream); }
+
+/* DRAG / EDIT */
+.drag-mode .draggable { cursor: move; outline: 2px dashed transparent; }
+.drag-mode .draggable:hover { outline-color: var(--red); }
+[contenteditable="true"] { outline: 2px dashed rgba(31,77,61,0.3); outline-offset: 4px; }
+
+.ad-actions { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+.ad-actions button { background: #333; color: white; border: none; padding: 8px 14px; font-size: 12px;
+  border-radius: 4px; cursor: pointer; font-weight: 600; }
+
+@media print {
+  .toolbar, .format-bar, .format-toolbar, .ad-actions { display: none; }
+  .ad { box-shadow: none; transform: none !important; margin: 0 !important; page-break-after: always; }
+  body { background: white; padding: 0; }
+}
 </style>
 </head>
 <body>
-
 <div class="toolbar">
   <h1>AD 2 — The ZUS Math</h1>
   <span class="persona">P1 — Doradca bankowy rozważający odejście</span>
@@ -195,7 +291,6 @@
   <button class="alt" onclick="resetPositions()">↺ Atstatyti</button>
   <button class="alt" onclick="window.print()">🖨 PDF</button>
 </div>
-
 <div class="format-toolbar" id="formatToolbar">
   <button onclick="document.execCommand('bold')"><b>B</b></button>
   <button onclick="document.execCommand('italic')"><i>I</i></button>
@@ -206,217 +301,160 @@
   <button onclick="setFont('Playfair Display')">Playfair</button>
   <button onclick="changeSize(2)">A+</button>
   <button onclick="changeSize(-2)">A−</button>
-  <button onclick="setColor('#1F4D3D')" style="background:#1F4D3D;color:white;">Žalia</button>
+  <button onclick="setColor('#009639')" style="background:#009639;color:white;">Žalia</button>
+  <button onclick="setColor('#6BC23B')" style="background:#6BC23B;color:#052D1A;">Bright</button>
   <button onclick="setColor('#C0392B')" style="background:#C0392B;color:white;">Raudona</button>
   <button onclick="setColor('#0F0F0F')">Juoda</button>
 </div>
 
 <div class="ad-wrapper" data-code="AD 2A">
   <div class="format-bar">
-    <span class="label">AD 2A — Wersja główna</span>
-    <button class="active" onclick="setFormat(this, '4-5')">4:5 Feed</button><button class="" onclick="setFormat(this, '9-16')">9:16 Stories</button><button class="" onclick="setFormat(this, '1-1')">1:1 Square</button>
+    <span class="label">AD 2A — Dochodu progres</span>
+    <span class="layout-tag">DATA-BARS</span>
+    <button class="active" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-
-  <div class="ad format-4-5 bright">
+  <div class="ad format-4-5">
     <div class="layout">
-      <svg class="leaf-decor tr" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-        <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-        <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-      </svg>
-      <svg class="leaf-decor bl" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-        <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-        <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-      </svg>
-
       <div class="brand-logo draggable">
-        <div class="logo-mark">
-          <svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-            <path class="logo-flame-1" fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-            <path class="logo-flame-3" fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-            <path class="logo-flame-2" fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-          </svg>
+      <div class="logo-mark"><svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
+  <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
+  <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
+</svg></div>
+      <span>KAPITAŁ ŻYCIA</span>
+    </div>
+      <div class="draggable" style="margin-top: 40px;">
+        <div class="eyebrow">MATEMATYKA B2B</div>
+        <h1 class="headline">20 polis = <span class='accent'>20 źródeł</span> dochodu.</h1>
+      </div>
+      <div class="bars-block draggable"><div class="bar-row">
+          <div class="bar-label">Polisa #1 (Rok 1) <span class="bar-value">✓ Prowizja</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:33%;"></div></div>
         </div>
-        <span>KAPITAŁ ŻYCIA</span>
-      </div>
-
-      <div class="draggable" style="margin-top: 50px;">
-        <div class="eyebrow">ZUS NA B2B?</div>
-        <h1 class="headline">Boisz się ZUS-u na <span class="accent">własnej działalności</span>?</h1>
-        
-      </div>
-
-      <div class="draggable" style="margin-top: 14px;">
-        
-        <p class="body-text">Rozumiemy. <strong>Ale policzmy to uczciwie.</strong></p>
-        <p class="body-text">Prowizja wypłacana przy zawarciu polisy, a następnie w 2. i 3. roku trwania umowy. Co to oznacza?</p>
-        
-        <div class="stats-block">
-          <div class="stat"><strong>20</strong> aktywnych polis = <strong>20</strong> źródeł dochodu działających jednocześnie.</div>
+<div class="bar-row">
+          <div class="bar-label">Polisa #1 (Rok 2) <span class="bar-value">✓ Prowizja</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:66%;"></div></div>
         </div>
-        
-        <p class="body-text">ZUS owszem płacisz, ale z pieniędzy, które zarabiasz <strong>wielokrotnie</strong> na tej samej pracy, którą wykonałeś raz.</p>
-        <p class="body-text">Na etacie tak to nie działa.</p>
-        
-      </div>
-
+<div class="bar-row">
+          <div class="bar-label">Polisa #1 (Rok 3) <span class="bar-value">✓ Prowizja</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
+        </div></div>
+      <div class="draggable"><p class="body-text">ZUS owszem płacisz. Ale z pieniędzy, które zarabiasz <strong>wielokrotnie</strong> na pracy wykonanej raz.</p>
+<p class="body-text">Na etacie tak to nie działa.</p></div>
       <div class="cta draggable">
-          <div class="cta-button">Jedna rozmowa. Konkretne liczby. <span>→</span></div>
-          <div class="cta-url">kapitalzycia.pl/cv</div>
-          <div class="brand-footer">
-            <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-          </div>
-        </div>
+      <div class="cta-button">Konkretne liczby <span>→</span></div>
+      <div class="cta-url">kapitalzycia.pl/cv</div>
+      
+      <div class="brand-footer">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+    </div>
     </div>
   </div>
-
   <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ Šitos PNG</button>
+    <button onclick="downloadOne(this)">⬇ PNG</button>
     <button onclick="changeBg(this, 'white')">Balta</button>
     <button onclick="changeBg(this, 'cream')">Kreminė</button>
+    <button onclick="changeBg(this, 'bright')">Bright</button>
     <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'dark')">Tamsi</button>
+    <button onclick="changeBg(this, 'deep')">Deep</button>
+    <button onclick="changeBg(this, 'dark')">Dark</button>
+    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
+    <button onclick="changeBg(this, 'warning')">Warning</button>
   </div>
 </div>
 
 
 <div class="ad-wrapper" data-code="AD 2B">
   <div class="format-bar">
-    <span class="label">AD 2B — Iteracja: pytanie retoryczne (Stories)</span>
-    <button class="" onclick="setFormat(this, '4-5')">4:5 Feed</button><button class="active" onclick="setFormat(this, '9-16')">9:16 Stories</button><button class="" onclick="setFormat(this, '1-1')">1:1 Square</button>
+    <span class="label">AD 2B — Mega 3×</span>
+    <span class="layout-tag">MEGA-NUMBER</span>
+    <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="active" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-
-  <div class="ad format-9-16">
-    <div class="layout">
-      <svg class="leaf-decor tr" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-        <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-        <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-      </svg>
-      <svg class="leaf-decor bl" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-        <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-        <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-      </svg>
-
+  <div class="ad format-9-16 bright">
+    <div class="layout layout-mega">
       <div class="brand-logo draggable">
-        <div class="logo-mark">
-          <svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-            <path class="logo-flame-1" fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-            <path class="logo-flame-3" fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-            <path class="logo-flame-2" fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-          </svg>
-        </div>
-        <span>KAPITAŁ ŻYCIA</span>
+      <div class="logo-mark"><svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
+  <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
+  <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
+</svg></div>
+      <span>KAPITAŁ ŻYCIA</span>
+    </div>
+      <div class="draggable" style="margin-top: 30px;">
+        <div class="eyebrow">TO MATEMATYKA</div>
+        <div class="mega-hero">3×</div>
+        <div class="mega-after">od jednej sprzedaży.</div>
       </div>
-
-      <div class="draggable" style="margin-top: 50px;">
-        <div class="eyebrow">MATEMATYKA, NIE RETORYKA</div>
-        <h1 class="headline">Ile zarobisz<br>za 3 lata?</h1>
-        
-      </div>
-
-      <div class="draggable" style="margin-top: 14px;">
-        
-        <p class="body-text"><strong>To nie pytanie retoryczne. To matematyka.</strong></p>
-        <p class="body-text">Sprzedajesz raz.</p>
-        
-        <div class="stats-block">
-          <div class="stat">Prowizja <strong>przy zawarciu</strong></div>
-          <div class="stat">Prowizja w <strong>2. roku</strong></div>
-          <div class="stat">Prowizja w <strong>3. roku</strong></div>
-        </div>
-        
-        <p class="body-text">Każda kolejna podpisana umowa powiększa Twój roczny dochód.</p>
-        <p class="body-text">ZUS na B2B? Tak. Ale ze stabilnego, rosnącego przychodu.</p>
-        <p class="body-text">Ponad 4 lata w sprzedaży. B2B. 100% online.</p>
-        
-      </div>
-
+      <div class="draggable"><p class="body-text">Sprzedajesz raz. Prowizja wraca <strong>przy zawarciu, w 2. i 3. roku</strong>.</p>
+<p class="body-text">Każda kolejna umowa powiększa Twój roczny dochód.</p>
+<p class="body-text">ZUS na B2B? Tak. Ale ze stabilnego, rosnącego przychodu.</p>
+<p class="body-text">Ponad 4 lata w sprzedaży. 100% online.</p></div>
       <div class="cta draggable">
-          <div class="cta-button">Sprawdź liczby <span>→</span></div>
-          <div class="cta-url">kapitalzycia.pl/cv</div>
-          <div class="brand-footer">
-            <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-          </div>
-        </div>
+      <div class="cta-button">Sprawdź <span>→</span></div>
+      <div class="cta-url">kapitalzycia.pl/cv</div>
+      
+      <div class="brand-footer">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+    </div>
     </div>
   </div>
-
   <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ Šitos PNG</button>
+    <button onclick="downloadOne(this)">⬇ PNG</button>
     <button onclick="changeBg(this, 'white')">Balta</button>
     <button onclick="changeBg(this, 'cream')">Kreminė</button>
+    <button onclick="changeBg(this, 'bright')">Bright</button>
     <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'dark')">Tamsi</button>
+    <button onclick="changeBg(this, 'deep')">Deep</button>
+    <button onclick="changeBg(this, 'dark')">Dark</button>
+    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
+    <button onclick="changeBg(this, 'warning')">Warning</button>
   </div>
 </div>
 
 
 <div class="ad-wrapper" data-code="AD 2C">
   <div class="format-bar">
-    <span class="label">AD 2C — Iteracja: obiekcja (Feed kwadrat)</span>
-    <button class="" onclick="setFormat(this, '4-5')">4:5 Feed</button><button class="" onclick="setFormat(this, '9-16')">9:16 Stories</button><button class="active" onclick="setFormat(this, '1-1')">1:1 Square</button>
+    <span class="label">AD 2C — Obiekcja jako citata</span>
+    <span class="layout-tag">QUOTE-HERO</span>
+    <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="active" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-
   <div class="ad format-1-1 cream">
-    <div class="layout">
-      <svg class="leaf-decor tr" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-        <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-        <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-      </svg>
-      <svg class="leaf-decor bl" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-        <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-        <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-      </svg>
-
+    <div class="layout layout-quote">
       <div class="brand-logo draggable">
-        <div class="logo-mark">
-          <svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-            <path class="logo-flame-1" fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-            <path class="logo-flame-3" fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-            <path class="logo-flame-2" fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-          </svg>
-        </div>
-        <span>KAPITAŁ ŻYCIA</span>
-      </div>
-
-      <div class="draggable" style="margin-top: 50px;">
+      <div class="logo-mark"><svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
+  <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
+  <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
+</svg></div>
+      <span>KAPITAŁ ŻYCIA</span>
+    </div>
+      <div class="draggable" style="margin-top: 40px;">
         <div class="eyebrow">OBIEKCJA</div>
-        
-        
+        <div class="quote-mega">Nie odejdę z banku, bo koszty ZUS mnie przerosną.</div>
+        <div class="quote-response">Słyszymy to często. Dlatego robimy <strong>konkretne wyliczenia</strong> dla każdego kandydata osobno. B2B brzmi groźnie, dopóki nie zobaczysz liczb.</div>
       </div>
-
-      <div class="draggable" style="margin-top: 14px;">
-        <div class="quote">Nie odejdę z banku, bo koszty ZUS mnie przerosną.</div>
-        
-        <p class="body-text">Słyszymy to często. Dlatego robimy <strong>konkretne wyliczenia</strong> – dla każdego kandydata osobno.</p>
-        <p class="body-text">B2B brzmi groźnie, dopóki nie zobaczysz liczb. Prowizja wypłacana przy zawarciu i odnawiana co roku przez 3 lata to przewidywalny, rosnący przychód.</p>
-        <p class="body-text">Pierwsze 6 miesięcy jest trudne. Nie będziemy Cię okłamywać. Ale jeśli sprzedajesz od ponad 4 lat – wiesz, że trud się opłaca.</p>
-        
-        
-        
-      </div>
-
       <div class="cta draggable">
-          <div class="cta-button">Aplikuj i sprawdź <span>→</span></div>
-          <div class="cta-url">kapitalzycia.pl/cv</div>
-          <div class="brand-footer">
-            <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-          </div>
-        </div>
+      <div class="cta-button">Sprawdź swoje <span>→</span></div>
+      <div class="cta-url">kapitalzycia.pl/cv</div>
+      
+      <div class="brand-footer">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+    </div>
     </div>
   </div>
-
   <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ Šitos PNG</button>
+    <button onclick="downloadOne(this)">⬇ PNG</button>
     <button onclick="changeBg(this, 'white')">Balta</button>
     <button onclick="changeBg(this, 'cream')">Kreminė</button>
+    <button onclick="changeBg(this, 'bright')">Bright</button>
     <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'dark')">Tamsi</button>
+    <button onclick="changeBg(this, 'deep')">Deep</button>
+    <button onclick="changeBg(this, 'dark')">Dark</button>
+    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
+    <button onclick="changeBg(this, 'warning')">Warning</button>
   </div>
 </div>
 
@@ -431,13 +469,13 @@
   }
   function changeBg(btn, bg) {
     const ad = btn.closest('.ad-wrapper').querySelector('.ad');
-    ad.classList.remove('dark', 'cream', 'green');
+    ad.classList.remove('dark', 'deep', 'cream', 'green', 'bright', 'charcoal', 'warning');
     if (bg !== 'white') ad.classList.add(bg);
   }
   let editMode = false;
   function toggleEdit() {
     editMode = !editMode;
-    document.querySelectorAll('.ad .headline, .ad .body-text, .ad .eyebrow, .ad .quote, .ad .stats-block .stat, .ad .compare-row, .ad .cta-button, .ad .cta-url, .ad .brand-tagline, .ad .disclaimer, .ad .hook-large').forEach(el => {
+    document.querySelectorAll('.ad .headline, .ad .body-text, .ad .eyebrow, .ad .quote-mega, .ad .quote-response, .ad .stat, .ad .compare-row, .ad .cta-button, .ad .cta-url, .ad .brand-tagline, .ad .disclaimer, .ad .mega-hero, .ad .mega-after, .ad .minimalist-main, .ad .footer-text, .ad .stamp, .ad .check-label, .ad .check-value, .ad .split-label, .ad .split-items li, .ad .split-footer, .ad .bar-label, .ad .warning-bar').forEach(el => {
       el.contentEditable = editMode;
     });
     document.getElementById('formatToolbar').classList.toggle('visible', editMode);
@@ -449,8 +487,8 @@
     const range = sel.getRangeAt(0);
     const span = document.createElement('span');
     const parent = range.commonAncestorContainer.parentElement;
-    const currentSize = parseFloat(window.getComputedStyle(parent).fontSize);
-    span.style.fontSize = (currentSize + delta) + 'px';
+    const cur = parseFloat(window.getComputedStyle(parent).fontSize);
+    span.style.fontSize = (cur + delta) + 'px';
     try { range.surroundContents(span); } catch(e){}
   }
   function setColor(color) { document.execCommand('foreColor', false, color); }
@@ -509,5 +547,4 @@
     }
   }
 </script>
-</body>
-</html>
+</body></html>
