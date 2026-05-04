@@ -1,12 +1,385 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-<meta charset="UTF-8">
-<title>Kapitał Życia — AD 7 — The Offer (Broad)</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@400;500;600;700&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
+#!/usr/bin/env python3
+"""
+Kapitał Życia static ads generator (v2.1 — Atria-influenced palette).
+Sugeneruoja 7 HTML failus (po vieną kiekvienai koncepcijai), kiekvienas su 3 iteracijomis (A/B/C).
+Kiekvienai iteracijai priskiriamas SKIRTINGAS layout patternas — ne tik spalva.
+
+Layout patternai (FR-PL 185+ ads + Atria/Tom Crosshill PL recruitment 87 creatives):
+- mega-number: didžiulis skaičius / % kaip hero
+- quote-hero: didžiulė italic citata
+- split-screen: kontrastas dvi pusės
+- photo-bg / hero-photo: fotografinis placeholder + bold overlay
+- warning: geltonas/oranžinis alert tonas
+- data-bars: progress'inis grafikas
+- minimalist: 3-5 žodžiai milžiniški
+- checklist: ✓ punktai
+- dramatic-dark: kinematografinis tamsus
+- stamp-badge: cirkulinis "OFERTA" antspaudas
+- ugc-story: chat-style Q&A su pilna foto
+- bold-numbered: numeracijos pristatymas (FR ETF style)
+- bold-statement: pure typography statement
+- handwritten-notes: caveat font ant kreminio fono
+- chalkboard: kreidos-tipo meniu (FR-PL Cafe-Chalkboard)
+- redacted-doc: cenzūruotas dokumentas (FR-PL Redacted-Checklist)
+- watercolor: pastelinis kvietimas (FR-PL Watercolor-Invitation)
+- yellow-alarm: Atria yellow card + "ULTIMATE GUIDE" framing (NEW v2.1)
+- burgundy-quote: Atria wine BG + Playfair italic premium quote (NEW v2.1)
+
+Atria insights (žr. reference-thumbs/atria/patterns.md):
+- vientisos solid spalvos > gradientai
+- yellow alarm = scroll-stopping
+- burgundy = premium invitation
+- type-only ads laiko atid 0.7s ilgiau nei foto-su-tekstu
+
+Naudojimas: python3 generator.py
+"""
+
+import os
+import re
+
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# ============================================================
+# DUOMENYS — 21 reklama (7 koncepcijos × 3 iteracijos)
+# ============================================================
+
+ADS = [
+    # ============== AD 1 — Stability Illusion ==============
+    {
+        "id": "01-stability-illusion",
+        "title": "AD 1 — The Stability Illusion",
+        "persona": "P1 — Doradca bankowy / pracownik korpo",
+        "iterations": [
+            {
+                "code": "AD 1A", "format": "4-5", "layout": "split-screen", "style": "white",
+                "label": "Bank vs AS Finanse split",
+                "eyebrow": "BANK VS AS FINANSE",
+                "headline": "Co opłaca się <span class='accent'>bardziej</span>?",
+                "left": {"label": "BANK", "items": ["Pensja w widełkach", "Plan rośnie co kwartał", "Sufit dochodowy", "Wynik zależy od procesów"]},
+                "right": {"label": "AS FINANSE", "items": ["Prowizja przy zawarciu", "+ w 2. i 3. roku umowy", "Dochód rośnie z umową", "Wynik zależy od Ciebie"]},
+                "footer": "Minimum 4 lata w sprzedaży. B2B. 100% online lub Warszawa.",
+                "cta": "Sprawdź ofertę", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 1B", "format": "9-16", "layout": "ugc-story", "style": "dark",
+                "label": "UGC story — frustrated banker Q&A",
+                "photo_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1080&h=1920&fit=crop&fm=jpg&q=80",
+                "ugc_sticker": "Mam pytanie",
+                "ugc_question": "Jak to jest, że po 4 latach w banku zarabiam prawie tyle samo co na starcie?",
+                "ugc_messages": [
+                    {"text": "<strong>To się nazywa pułap prowizyjny.</strong>", "bold": True},
+                    {"text": "Im więcej zamykasz, tym wyższy plan dostajesz <span class='red'>w kolejnym kwartale</span>."},
+                    {"text": "Twoja pensja nigdy nie zależała od wyników – tylko od <span class='underline-red'>widełek w umowie</span>.", "align": "right"},
+                    {"text": "U nas: prowizja przy zawarciu + w 2. i 3. roku trwania umowy."}
+                ],
+                "ugc_url_subtitle": "Aplikuj na doradcę ubezpieczeniowego",
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 1C", "format": "1-1", "layout": "bold-statement", "style": "deep",
+                "label": "Bold statement — Atria text-only",
+                "statement": "Tu sprzedajesz <span class='accent'>raz</span>. Zarabiasz <span class='accent'>3 lata</span>.",
+                "supporting": "Każda umowa generuje prowizję przy zawarciu i w 2. i 3. roku. Min. 4 lata w sprzedaży. B2B.",
+                "cta": "Sprawdź jak", "cta_url": "kapitalzycia.pl/cv"
+            }
+        ]
+    },
+    # ============== AD 2 — ZUS Math ==============
+    {
+        "id": "02-zus-math",
+        "title": "AD 2 — The ZUS Math",
+        "persona": "P1 — Doradca bankowy rozważający odejście",
+        "iterations": [
+            {
+                "code": "AD 2A", "format": "4-5", "layout": "handwritten-notes", "style": "cream",
+                "label": "Handwritten notes — Napkin Math",
+                "notes_title": "Matematyka B2B (na serwetce)",
+                "notes_intro": "Boisz się ZUS-u? Policzmy uczciwie:",
+                "notes_math": [
+                    "20 polis × prowizja w roku 1",
+                    "+ 20 polis × prowizja w roku 2",
+                    "+ 20 polis × prowizja w roku 3",
+                    "<span class='equals'>= 60 wypłat za pracę raz</span>"
+                ],
+                "notes_items": [
+                    "ZUS płacisz tak, B2B",
+                    {"text": "Ale z 60 wypłat, nie z 20", "crossed": False}
+                ],
+                "cta": "Sprawdź swoje liczby", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 2B", "format": "9-16", "layout": "yellow-alarm", "style": "yellow",
+                "label": "Yellow alarm — 3× math",
+                "alert": "MATEMATYKA · ULTIMATE GUIDE",
+                "headline": "<span class='accent'>3×</span> z jednej sprzedaży.",
+                "sub": "ZUS Cię nie ostrzeże.",
+                "body": [
+                    "Sprzedajesz polisę <strong>raz</strong>. Prowizja wraca przy zawarciu, w 2. i 3. roku trwania umowy.",
+                    "Każda kolejna umowa powiększa Twój roczny dochód. ZUS płacisz tak — ale z większej bazy.",
+                    "Ponad 4 lata w sprzedaży. B2B. 100% online."
+                ],
+                "cta": "Sprawdź swoją matematykę", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 2C", "format": "1-1", "layout": "redacted-doc", "style": "white",
+                "label": "Redacted doc — ZUS letter feel",
+                "stamp_text": "Confidential",
+                "doc_meta": "List ZUS · Klauzula poufności · 2026",
+                "headline": "Tego ZUS Ci nie powie.",
+                "redacted_items": [
+                    {"text": "Składka emerytalna miesięcznie: <span class='redact-bar'>███████ zł</span>", "checked": False},
+                    {"text": "Świadczenie po 25 latach: <span class='redact-bar red'>████████</span> zł / m-c", "checked": False},
+                    {"text": "Realna stopa zastąpienia: <span class='redact-bar'>██%</span>", "checked": False},
+                    {"text": "Twoja kontrola nad tym: <span class='redact-bar'>ZERO</span>", "checked": True}
+                ],
+                "cta": "Aplikuj i sprawdź", "cta_url": "kapitalzycia.pl/cv"
+            }
+        ]
+    },
+    # ============== AD 3 — OC Trap ==============
+    {
+        "id": "03-oc-commission-trap",
+        "title": "AD 3 — The OC Commission Trap",
+        "persona": "P2 — Closer sprzedający OC/NNW",
+        "iterations": [
+            {
+                "code": "AD 3A", "format": "4-5", "layout": "chalkboard", "style": "dark",
+                "label": "Chalkboard — OC vs Życie menu",
+                "eyebrow": "Cennik prowizji ubezpieczyciela",
+                "headline": "Dwa <span class='accent'>różne</span> modele.",
+                "chalk_menu": [
+                    {"label": "OC / NNW (jednorazowo)", "price": "40-150 zł"},
+                    {"label": "Życie · rok 1 (przy zawarciu)", "price": "✓"},
+                    {"label": "Życie · rok 2 (odnowienie)", "price": "✓"},
+                    {"label": "Życie · rok 3 (odnowienie)", "price": "✓✓"}
+                ],
+                "cta": "Sprawdź pełny cennik", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 3B", "format": "9-16", "layout": "ugc-story", "style": "dark",
+                "label": "UGC story — closer Q&A",
+                "photo_url": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1080&h=1920&fit=crop&fm=jpg&q=80",
+                "ugc_sticker": "Mam pytanie",
+                "ugc_question": "Sprzedaję OC od 3 lat. Jak zrobić więcej z tych samych klientów?",
+                "ugc_messages": [
+                    {"text": "<strong>OC = 40-150 zł i koniec.</strong>", "bold": True},
+                    {"text": "Życie z elementem inwestycyjnym = prowizja <span class='red'>3 razy</span> z jednej sprzedaży."},
+                    {"text": "Przy zawarciu + w 2. i 3. roku trwania umowy.", "align": "right"},
+                    {"text": "Pomoc w licencji KNF + zwrot kosztów."}
+                ],
+                "ugc_url_subtitle": "Aplikuj jeśli masz min. 2 lata doświadczenia",
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 3C", "format": "1-1", "layout": "yellow-alarm", "style": "yellow",
+                "label": "Yellow alarm — OC trap exit",
+                "alert": "POWÓD #1 · ULTIMATE GUIDE",
+                "headline": "<span class='accent'>OC</span> to ślepy zaułek.",
+                "sub": "Ta sama branża. Inne zarobki.",
+                "body": [
+                    "OC daje <strong>40-150 zł</strong> jednorazowo. Polisa życie — prowizja przy zawarciu + w 2. i 3. roku trwania.",
+                    "Jeden klient. Jedna rozmowa. 3 wypłaty zamiast jednej. Pomoc w licencji KNF.",
+                    "Min. 2 lata w sprzedaży. B2B."
+                ],
+                "cta": "Sprawdź różnicę", "cta_url": "kapitalzycia.pl/cv"
+            }
+        ]
+    },
+    # ============== AD 4 — Career Change ==============
+    {
+        "id": "04-not-a-career-change",
+        "title": "AD 4 — Not a Career Change",
+        "persona": "P3 — Agent nieruchomości",
+        "iterations": [
+            {
+                "code": "AD 4A", "format": "4-5", "layout": "hero-photo", "style": "dark",
+                "label": "Hero photo — empty market 2024",
+                "photo_url": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1080&h=1350&fit=crop&fm=jpg&q=80",
+                "eyebrow": "2024 ROK",
+                "headline": "Rynek <span class='accent'>zamarł</span>.",
+                "body": [
+                    "Wysokie stopy. Niska zdolność kredytowa. <strong>Agenci czekali miesiącami</strong> na jedno zamknięcie.",
+                    "<strong>To nie zmiana kariery.</strong> Dodajesz drugi strumień przychodu do tej samej sieci.",
+                    "Jedna umowa = prowizja przy zawarciu + w 2. i 3. roku."
+                ],
+                "cta": "Sprawdź", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 4B", "format": "9-16", "layout": "handwritten-notes", "style": "cream",
+                "label": "Handwritten — sieć kontaktów math",
+                "notes_title": "Twoja sieć (od 5 lat)",
+                "notes_intro": "Liczę na serwetce, ile zarabiasz na 1 kontakcie:",
+                "notes_math": [
+                    "Nieruchomość × 1 prowizja = jednorazowo",
+                    "<span class='equals'>+ Polisa życie × 3 prowizje</span>",
+                    "<span class='equals'>= 4 wypłaty z 1 klienta</span>"
+                ],
+                "notes_items": [
+                    "Tej samej rozmowie",
+                    "Z tej samej sieci kontaktów",
+                    {"text": "Bez porzucania nieruchomości"}
+                ],
+                "cta": "Sprawdź jak", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 4C", "format": "1-1", "layout": "burgundy-quote", "style": "burgundy",
+                "label": "Burgundy quote — premium invitation",
+                "eyebrow": "Zaproszenie · agenci nieruchomości",
+                "quote": "Nie zmieniaj <span class='accent'>kariery</span>. Dodaj drugi strumień.",
+                "body": [
+                    "Drugi strumień przychodu z <strong>tej samej sieci kontaktów</strong>, którą już masz od 5+ lat.",
+                    "Prowizja przy zawarciu + w 2. i 3. roku trwania umowy. B2B. 100% online.",
+                ],
+                "signature": "— Wybieramy niewiele osób z 5+ latami w branży.",
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            }
+        ]
+    },
+    # ============== AD 5 — Your Work Compounds ==============
+    {
+        "id": "05-your-work-compounds",
+        "title": "AD 5 — Your Work Compounds",
+        "persona": "P4 — Pracownik korpo / finansów / consultingu",
+        "iterations": [
+            {
+                "code": "AD 5A", "format": "4-5", "layout": "hero-photo", "style": "dark",
+                "label": "Hero photo — corporate office",
+                "photo_url": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1080&h=1350&fit=crop&fm=jpg&q=80",
+                "eyebrow": "ETAT VS PROWIZJA",
+                "headline": "Sprzedajesz raz. Zarabiasz <span class='accent'>3 lata</span>.",
+                "body": [
+                    "Na etacie pracujesz cały miesiąc. Wypłatę dostajesz raz.",
+                    "<strong>Każdy tydzień pracy w 2026 generuje dochód w 2027 i 2028.</strong>",
+                    "To się kumuluje. Na etacie – nie. B2B. 100% online."
+                ],
+                "cta": "Sprawdź", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 5B", "format": "9-16", "layout": "bold-statement", "style": "charcoal",
+                "label": "Bold statement — korpo critique",
+                "statement": "10 lat. Wciąż pracujesz dla <span class='accent'>kogoś innego</span>.",
+                "supporting": "Wyścig szczurów ma jedną cechę: bieżnia jest ta sama. U nas każda sprzedaż zostaje z Tobą — w 2. i 3. roku umowy.",
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 5C", "format": "1-1", "layout": "bold-numbered", "style": "deep",
+                "label": "Bold numbered — FR ETF style ścieżka",
+                "subtitle": "Bez ukrytych kosztów",
+                "headline": "Ścieżka <span class='magenta'>dochodu</span> u nas",
+                "numbered_items": [
+                    "Start (4 polisy/m-c): <strong>11 200 PLN</strong>",
+                    "Po 6-12 miesiącach: <strong>12-15 tys. PLN</strong>",
+                    "Po 2-3 latach: <strong>20-30+ tys. PLN</strong>",
+                    "+ Prowizje z 2. i 3. roku każdej umowy"
+                ],
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv",
+                "disclaimer": True
+            }
+        ]
+    },
+    # ============== AD 6 — Effort Earns Leads ==============
+    {
+        "id": "06-effort-earns-leads",
+        "title": "AD 6 — Effort Earns Leads",
+        "persona": "P5 — Były sportowiec / mentalność zawodnika",
+        "iterations": [
+            {
+                "code": "AD 6A", "format": "4-5", "layout": "stamp-badge", "style": "bright",
+                "label": "Tylko najlepsi stamp",
+                "stamp": "TYLKO DLA NAJLEPSZYCH",
+                "headline": "Wynik zależy <span class='accent'>od Ciebie</span>. Zawsze.",
+                "body": [
+                    "Dyscyplina, praca, konsekwencja. <strong>Nie słowa.</strong> Nawyki, które masz.",
+                    "Tu zarabiasz dokładnie tyle, ile sam wypracujesz. Bez planu kwartalnego.",
+                    "Prowizja przy zawarciu i odnawiana przez kolejne 2 lata.",
+                    "Szukamy ludzi z Twoją mentalnością. Nie każdego."
+                ],
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 6B", "format": "9-16", "layout": "ugc-story", "style": "dark",
+                "label": "UGC story — sport mentality Q&A",
+                "photo_url": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1080&h=1920&fit=crop&fm=jpg&q=80",
+                "ugc_sticker": "Mam pytanie",
+                "ugc_question": "5 lat w korpo. Awans dostaje ktoś inny. Co dalej?",
+                "ugc_messages": [
+                    {"text": "<strong>Nie lepszy. Bardziej widoczny.</strong>", "bold": True},
+                    {"text": "Jeśli przez całe życie pracowałeś na <span class='underline-red'>wynik</span> – mówię do Ciebie."},
+                    {"text": "Tu wynik = zarobek. Bez wyjątków.", "align": "right"},
+                    {"text": "B2B. Prowizja przy zawarciu + w 2. i 3. roku."}
+                ],
+                "ugc_url_subtitle": "Aplikuj jeśli sprzedajesz od 4+ lat",
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 6C", "format": "1-1", "layout": "bold-statement", "style": "bright",
+                "label": "Bold statement — filtr",
+                "statement": "Nie wszystkich. <span class='accent'>Najlepszych</span>.",
+                "supporting": "B2B. Prowizja przy zawarciu i odnawiana przez 2 lata. Pierwsze 6 miesięcy jest trudne — mówimy uczciwie.",
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            }
+        ]
+    },
+    # ============== AD 7 — The Offer ==============
+    {
+        "id": "07-the-offer",
+        "title": "AD 7 — The Offer (Broad)",
+        "persona": "Broad — wszyscy, zimny ruch",
+        "iterations": [
+            {
+                "code": "AD 7A", "format": "4-5", "layout": "burgundy-quote", "style": "burgundy",
+                "label": "Burgundy quote — premium invitation",
+                "eyebrow": "Zaproszenie · tylko dla wybranych",
+                "quote": "Ponad 4 lata <span class='accent'>w sprzedaży</span>?",
+                "body": [
+                    "Doradca ubezpieczeniowy. Umowa B2B. <strong>Prowizja przy zawarciu + w 2. i 3. roku</strong>.",
+                    "Sprzedajesz polisę raz — prowizja wraca przez 2 kolejne lata. Pełny etat lub part-time. 100% online lub Warszawa.",
+                ],
+                "signature": "— To nie masowa rekrutacja. Wybieramy niewiele osób.",
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            },
+            {
+                "code": "AD 7B", "format": "9-16", "layout": "mega-number", "style": "cream",
+                "label": "Mega PLN hero",
+                "eyebrow": "PART-TIME (2-3H WIECZORAMI)",
+                "mega": "8 400-14 000",
+                "mega_after": "PLN miesięcznie.",
+                "body": [
+                    "Doradca ubezpieczeniowy w niepełnym wymiarze. Wieczorami od 16-17. Wystarczą 2-3 konsultacje dziennie.",
+                    "<strong>Prowizja przy zawarciu i odnawiana co roku.</strong>",
+                    "Po 3-4 miesiącach naturalnie przechodzisz na pełny etat.",
+                    "Wymagane ponad 4 lata w sprzedaży."
+                ],
+                "cta": "Sprawdź", "cta_url": "kapitalzycia.pl/cv",
+                "disclaimer": True
+            },
+            {
+                "code": "AD 7C", "format": "1-1", "layout": "yellow-alarm", "style": "yellow",
+                "label": "Yellow alarm — oferta short version",
+                "alert": "OFERTA · ULTIMATE GUIDE",
+                "headline": "Sprzedajesz <span class='accent'>raz</span>. Zarabiasz 3 lata.",
+                "sub": "B2B. 100% online.",
+                "body": [
+                    "Prowizja przy zawarciu i odnawiana co roku przez 2 lata. <strong>Jakościowe leady</strong> dla aktywnych doradców.",
+                    "GAP Selling onboarding od pierwszego dnia. Min. 4 lata w sprzedaży.",
+                ],
+                "cta": "Aplikuj", "cta_url": "kapitalzycia.pl/cv"
+            }
+        ]
+    }
+]
+
+
+# ============================================================
+# CSS + KOMPONENTAI
+# ============================================================
+
+LOGO_IMG = '<img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">'
+
+DISCLAIMER_TEXT = ("Podane zakresy wynagrodzenia są szacunkowe i zależą od indywidualnych "
+                   "wyników sprzedażowych. Nie stanowią gwarancji osiągnięcia określonych dochodów.")
+
+CSS = """
 :root {
   --green-bright: #6BC23B; --green: #009639; --green-deep: #0E5C2F; --green-night: #052D1A;
   --cream: #F5EFE3; --sand: #EAE0CC; --white: #FFFFFF; --black: #0F0F0F;
@@ -538,12 +911,23 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   .ad { box-shadow: none; transform: none !important; margin: 0 !important; page-break-after: always; }
   body { background: white; padding: 0; }
 }
-</style>
+"""
+
+
+HEAD_TPL = """<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Kapitał Życia — {title}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Antonio:wght@400;500;600;700&family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>{css}</style>
 </head>
 <body>
 <div class="toolbar">
-  <h1>AD 7 — The Offer (Broad)</h1>
-  <span class="persona">Broad — wszyscy, zimny ruch</span>
+  <h1>{title}</h1>
+  <span class="persona">{persona}</span>
   <button onclick="downloadAll()">⬇ Atsisiųsti visas</button>
   <button class="alt" onclick="toggleEdit()">✎ Redaguoti</button>
   <button class="alt" onclick="toggleDrag()">↕ Stumti</button>
@@ -565,139 +949,9 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   <button onclick="setColor('#C0392B')" style="background:#C0392B;color:white;">Raudona</button>
   <button onclick="setColor('#0F0F0F')">Juoda</button>
 </div>
+"""
 
-<div class="ad-wrapper" data-code="AD 7A">
-  <div class="format-bar">
-    <span class="label">AD 7A — Burgundy quote — premium invitation</span>
-    <span class="layout-tag">BURGUNDY-QUOTE</span>
-    <button class="active" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
-  </div>
-  <div class="ad format-4-5 burgundy">
-    <div class="layout layout-burgundy">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="draggable" style="margin-top: 50px;">
-        <div class="burgundy-eyebrow">Zaproszenie · tylko dla wybranych</div>
-        <div class="burgundy-quote-mark">"</div>
-        <h1 class="burgundy-quote">Ponad 4 lata <span class='accent'>w sprzedaży</span>?</h1>
-        <div class="burgundy-divider"></div>
-      </div>
-      <div class="draggable"><p class="burgundy-body">Doradca ubezpieczeniowy. Umowa B2B. <strong>Prowizja przy zawarciu + w 2. i 3. roku</strong>.</p>
-<p class="burgundy-body">Sprzedajesz polisę raz — prowizja wraca przez 2 kolejne lata. Pełny etat lub part-time. 100% online lub Warszawa.</p><div class="burgundy-signature">— To nie masowa rekrutacja. Wybieramy niewiele osób.</div></div>
-      <div class="burgundy-cta draggable">Aplikuj →</div>
-      <div class="cta-url" style="margin-top: 14px;">kapitalzycia.pl/cv</div>
-      <div class="brand-footer" style="margin-top: 20px;">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
-    </div>
-  </div>
-  <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ PNG</button>
-    <button onclick="changeBg(this, 'white')">Balta</button>
-    <button onclick="changeBg(this, 'cream')">Kreminė</button>
-    <button onclick="changeBg(this, 'bright')">Bright</button>
-    <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'deep')">Deep</button>
-    <button onclick="changeBg(this, 'dark')">Dark</button>
-    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
-    <button onclick="changeBg(this, 'warning')">Warning</button>
-    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
-    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
-  </div>
-</div>
-
-
-<div class="ad-wrapper" data-code="AD 7B">
-  <div class="format-bar">
-    <span class="label">AD 7B — Mega PLN hero</span>
-    <span class="layout-tag">MEGA-NUMBER</span>
-    <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="active" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
-  </div>
-  <div class="ad format-9-16 cream">
-    <div class="layout layout-mega">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="draggable" style="margin-top: 30px;">
-        <div class="eyebrow">PART-TIME (2-3H WIECZORAMI)</div>
-        <div class="mega-hero">8 400-14 000</div>
-        <div class="mega-after">PLN miesięcznie.</div>
-      </div>
-      <div class="draggable"><p class="body-text">Doradca ubezpieczeniowy w niepełnym wymiarze. Wieczorami od 16-17. Wystarczą 2-3 konsultacje dziennie.</p>
-<p class="body-text"><strong>Prowizja przy zawarciu i odnawiana co roku.</strong></p>
-<p class="body-text">Po 3-4 miesiącach naturalnie przechodzisz na pełny etat.</p>
-<p class="body-text">Wymagane ponad 4 lata w sprzedaży.</p></div>
-      <div class="cta draggable">
-      <div class="cta-button">Sprawdź <span>→</span></div>
-      <div class="cta-url">kapitalzycia.pl/cv</div>
-      <div class="disclaimer">Podane zakresy wynagrodzenia są szacunkowe i zależą od indywidualnych wyników sprzedażowych. Nie stanowią gwarancji osiągnięcia określonych dochodów.</div>
-      <div class="brand-footer">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
-    </div>
-    </div>
-  </div>
-  <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ PNG</button>
-    <button onclick="changeBg(this, 'white')">Balta</button>
-    <button onclick="changeBg(this, 'cream')">Kreminė</button>
-    <button onclick="changeBg(this, 'bright')">Bright</button>
-    <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'deep')">Deep</button>
-    <button onclick="changeBg(this, 'dark')">Dark</button>
-    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
-    <button onclick="changeBg(this, 'warning')">Warning</button>
-    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
-    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
-  </div>
-</div>
-
-
-<div class="ad-wrapper" data-code="AD 7C">
-  <div class="format-bar">
-    <span class="label">AD 7C — Yellow alarm — oferta short version</span>
-    <span class="layout-tag">YELLOW-ALARM</span>
-    <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="active" onclick="setFormat(this, '1-1')">1:1</button>
-  </div>
-  <div class="ad format-1-1 yellow">
-    <div class="layout layout-yellow">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="draggable" style="margin-top: 36px;">
-        <div class="yellow-alert-bar">OFERTA · ULTIMATE GUIDE</div>
-        <h1 class="yellow-headline">Sprzedajesz <span class='accent'>raz</span>. Zarabiasz 3 lata.</h1>
-        <div class="yellow-sub">B2B. 100% online.</div>
-      </div>
-      <div class="draggable"><p class="yellow-body">Prowizja przy zawarciu i odnawiana co roku przez 2 lata. <strong>Jakościowe leady</strong> dla aktywnych doradców.</p>
-<p class="yellow-body">GAP Selling onboarding od pierwszego dnia. Min. 4 lata w sprzedaży.</p></div>
-      <div class="yellow-cta draggable">Aplikuj →</div>
-      <div class="cta-url" style="margin-top: 14px;">kapitalzycia.pl/cv</div>
-      <div class="brand-footer" style="margin-top: 20px;">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
-      
-    </div>
-  </div>
-  <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ PNG</button>
-    <button onclick="changeBg(this, 'white')">Balta</button>
-    <button onclick="changeBg(this, 'cream')">Kreminė</button>
-    <button onclick="changeBg(this, 'bright')">Bright</button>
-    <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'deep')">Deep</button>
-    <button onclick="changeBg(this, 'dark')">Dark</button>
-    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
-    <button onclick="changeBg(this, 'warning')">Warning</button>
-    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
-    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
-  </div>
-</div>
-
+FOOTER_SCRIPT = """
 <script>
   function setFormat(btn, format) {
     const wrapper = btn.closest('.ad-wrapper');
@@ -746,7 +1000,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
       if (!dragMode) return;
       e.preventDefault();
       const startX = e.clientX, startY = e.clientY;
-      const t = el.style.transform.match(/translate\(([^)]+)\)/);
+      const t = el.style.transform.match(/translate\\(([^)]+)\\)/);
       const startTx = t ? parseFloat(t[1].split(',')[0]) : 0;
       const startTy = t ? parseFloat(t[1].split(',')[1]) : 0;
       const move = ev => {
@@ -775,7 +1029,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     const canvas = await html2canvas(ad, { scale: 2, useCORS: true, backgroundColor: null });
     ad.style.transform = original;
     const link = document.createElement('a');
-    link.download = `kapital-zycia-${code.replace(/\s+/g,'-').toLowerCase()}-${format}.png`;
+    link.download = `kapital-zycia-${code.replace(/\\s+/g,'-').toLowerCase()}-${format}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
   }
@@ -788,3 +1042,548 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   }
 </script>
 </body></html>
+"""
+
+
+# ============================================================
+# LAYOUT GENERATORIAI
+# ============================================================
+
+def logo_block():
+    return f'''<div class="brand-logo draggable">
+      {LOGO_IMG}
+      <span>KAPITAŁ ŻYCIA</span>
+    </div>'''
+
+
+def cta_block(it):
+    disclaimer_html = f'<div class="disclaimer">{DISCLAIMER_TEXT}</div>' if it.get("disclaimer") else ''
+    return f'''<div class="cta draggable">
+      <div class="cta-button">{it["cta"]} <span>→</span></div>
+      <div class="cta-url">{it["cta_url"]}</div>
+      {disclaimer_html}
+      <div class="brand-footer">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+    </div>'''
+
+
+def body_paragraphs(items):
+    return "\n".join(f'<p class="body-text">{p}</p>' for p in items)
+
+
+# ----- Layout: standard / mega-number -----
+def layout_mega_number(it):
+    strike = " strike" if it.get("mega_strike") else ""
+    body = body_paragraphs(it.get("body", []))
+    return f'''<div class="layout layout-mega">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 30px;">
+        <div class="eyebrow">{it.get("eyebrow", "")}</div>
+        <div class="mega-hero{strike}">{it["mega"]}</div>
+        <div class="mega-after">{it.get("mega_after", "")}</div>
+      </div>
+      <div class="draggable">{body}</div>
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_quote_hero(it):
+    return f'''<div class="layout layout-quote">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 40px;">
+        <div class="eyebrow">{it.get("eyebrow", "")}</div>
+        <div class="quote-mega">{it["quote"]}</div>
+        <div class="quote-response">{it["response"]}</div>
+      </div>
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_split_screen(it):
+    left = it["left"]
+    right = it["right"]
+    left_items = "\n".join(f'<li>{i}</li>' for i in left["items"])
+    right_items = "\n".join(f'<li>{i}</li>' for i in right["items"])
+    footer = f'<div class="split-footer">{it["footer"]}</div>' if it.get("footer") else ''
+    return f'''<div class="layout layout-split">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 30px;">
+        <div class="eyebrow">{it.get("eyebrow", "")}</div>
+        <h1 class="headline">{it["headline"]}</h1>
+      </div>
+      <div class="splits">
+        <div class="split-col left">
+          <div class="split-label">{left["label"]}</div>
+          <ul class="split-items">{left_items}</ul>
+        </div>
+        <div class="split-col right">
+          <div class="split-label">{right["label"]}</div>
+          <ul class="split-items">{right_items}</ul>
+        </div>
+      </div>
+      {footer}
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_photo_bg(it):
+    body = body_paragraphs(it.get("body", []))
+    photo_url = it.get("photo_url", "")
+    bg_style = f'style="background-image: url(\'{photo_url}\');"' if photo_url else ''
+    return f'''<div class="layout-photo">
+      <div class="photo-bg-layer" {bg_style}></div>
+      <div class="layout">
+        {logo_block()}
+        <div class="draggable" style="margin-top: 50px;">
+          <div class="eyebrow">{it.get("eyebrow", "")}</div>
+          <h1 class="headline">{it["headline"]}</h1>
+        </div>
+        <div class="draggable">{body}</div>
+        {cta_block(it)}
+      </div>
+    </div>'''
+
+
+def layout_hero_photo(it):
+    body = body_paragraphs(it.get("body", []))
+    photo_url = it.get("photo_url", "")
+    bg_style = f'style="background-image: url(\'{photo_url}\');"' if photo_url else ''
+    return f'''<div class="layout-hero-photo">
+      <div class="photo-side" {bg_style}></div>
+      <div class="text-side">
+        {logo_block()}
+        <div class="draggable" style="margin-top: 30px;">
+          <div class="eyebrow">{it.get("eyebrow", "")}</div>
+          <h1 class="headline">{it["headline"]}</h1>
+        </div>
+        <div class="draggable">{body}</div>
+        {cta_block(it)}
+      </div>
+    </div>'''
+
+
+def layout_warning(it):
+    body = body_paragraphs(it.get("body", []))
+    return f'''<div class="layout layout-warning">
+      {logo_block()}
+      <div class="warning-bar draggable">⚠ {it.get("eyebrow", "")}</div>
+      <div class="draggable">
+        <h1 class="headline">{it["headline_warning"]}</h1>
+      </div>
+      <div class="draggable">{body}</div>
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_data_bars(it):
+    bars = "\n".join(
+        f'''<div class="bar-row">
+          <div class="bar-label">{b["label"]} <span class="bar-value">{b["value"]}</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:{b["level"]}%;"></div></div>
+        </div>''' for b in it["bars"])
+    body = body_paragraphs(it.get("body", []))
+    return f'''<div class="layout">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 40px;">
+        <div class="eyebrow">{it.get("eyebrow", "")}</div>
+        <h1 class="headline">{it["headline"]}</h1>
+      </div>
+      <div class="bars-block draggable">{bars}</div>
+      <div class="draggable">{body}</div>
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_minimalist(it):
+    main_lines = "<br>".join(it["minimalist_main"])
+    return f'''<div class="layout layout-min">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 60px;">
+        <div class="eyebrow">{it.get("eyebrow", "")}</div>
+      </div>
+      <div class="minimalist-main draggable">{main_lines}</div>
+      <div class="footer-text draggable">{it.get("footer_text", "")}</div>
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_checklist(it):
+    rows = "\n".join(
+        f'''<div class="check-row draggable">
+          <div class="check-icon">✓</div>
+          <div class="check-content">
+            <div class="check-label">{c["label"]}</div>
+            <div class="check-value">{c["value"]}</div>
+          </div>
+        </div>''' for c in it["checklist"])
+    headline = f'<h1 class="headline">{it["headline"]}</h1>' if it.get("headline") else ''
+    footer_text = f'<p class="body-text" style="opacity:0.85;margin-top:20px;">{it["footer_text"]}</p>' if it.get("footer_text") else ''
+    return f'''<div class="layout">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 40px;">
+        <div class="eyebrow">{it.get("eyebrow", "")}</div>
+        {headline}
+      </div>
+      <div class="checklist-block">{rows}</div>
+      {footer_text}
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_dramatic_dark(it):
+    body = body_paragraphs(it.get("body", []))
+    return f'''<div class="layout-dramatic">
+      <div class="layout">
+        {logo_block()}
+        <div class="draggable" style="margin-top: 50px;">
+          <div class="eyebrow">{it.get("eyebrow", "")}</div>
+          <h1 class="headline">{it["headline"]}</h1>
+        </div>
+        <div class="draggable">{body}</div>
+        {cta_block(it)}
+      </div>
+    </div>'''
+
+
+def layout_stamp_badge(it):
+    body = body_paragraphs(it.get("body", []))
+    headline = f'<h1 class="headline">{it["headline"]}</h1>' if it.get("headline") else ''
+    return f'''<div class="layout">
+      {logo_block()}
+      <div class="stamp draggable">{it["stamp"]}</div>
+      <div class="draggable" style="margin-top: 60px;">
+        {headline}
+      </div>
+      <div class="draggable">{body}</div>
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_ugc_story(it):
+    photo_url = it.get("photo_url", "")
+    bg_style = f'style="background-image: url(\'{photo_url}\');"' if photo_url else ''
+    question = it.get("ugc_question", "")
+    messages_html = ""
+    for msg in it.get("ugc_messages", []):
+        if isinstance(msg, dict):
+            cls = "ugc-message"
+            if msg.get("align") == "right":
+                cls += " right"
+            if msg.get("bold"):
+                cls += " bold-answer"
+            messages_html += f'<div class="{cls}">{msg["text"]}</div>'
+        else:
+            messages_html += f'<div class="ugc-message">{msg}</div>'
+    return f'''<div class="layout-ugc">
+      <div class="photo-fullbleed" {bg_style}></div>
+      <div class="ugc-content">
+        <div class="ugc-question-sticker draggable">{it.get("ugc_sticker", "Mam pytanie")}</div>
+        <div class="ugc-question-bubble draggable">{question}</div>
+        {messages_html}
+        <div class="ugc-cta-row">
+          <div class="url-text"><strong>{it["cta_url"]}</strong>{it.get("ugc_url_subtitle", "Sprawdź, czy to dla Ciebie")}</div>
+          <div class="cta-button">{it["cta"]}</div>
+        </div>
+      </div>
+    </div>'''
+
+
+def layout_bold_numbered(it):
+    items_html = ""
+    for i, item in enumerate(it["numbered_items"], 1):
+        items_html += f'''<div class="numbered-item draggable">
+          <div class="num">{i}.</div>
+          <div class="item-text">{item}</div>
+        </div>'''
+    return f'''<div class="layout layout-numbered">
+      <div class="layout-numbered-bg"></div>
+      {logo_block()}
+      <div class="draggable" style="margin-top: 30px;">
+        <div class="numbered-subtitle">{it.get("subtitle", "")}</div>
+        <h1 class="numbered-headline">{it["headline"]}</h1>
+      </div>
+      <div class="numbered-grid">{items_html}</div>
+      <div class="pill-cta draggable">{it["cta"]} →</div>
+      <div class="cta-url" style="margin-top: 12px;">{it["cta_url"]}</div>
+      {f'<div class="disclaimer">{DISCLAIMER_TEXT}</div>' if it.get("disclaimer") else ''}
+    </div>'''
+
+
+def layout_bold_statement(it):
+    supporting = f'<div class="stmt-supporting draggable">{it["supporting"]}</div>' if it.get("supporting") else ''
+    return f'''<div class="layout layout-bold-stmt">
+      {logo_block()}
+      <div class="massive-statement draggable">{it["statement"]}</div>
+      {supporting}
+      {cta_block(it)}
+    </div>'''
+
+
+def layout_handwritten_notes(it):
+    items_html = ""
+    for note in it.get("notes_items", []):
+        if isinstance(note, dict):
+            cls = "crossed" if note.get("crossed") else ""
+            items_html += f'<li class="{cls}">{note["text"]}</li>'
+        else:
+            items_html += f'<li>{note}</li>'
+    math_html = ""
+    if it.get("notes_math"):
+        for line in it["notes_math"]:
+            math_html += f'<span class="calc-line">{line}</span>'
+        math_html = f'<div class="notes-math draggable">{math_html}</div>'
+    return f'''<div class="layout layout-notes">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 40px;">
+        <div class="notes-title">{it.get("notes_title", "")}</div>
+        <div class="notes-body">{it.get("notes_intro", "")}</div>
+      </div>
+      {f'<ul class="notes-list">{items_html}</ul>' if items_html else ''}
+      {math_html}
+      <div class="notes-cta draggable">{it["cta"]}</div>
+      <div class="cta-url" style="margin-top: 8px;">{it["cta_url"]}</div>
+      <div class="brand-footer" style="margin-top: 20px;">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+    </div>'''
+
+
+def layout_chalkboard(it):
+    menu_html = ""
+    for item in it.get("chalk_menu", []):
+        if isinstance(item, dict):
+            menu_html += f'<li><span>{item["label"]}</span><span class="price">{item["price"]}</span></li>'
+        else:
+            menu_html += f'<li>{item}</li>'
+    return f'''<div class="layout layout-chalkboard">
+      <div class="chalk-frame">
+        {logo_block()}
+        <div class="draggable" style="margin-top: 30px;">
+          <div class="chalk-eyebrow">{it.get("eyebrow", "")}</div>
+          <div class="chalk-headline">{it["headline"]}</div>
+        </div>
+        <ul class="chalk-menu draggable">{menu_html}</ul>
+        <div class="chalk-cta draggable">{it["cta"]} →</div>
+        <div class="cta-url" style="margin-top: 16px; color: rgba(255,255,255,0.7);">{it["cta_url"]}</div>
+      </div>
+    </div>'''
+
+
+def layout_redacted_doc(it):
+    items_html = ""
+    for item in it.get("redacted_items", []):
+        if isinstance(item, dict):
+            cls = "checked" if item.get("checked") else ""
+            items_html += f'<li class="{cls}">{item["text"]}</li>'
+        else:
+            items_html += f'<li>{item}</li>'
+    return f'''<div class="layout layout-redacted">
+      {logo_block()}
+      <div class="redacted-stamp draggable">{it.get("stamp_text", "Confidential")}</div>
+      <div class="draggable" style="margin-top: 30px;">
+        <div class="redacted-doc-meta">{it.get("doc_meta", "Dokument · Klauzula poufności")}</div>
+        <h1 class="redacted-doc-title">{it["headline"]}</h1>
+      </div>
+      <ul class="redacted-list">{items_html}</ul>
+      <div class="redacted-cta draggable">{it["cta"]} →</div>
+      <div class="cta-url" style="margin-top: 12px;">{it["cta_url"]}</div>
+      <div class="brand-footer" style="margin-top: 20px;">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+    </div>'''
+
+
+def layout_watercolor(it):
+    body = ""
+    for p in it.get("body", []):
+        body += f'<p class="watercolor-body">{p}</p>'
+    return f'''<div class="layout layout-watercolor">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 50px;">
+        <div class="watercolor-eyebrow">{it.get("eyebrow", "")}</div>
+        <h1 class="watercolor-headline">{it["headline"]}</h1>
+        <div class="watercolor-divider"></div>
+      </div>
+      <div class="draggable">{body}</div>
+      <div class="watercolor-cta draggable">{it["cta"]} →</div>
+      <div class="cta-url" style="margin-top: 16px;">{it["cta_url"]}</div>
+      <div class="brand-footer" style="margin-top: 20px;">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+    </div>'''
+
+
+def layout_yellow_alarm(it):
+    body = "\n".join(f'<p class="yellow-body">{p}</p>' for p in it.get("body", []))
+    sub = f'<div class="yellow-sub">{it["sub"]}</div>' if it.get("sub") else ''
+    return f'''<div class="layout layout-yellow">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 36px;">
+        <div class="yellow-alert-bar">{it.get("alert", "ULTIMATE GUIDE")}</div>
+        <h1 class="yellow-headline">{it["headline"]}</h1>
+        {sub}
+      </div>
+      <div class="draggable">{body}</div>
+      <div class="yellow-cta draggable">{it["cta"]} →</div>
+      <div class="cta-url" style="margin-top: 14px;">{it["cta_url"]}</div>
+      <div class="brand-footer" style="margin-top: 20px;">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+      {("<div class='disclaimer' style='margin-top:14px;'>" + DISCLAIMER_TEXT + "</div>") if it.get("disclaimer") else ""}
+    </div>'''
+
+
+def layout_burgundy_quote(it):
+    body = "\n".join(f'<p class="burgundy-body">{p}</p>' for p in it.get("body", []))
+    signature = f'<div class="burgundy-signature">{it["signature"]}</div>' if it.get("signature") else ''
+    return f'''<div class="layout layout-burgundy">
+      {logo_block()}
+      <div class="draggable" style="margin-top: 50px;">
+        <div class="burgundy-eyebrow">{it.get("eyebrow", "")}</div>
+        <div class="burgundy-quote-mark">"</div>
+        <h1 class="burgundy-quote">{it["quote"]}</h1>
+        <div class="burgundy-divider"></div>
+      </div>
+      <div class="draggable">{body}{signature}</div>
+      <div class="burgundy-cta draggable">{it["cta"]} →</div>
+      <div class="cta-url" style="margin-top: 14px;">{it["cta_url"]}</div>
+      <div class="brand-footer" style="margin-top: 20px;">
+        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      </div>
+    </div>'''
+
+
+LAYOUTS = {
+    "mega-number": layout_mega_number,
+    "quote-hero": layout_quote_hero,
+    "split-screen": layout_split_screen,
+    "photo-bg": layout_photo_bg,
+    "hero-photo": layout_hero_photo,
+    "warning": layout_warning,
+    "data-bars": layout_data_bars,
+    "minimalist": layout_minimalist,
+    "checklist": layout_checklist,
+    "dramatic-dark": layout_dramatic_dark,
+    "stamp-badge": layout_stamp_badge,
+    "ugc-story": layout_ugc_story,
+    "bold-numbered": layout_bold_numbered,
+    "bold-statement": layout_bold_statement,
+    "handwritten-notes": layout_handwritten_notes,
+    "chalkboard": layout_chalkboard,
+    "redacted-doc": layout_redacted_doc,
+    "watercolor": layout_watercolor,
+    "yellow-alarm": layout_yellow_alarm,
+    "burgundy-quote": layout_burgundy_quote,
+}
+
+
+def build_ad(it):
+    fmt = it["format"]
+    style = it.get("style", "white")
+    style_class = "" if style == "white" else f" {style}"
+    layout_fn = LAYOUTS.get(it["layout"], layout_mega_number)
+    inner = layout_fn(it)
+    layout_tag = it["layout"].upper()
+
+    format_btns = ""
+    for f in ["4-5", "9-16", "1-1"]:
+        active = "active" if f == fmt else ""
+        f_label = {"4-5": "4:5", "9-16": "9:16", "1-1": "1:1"}[f]
+        format_btns += f'<button class="{active}" onclick="setFormat(this, \'{f}\')">{f_label}</button>'
+
+    return f'''
+<div class="ad-wrapper" data-code="{it["code"]}">
+  <div class="format-bar">
+    <span class="label">{it["code"]} — {it.get("label", "")}</span>
+    <span class="layout-tag">{layout_tag}</span>
+    {format_btns}
+  </div>
+  <div class="ad format-{fmt}{style_class}">
+    {inner}
+  </div>
+  <div class="ad-actions">
+    <button onclick="downloadOne(this)">⬇ PNG</button>
+    <button onclick="changeBg(this, 'white')">Balta</button>
+    <button onclick="changeBg(this, 'cream')">Kreminė</button>
+    <button onclick="changeBg(this, 'bright')">Bright</button>
+    <button onclick="changeBg(this, 'green')">Žalia</button>
+    <button onclick="changeBg(this, 'deep')">Deep</button>
+    <button onclick="changeBg(this, 'dark')">Dark</button>
+    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
+    <button onclick="changeBg(this, 'warning')">Warning</button>
+    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
+    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
+  </div>
+</div>
+'''
+
+
+def build_concept(c):
+    head = HEAD_TPL.format(title=c["title"], persona=c["persona"], css=CSS)
+    ads = "\n".join(build_ad(it) for it in c["iterations"])
+    return head + ads + FOOTER_SCRIPT
+
+
+def main():
+    for c in ADS:
+        path = os.path.join(OUTPUT_DIR, f"{c['id']}.html")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(build_concept(c))
+        print(f"✓ {path}")
+
+    # Index
+    index = '''<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8">
+<title>Kapitał Życia — Static Ads Preview</title>
+<meta name="description" content="21 statyczna reklama (7 koncepcji × 3 iteracje) z 13 layout'ami. Lenkų rinka. Doradca ubezpieczeniowy.">
+<meta property="og:title" content="Kapitał Życia — Static Ads Preview">
+<meta property="og:description" content="21 statyczna reklama z 13 layout'ami — recruitment kampanija dla rynku polskiego.">
+<meta property="og:image" content="https://mbgumbyte.github.io/kapital-zycia-ads/assets/logo-full.png">
+<meta property="og:image:width" content="440">
+<meta property="og:image:height" content="325">
+<meta property="og:url" content="https://mbgumbyte.github.io/kapital-zycia-ads/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kapitał Życia — Static Ads Preview">
+<meta name="twitter:description" content="21 statyczna reklama z 13 layout'ami — recruitment kampanija.">
+<meta name="twitter:image" content="https://mbgumbyte.github.io/kapital-zycia-ads/assets/logo-full.png">
+<link rel="icon" type="image/png" href="assets/logo-flames.png">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#F5EFE3,#fff);padding:40px 20px;max-width:900px;margin:0 auto;color:#0F0F0F;}
+h1{font-family:'Anton',sans-serif;font-size:56px;letter-spacing:0.04em;color:#0E5C2F;margin-bottom:6px;}
+.tag{color:#6B6B6B;margin-bottom:32px;font-size:18px;}
+.card{background:white;padding:24px 28px;border-radius:10px;margin-bottom:14px;border-left:6px solid #009639;
+  display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,0.04);}
+.card h2{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:0.04em;margin-bottom:4px;}
+.card .persona{color:#6B6B6B;font-size:14px;}
+.card .layouts{color:#009639;font-size:12px;font-weight:700;margin-top:6px;letter-spacing:0.06em;text-transform:uppercase;}
+.card a{background:#0E5C2F;color:white;text-decoration:none;padding:12px 22px;border-radius:6px;font-weight:700;font-size:14px;}
+.card a:hover{background:#009639;}
+.foot{margin-top:30px;padding:20px;background:rgba(255,255,255,0.6);border-radius:8px;font-size:13px;color:#6B6B6B;}
+</style></head><body>
+<h1>KAPITAŁ ŻYCIA — STATIC ADS</h1>
+<div class="tag">7 koncepcijos × 3 iteracijos = <strong style="color:#009639;">21 reklama</strong>. 13 layout patternų (Atria-influenced). Lenkų rinka.</div>
+'''
+    for c in ADS:
+        layouts = " · ".join(it["layout"] for it in c["iterations"])
+        index += f'''<div class="card">
+  <div>
+    <h2>{c["title"]}</h2>
+    <div class="persona">{c["persona"]}</div>
+    <div class="layouts">{layouts}</div>
+  </div>
+  <a href="{c["id"]}.html">Atidaryti →</a>
+</div>
+'''
+    index += '''<div class="foot">Kiekviena reklama redaguojama tiesiai naršyklėje. Eksportuojama kaip PNG (2× scale). Formato perjungimas (4:5 / 9:16 / 1:1) per ad. Foninių spalvų variantai per ad.</div>
+</body></html>'''
+    idx_path = os.path.join(OUTPUT_DIR, "index.html")
+    with open(idx_path, "w", encoding="utf-8") as f:
+        f.write(index)
+    print(f"✓ {idx_path}")
+
+
+if __name__ == "__main__":
+    main()

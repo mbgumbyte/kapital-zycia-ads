@@ -13,6 +13,8 @@
   --charcoal: #1A1A1A; --gray: #6B6B6B;
   --warning-bg: #FFE94A; --warning-text: #1A1A1A;
   --red: #C0392B;
+  --yellow: #F4D33E; --yellow-dark: #E0BF2A;
+  --burgundy: #4A1E2A; --burgundy-light: #5C2A39;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
@@ -57,39 +59,43 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.green .layout { background: var(--green); color: var(--white); }
 .ad.bright .layout { background: var(--green-bright); color: var(--green-night); }
 .ad.warning .layout { background: var(--warning-bg); color: var(--warning-text); }
+.ad.yellow .layout { background: var(--yellow); color: var(--black); }
+.ad.burgundy .layout { background: var(--burgundy); color: var(--cream); }
 
 /* BRAND LOGO */
 .brand-logo { display: flex; align-items: center; gap: 14px; font-family: 'Inter', sans-serif; font-weight: 800;
   font-size: 22px; letter-spacing: 0.08em; color: var(--black); }
 .brand-logo .logo-flames-img { width: 50px; height: auto; display: block; }
-.ad.dark .brand-logo, .ad.deep .brand-logo, .ad.green .brand-logo, .ad.charcoal .brand-logo { color: var(--white); }
-.ad.bright .brand-logo, .ad.warning .brand-logo { color: var(--green-night); }
+.ad.dark .brand-logo, .ad.deep .brand-logo, .ad.green .brand-logo, .ad.charcoal .brand-logo, .ad.burgundy .brand-logo { color: var(--white); }
+.ad.bright .brand-logo, .ad.warning .brand-logo, .ad.yellow .brand-logo { color: var(--green-night); }
 /* On dark backgrounds we keep the colorful flames — they are recognizable. Only invert text color. */
 
 /* COMMON */
 .eyebrow { font-family: 'Anton', sans-serif; font-size: 24px; letter-spacing: 0.18em;
   color: var(--green-deep); text-transform: uppercase; margin-bottom: 24px; }
-.ad.dark .eyebrow, .ad.deep .eyebrow, .ad.charcoal .eyebrow, .ad.green .eyebrow { color: var(--green-bright); }
-.ad.bright .eyebrow, .ad.warning .eyebrow { color: var(--green-night); }
+.ad.dark .eyebrow, .ad.deep .eyebrow, .ad.charcoal .eyebrow, .ad.green .eyebrow, .ad.burgundy .eyebrow { color: var(--green-bright); }
+.ad.bright .eyebrow, .ad.warning .eyebrow, .ad.yellow .eyebrow { color: var(--green-night); }
 
 .headline { font-family: 'Anton', sans-serif; font-size: 86px; line-height: 0.98;
   letter-spacing: -0.01em; color: var(--black); margin-bottom: 28px; }
-.ad.dark .headline, .ad.deep .headline, .ad.green .headline, .ad.charcoal .headline { color: var(--white); }
-.ad.bright .headline, .ad.warning .headline { color: var(--green-night); }
+.ad.dark .headline, .ad.deep .headline, .ad.green .headline, .ad.charcoal .headline, .ad.burgundy .headline { color: var(--white); }
+.ad.bright .headline, .ad.warning .headline, .ad.yellow .headline { color: var(--green-night); }
 .headline .accent { color: var(--green); font-style: italic; }
 .ad.dark .headline .accent, .ad.deep .headline .accent, .ad.charcoal .headline .accent { color: var(--green-bright); }
 .ad.green .headline .accent, .ad.bright .headline .accent { color: var(--cream); font-style: italic; }
-.ad.warning .headline .accent { color: var(--red); font-style: italic; }
+.ad.warning .headline .accent, .ad.yellow .headline .accent { color: var(--red); font-style: italic; }
+.ad.burgundy .headline .accent { color: var(--green-bright); font-style: italic; }
 .headline .strike { text-decoration: line-through; text-decoration-thickness: 4px; opacity: 0.7; }
 
 .body-text { font-family: 'Inter', sans-serif; font-size: 28px; line-height: 1.42;
   color: var(--black); margin-bottom: 16px; font-weight: 400; }
-.ad.dark .body-text, .ad.deep .body-text, .ad.green .body-text, .ad.charcoal .body-text { color: rgba(255,255,255,0.92); }
-.ad.bright .body-text, .ad.warning .body-text { color: var(--green-night); }
+.ad.dark .body-text, .ad.deep .body-text, .ad.green .body-text, .ad.charcoal .body-text, .ad.burgundy .body-text { color: rgba(255,255,255,0.92); }
+.ad.bright .body-text, .ad.warning .body-text, .ad.yellow .body-text { color: var(--green-night); }
 .body-text strong { font-weight: 700; color: var(--green-deep); }
 .ad.dark .body-text strong, .ad.deep .body-text strong, .ad.charcoal .body-text strong { color: var(--green-bright); }
 .ad.green .body-text strong { color: var(--cream); }
-.ad.bright .body-text strong, .ad.warning .body-text strong { color: var(--green-night); text-decoration: underline; text-decoration-color: var(--green); text-decoration-thickness: 3px; }
+.ad.bright .body-text strong, .ad.warning .body-text strong, .ad.yellow .body-text strong { color: var(--green-night); text-decoration: underline; text-decoration-color: var(--green); text-decoration-thickness: 3px; }
+.ad.burgundy .body-text strong { color: var(--green-bright); }
 
 /* CTA */
 .cta { margin-top: auto; padding-top: 28px; display: flex; flex-direction: column; gap: 12px; }
@@ -98,24 +104,25 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.green .cta-button { background: var(--white); color: var(--green-deep); }
 .ad.dark .cta-button, .ad.deep .cta-button, .ad.charcoal .cta-button { background: var(--green-bright); color: var(--green-night); }
 .ad.bright .cta-button { background: var(--green-night); color: var(--white); }
-.ad.warning .cta-button { background: var(--green-night); color: var(--warning-bg); }
+.ad.warning .cta-button, .ad.yellow .cta-button { background: var(--green-night); color: var(--yellow); }
+.ad.burgundy .cta-button { background: var(--green-bright); color: var(--burgundy); }
 .cta-url { font-family: 'Inter', sans-serif; font-size: 22px; color: var(--gray); font-weight: 500; }
-.ad.dark .cta-url, .ad.deep .cta-url, .ad.green .cta-url, .ad.charcoal .cta-url { color: rgba(255,255,255,0.7); }
-.ad.bright .cta-url, .ad.warning .cta-url { color: var(--green-night); opacity: 0.7; }
+.ad.dark .cta-url, .ad.deep .cta-url, .ad.green .cta-url, .ad.charcoal .cta-url, .ad.burgundy .cta-url { color: rgba(255,255,255,0.7); }
+.ad.bright .cta-url, .ad.warning .cta-url, .ad.yellow .cta-url { color: var(--green-night); opacity: 0.7; }
 
 .disclaimer { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.4; color: var(--gray);
   font-weight: 300; font-style: italic; margin-top: 14px; }
-.ad.dark .disclaimer, .ad.deep .disclaimer, .ad.green .disclaimer, .ad.charcoal .disclaimer { color: rgba(255,255,255,0.55); }
-.ad.bright .disclaimer, .ad.warning .disclaimer { color: var(--green-night); opacity: 0.55; }
+.ad.dark .disclaimer, .ad.deep .disclaimer, .ad.green .disclaimer, .ad.charcoal .disclaimer, .ad.burgundy .disclaimer { color: rgba(255,255,255,0.55); }
+.ad.bright .disclaimer, .ad.warning .disclaimer, .ad.yellow .disclaimer { color: var(--green-night); opacity: 0.55; }
 
 .brand-footer { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.1);
   display: flex; align-items: center; justify-content: space-between; }
-.ad.dark .brand-footer, .ad.deep .brand-footer, .ad.green .brand-footer, .ad.charcoal .brand-footer { border-top-color: rgba(255,255,255,0.18); }
-.ad.bright .brand-footer, .ad.warning .brand-footer { border-top-color: rgba(14,45,34,0.2); }
+.ad.dark .brand-footer, .ad.deep .brand-footer, .ad.green .brand-footer, .ad.charcoal .brand-footer, .ad.burgundy .brand-footer { border-top-color: rgba(255,255,255,0.18); }
+.ad.bright .brand-footer, .ad.warning .brand-footer, .ad.yellow .brand-footer { border-top-color: rgba(14,45,34,0.2); }
 .brand-tagline { font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: 0.14em;
   color: var(--gray); text-transform: uppercase; font-weight: 700; }
-.ad.dark .brand-tagline, .ad.deep .brand-tagline, .ad.green .brand-tagline, .ad.charcoal .brand-tagline { color: rgba(255,255,255,0.65); }
-.ad.bright .brand-tagline, .ad.warning .brand-tagline { color: var(--green-night); opacity: 0.7; }
+.ad.dark .brand-tagline, .ad.deep .brand-tagline, .ad.green .brand-tagline, .ad.charcoal .brand-tagline, .ad.burgundy .brand-tagline { color: rgba(255,255,255,0.65); }
+.ad.bright .brand-tagline, .ad.warning .brand-tagline, .ad.yellow .brand-tagline { color: var(--green-night); opacity: 0.7; }
 
 /* ============= LAYOUT: MEGA-NUMBER ============= */
 .layout-mega { padding: 70px 60px 60px; }
@@ -461,6 +468,62 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   align-self: flex-start; margin-top: 30px; background: rgba(255,255,255,0.5);
   backdrop-filter: blur(4px); }
 
+/* ============= LAYOUT: YELLOW-ALARM (Atria yellow card) ============= */
+.layout-yellow { padding: 90px 80px;
+  background: var(--yellow) !important; color: var(--black);
+  background-image:
+    linear-gradient(135deg, var(--yellow) 0%, var(--yellow-dark) 100%) !important; }
+.yellow-alert-bar { background: var(--green-night); color: var(--yellow);
+  font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 0.18em;
+  padding: 12px 22px; align-self: flex-start; margin-bottom: 30px;
+  text-transform: uppercase; }
+.layout-yellow .yellow-headline { font-family: 'Anton', sans-serif;
+  font-size: 138px; line-height: 0.9; letter-spacing: -0.02em;
+  color: var(--green-night); text-transform: uppercase; margin-bottom: 28px; }
+.ad.format-1-1 .layout-yellow .yellow-headline { font-size: 100px; }
+.ad.format-9-16 .layout-yellow .yellow-headline { font-size: 160px; }
+.layout-yellow .yellow-headline .accent { color: var(--red); font-style: italic; }
+.layout-yellow .yellow-sub { font-family: 'Anton', sans-serif; font-size: 56px;
+  color: var(--green-night); letter-spacing: -0.01em; margin-bottom: 36px; }
+.ad.format-9-16 .layout-yellow .yellow-sub { font-size: 64px; }
+.layout-yellow .yellow-body { font-family: 'Inter', sans-serif; font-size: 28px;
+  line-height: 1.45; color: var(--green-night); margin-bottom: 16px; max-width: 90%; }
+.layout-yellow .yellow-body strong { font-weight: 800; text-decoration: underline;
+  text-decoration-color: var(--red); text-decoration-thickness: 4px; }
+.layout-yellow .yellow-cta { background: var(--green-night); color: var(--yellow);
+  padding: 20px 32px; font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 28px; align-self: flex-start; border-radius: 6px; margin-top: 30px; }
+
+/* ============= LAYOUT: BURGUNDY-QUOTE (Atria premium invitation) ============= */
+.layout-burgundy { padding: 110px 90px; position: relative;
+  background: var(--burgundy) !important; color: var(--cream);
+  background-image:
+    radial-gradient(circle at 80% 20%, rgba(107,194,59,0.10) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(245,239,227,0.06) 0%, transparent 30%) !important; }
+.burgundy-eyebrow { font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 28px; color: var(--green-bright); margin-bottom: 18px;
+  letter-spacing: 0.04em; }
+.burgundy-quote-mark { font-family: 'Playfair Display', serif; font-size: 220px;
+  line-height: 0.6; color: var(--green-bright); opacity: 0.4; margin-bottom: -40px; }
+.burgundy-quote { font-family: 'Playfair Display', serif; font-style: italic;
+  font-weight: 700; font-size: 78px; line-height: 1.05;
+  color: var(--cream); margin-bottom: 32px; }
+.ad.format-1-1 .burgundy-quote { font-size: 60px; }
+.ad.format-9-16 .burgundy-quote { font-size: 90px; }
+.burgundy-quote .accent { color: var(--green-bright); font-weight: 700; font-style: italic; }
+.burgundy-divider { width: 100px; height: 2px; background: var(--green-bright);
+  margin: 28px 0; opacity: 0.7; }
+.burgundy-body { font-family: 'Inter', sans-serif; font-size: 24px;
+  line-height: 1.55; color: rgba(245,239,227,0.85); margin-bottom: 14px; max-width: 90%; }
+.burgundy-body strong { color: var(--green-bright); font-weight: 700; }
+.burgundy-signature { font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 22px; color: rgba(245,239,227,0.7); margin-top: 24px;
+  letter-spacing: 0.04em; }
+.burgundy-cta { font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 28px; color: var(--burgundy); padding: 18px 36px;
+  background: var(--green-bright); border-radius: 100px;
+  align-self: flex-start; margin-top: 28px; font-weight: 700; }
+
 /* DRAG / EDIT */
 .drag-mode .draggable { cursor: move; outline: 2px dashed transparent; }
 .drag-mode .draggable:hover { outline-color: var(--red); }
@@ -556,6 +619,8 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     <button onclick="changeBg(this, 'dark')">Dark</button>
     <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
     <button onclick="changeBg(this, 'warning')">Warning</button>
+    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
+    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
   </div>
 </div>
 
@@ -590,6 +655,8 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     <button onclick="changeBg(this, 'dark')">Dark</button>
     <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
     <button onclick="changeBg(this, 'warning')">Warning</button>
+    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
+    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
   </div>
 </div>
 
@@ -628,6 +695,8 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     <button onclick="changeBg(this, 'dark')">Dark</button>
     <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
     <button onclick="changeBg(this, 'warning')">Warning</button>
+    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
+    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
   </div>
 </div>
 
@@ -642,13 +711,13 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   }
   function changeBg(btn, bg) {
     const ad = btn.closest('.ad-wrapper').querySelector('.ad');
-    ad.classList.remove('dark', 'deep', 'cream', 'green', 'bright', 'charcoal', 'warning');
+    ad.classList.remove('dark', 'deep', 'cream', 'green', 'bright', 'charcoal', 'warning', 'yellow', 'burgundy');
     if (bg !== 'white') ad.classList.add(bg);
   }
   let editMode = false;
   function toggleEdit() {
     editMode = !editMode;
-    document.querySelectorAll('.ad .headline, .ad .body-text, .ad .eyebrow, .ad .quote-mega, .ad .quote-response, .ad .stat, .ad .compare-row, .ad .cta-button, .ad .cta-url, .ad .brand-tagline, .ad .disclaimer, .ad .mega-hero, .ad .mega-after, .ad .minimalist-main, .ad .footer-text, .ad .stamp, .ad .check-label, .ad .check-value, .ad .split-label, .ad .split-items li, .ad .split-footer, .ad .bar-label, .ad .warning-bar, .ad .ugc-question-sticker, .ad .ugc-question-bubble, .ad .ugc-message, .ad .url-text, .ad .numbered-headline, .ad .numbered-subtitle, .ad .numbered-item .num, .ad .numbered-item .item-text, .ad .pill-cta, .ad .massive-statement, .ad .stmt-supporting, .ad .notes-title, .ad .notes-body, .ad .notes-list li, .ad .notes-math, .ad .notes-math .calc-line, .ad .notes-cta, .ad .chalk-eyebrow, .ad .chalk-headline, .ad .chalk-menu li, .ad .chalk-cta, .ad .redacted-stamp, .ad .redacted-doc-meta, .ad .redacted-doc-title, .ad .redacted-list li, .ad .redacted-cta, .ad .watercolor-eyebrow, .ad .watercolor-headline, .ad .watercolor-body, .ad .watercolor-cta').forEach(el => {
+    document.querySelectorAll('.ad .headline, .ad .body-text, .ad .eyebrow, .ad .quote-mega, .ad .quote-response, .ad .stat, .ad .compare-row, .ad .cta-button, .ad .cta-url, .ad .brand-tagline, .ad .disclaimer, .ad .mega-hero, .ad .mega-after, .ad .minimalist-main, .ad .footer-text, .ad .stamp, .ad .check-label, .ad .check-value, .ad .split-label, .ad .split-items li, .ad .split-footer, .ad .bar-label, .ad .warning-bar, .ad .ugc-question-sticker, .ad .ugc-question-bubble, .ad .ugc-message, .ad .url-text, .ad .numbered-headline, .ad .numbered-subtitle, .ad .numbered-item .num, .ad .numbered-item .item-text, .ad .pill-cta, .ad .massive-statement, .ad .stmt-supporting, .ad .notes-title, .ad .notes-body, .ad .notes-list li, .ad .notes-math, .ad .notes-math .calc-line, .ad .notes-cta, .ad .chalk-eyebrow, .ad .chalk-headline, .ad .chalk-menu li, .ad .chalk-cta, .ad .redacted-stamp, .ad .redacted-doc-meta, .ad .redacted-doc-title, .ad .redacted-list li, .ad .redacted-cta, .ad .watercolor-eyebrow, .ad .watercolor-headline, .ad .watercolor-body, .ad .watercolor-cta, .ad .yellow-alert-bar, .ad .yellow-headline, .ad .yellow-sub, .ad .yellow-body, .ad .yellow-cta, .ad .burgundy-eyebrow, .ad .burgundy-quote, .ad .burgundy-body, .ad .burgundy-signature, .ad .burgundy-cta').forEach(el => {
       el.contentEditable = editMode;
     });
     document.getElementById('formatToolbar').classList.toggle('visible', editMode);
