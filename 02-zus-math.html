@@ -61,9 +61,10 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 /* BRAND LOGO */
 .brand-logo { display: flex; align-items: center; gap: 14px; font-family: 'Inter', sans-serif; font-weight: 800;
   font-size: 22px; letter-spacing: 0.08em; color: var(--black); }
-.brand-logo .logo-mark { width: 44px; height: 54px; }
+.brand-logo .logo-flames-img { width: 50px; height: auto; display: block; }
 .ad.dark .brand-logo, .ad.deep .brand-logo, .ad.green .brand-logo, .ad.charcoal .brand-logo { color: var(--white); }
 .ad.bright .brand-logo, .ad.warning .brand-logo { color: var(--green-night); }
+/* On dark backgrounds we keep the colorful flames — they are recognizable. Only invert text color. */
 
 /* COMMON */
 .eyebrow { font-family: 'Anton', sans-serif; font-size: 24px; letter-spacing: 0.18em;
@@ -168,25 +169,32 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 /* ============= LAYOUT: PHOTO-BG ============= */
 .layout-photo .photo-bg-layer { position: absolute; inset: 0; z-index: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(107, 194, 59, 0.35), transparent 60%),
-              radial-gradient(circle at 80% 80%, rgba(14, 92, 47, 0.5), transparent 50%),
-              linear-gradient(135deg, #052D1A 0%, #0E5C2F 60%, #1A1A1A 100%); }
+  background-size: cover; background-position: center; }
 .layout-photo .photo-bg-layer::after { content: ''; position: absolute; inset: 0;
-  background-image:
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 80px),
-    radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 100%);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 50%, rgba(5,45,26,0.92) 100%),
+    radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.5) 100%);
 }
-.layout-photo .layout { position: relative; z-index: 1; background: transparent; color: white; }
+.layout-photo .layout { position: relative; z-index: 1; background: transparent; color: white; padding-top: 70px; }
 .layout-photo .headline { color: white; font-size: 96px; }
 .layout-photo .headline .accent { color: var(--green-bright); }
-.layout-photo .body-text { color: rgba(255,255,255,0.92); font-size: 30px; }
+.layout-photo .body-text { color: rgba(255,255,255,0.95); font-size: 30px; }
 .layout-photo .body-text strong { color: var(--green-bright); }
 .layout-photo .eyebrow { color: var(--green-bright); }
 .layout-photo .cta-button { background: var(--green-bright); color: var(--green-night); }
-.layout-photo .cta-url { color: rgba(255,255,255,0.7); }
-.layout-photo .brand-tagline { color: rgba(255,255,255,0.65); }
+.layout-photo .cta-url { color: rgba(255,255,255,0.75); }
+.layout-photo .brand-tagline { color: rgba(255,255,255,0.7); }
 .layout-photo .brand-footer { border-top-color: rgba(255,255,255,0.2); }
 .layout-photo.format-9-16 .headline { font-size: 110px; }
+
+/* HERO PHOTO LAYOUT — photo on right, text on left */
+.layout-hero-photo { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+.layout-hero-photo .photo-side { background-size: cover; background-position: center; position: relative; }
+.layout-hero-photo .photo-side::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--green-night) 0%, transparent 30%); }
+.layout-hero-photo .text-side { padding: 70px 60px; display: flex; flex-direction: column; }
+.ad.format-9-16 .layout-hero-photo { grid-template-columns: 1fr; grid-template-rows: 1fr 1.2fr; }
+.ad.format-9-16 .layout-hero-photo .photo-side { min-height: 750px; }
 
 /* ============= LAYOUT: WARNING ============= */
 .layout-warning .layout { padding-top: 60px; }
@@ -316,11 +324,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   <div class="ad format-4-5">
     <div class="layout">
       <div class="brand-logo draggable">
-      <div class="logo-mark"><svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-  <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-  <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-</svg></div>
+      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
       <span>KAPITAŁ ŻYCIA</span>
     </div>
       <div class="draggable" style="margin-top: 40px;">
@@ -374,11 +378,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   <div class="ad format-9-16 bright">
     <div class="layout layout-mega">
       <div class="brand-logo draggable">
-      <div class="logo-mark"><svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-  <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-  <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-</svg></div>
+      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
       <span>KAPITAŁ ŻYCIA</span>
     </div>
       <div class="draggable" style="margin-top: 30px;">
@@ -423,11 +423,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   <div class="ad format-1-1 cream">
     <div class="layout layout-quote">
       <div class="brand-logo draggable">
-      <div class="logo-mark"><svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#6BC23B" d="M38,125 C25,105 18,75 25,45 C30,25 38,12 46,8 C44,18 40,32 38,50 C36,70 38,90 40,108 C40,115 39,120 38,125 Z"/>
-  <path fill="#0E5C2F" d="M64,125 C77,105 84,75 77,45 C72,25 64,12 56,8 C58,18 62,32 64,50 C66,70 64,90 62,108 C62,115 63,120 64,125 Z"/>
-  <path fill="#009639" d="M51,128 C40,100 43,60 49,22 C50,10 53,5 53,5 C53,15 56,28 56,50 C58,80 60,105 51,128 Z"/>
-</svg></div>
+      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
       <span>KAPITAŁ ŻYCIA</span>
     </div>
       <div class="draggable" style="margin-top: 40px;">
