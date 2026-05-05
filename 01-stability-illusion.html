@@ -720,6 +720,114 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   padding: 60px 100px 720px !important;
   justify-content: center !important;
 }
+
+/* ============= AD 1 SPECIFIC FIXES ============= */
+
+/* === AD 1A — yellow + photo === */
+/* 4:5: bigger headline + better fill */
+.ad.format-4-5 .layout-im-yellow { grid-template-columns: 1.3fr 0.7fr !important; }
+.ad.format-4-5 .layout-im-yellow .im-text-side { padding: 100px 70px !important; }
+.ad.format-4-5 .layout-im-yellow .im-headline { font-size: 92px !important; line-height: 0.98 !important; }
+.ad.format-4-5 .layout-im-yellow .im-body { font-size: 28px !important; }
+
+/* 9:16: small text top, big photo bottom with yellow fade */
+.ad.format-9-16 .layout-im-yellow {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 0.55fr 1.45fr !important;
+}
+.ad.format-9-16 .layout-im-yellow .im-text-side {
+  padding: 320px 80px 30px !important;
+  justify-content: flex-start !important;
+}
+.ad.format-9-16 .layout-im-yellow .im-headline { font-size: 110px !important; }
+.ad.format-9-16 .layout-im-yellow .im-body { font-size: 32px !important; }
+.ad.format-9-16 .layout-im-yellow .im-photo-side {
+  position: relative !important;
+}
+.ad.format-9-16 .layout-im-yellow .im-photo-side::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(180deg, var(--im-yellow) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.ad.format-9-16 .layout-im-yellow .im-photo-side::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 720px;
+  background: linear-gradient(0deg, var(--im-yellow) 30%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 1:1: bigger text */
+.ad.format-1-1 .layout-im-yellow .im-headline { font-size: 76px !important; line-height: 1.0 !important; }
+.ad.format-1-1 .layout-im-yellow .im-body { font-size: 26px !important; }
+
+/* === AD 1B — dark green + sticky + photo === */
+/* 4:5: more padding from left */
+.ad.format-4-5 .layout-im-dark { padding: 90px 80px 0 110px !important; }
+.ad.format-4-5 .layout-im-dark .im-headline-dark { font-size: 86px !important; }
+
+/* 9:16: full-bleed photo BG with dark green overlay */
+.ad.format-9-16 .layout-im-dark {
+  position: relative !important;
+  padding: 320px 100px 720px !important;
+}
+.ad.format-9-16 .layout-im-dark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1080&h=1920&fit=crop&q=85');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35) blur(2px);
+  z-index: 0;
+}
+.ad.format-9-16 .layout-im-dark .im-content {
+  position: relative !important;
+  z-index: 1 !important;
+  justify-content: center !important;
+}
+
+/* 1:1: more padding from left */
+.ad.format-1-1 .layout-im-dark { padding: 80px 70px 0 100px !important; }
+
+/* === AD 1C — white + photo === */
+/* 4:5: more left padding + bigger text */
+.ad.format-4-5 .layout-im-white { grid-template-columns: 1.2fr 0.8fr !important; }
+.ad.format-4-5 .layout-im-white .im-text-side { padding: 110px 70px 110px 110px !important; }
+.ad.format-4-5 .layout-im-white .im-headline-white { font-size: 80px !important; }
+
+/* 9:16: face visible (top of photo), bigger text, more horizontal padding */
+.ad.format-9-16 .layout-im-white {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 1fr 1fr !important;
+}
+.ad.format-9-16 .layout-im-white .im-photo-side {
+  background-position: center 15% !important;
+  min-height: 800px !important;
+}
+.ad.format-9-16 .layout-im-white .im-text-side {
+  padding: 80px 100px 720px !important;
+}
+.ad.format-9-16 .layout-im-white .im-headline-white { font-size: 96px !important; }
+.ad.format-9-16 .layout-im-white .im-subhead { font-size: 38px !important; }
+
+/* 1:1: text centered */
+.ad.format-1-1 .layout-im-white { grid-template-columns: 1fr !important; grid-template-rows: 1fr 0.6fr !important; }
+.ad.format-1-1 .layout-im-white .im-text-side {
+  padding: 80px 90px !important;
+  text-align: center !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.ad.format-1-1 .layout-im-white .im-headline-white { font-size: 62px !important; text-align: center !important; }
+.ad.format-1-1 .layout-im-white .im-checklist-w { align-items: flex-start !important; }
+.ad.format-1-1 .layout-im-white .im-cta-sticky { align-self: center !important; }
 </style>
 </head>
 <body>
