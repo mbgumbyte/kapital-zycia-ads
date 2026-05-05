@@ -698,6 +698,28 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.format-9-16 .layout-dp-cream .dpc-brand-corner { bottom: 700px !important; }
 .ad.format-4-5 .layout-dp-cream .dpc-brand-corner { bottom: 130px !important; right: 80px !important; }
 .ad.format-1-1 .layout-dp-cream .dpc-brand-corner { bottom: 110px !important; right: 80px !important; }
+
+/* AD 1B layout-im-dark 9:16 — proper safe zones + horizontal padding */
+.ad.format-9-16 .layout-im-dark {
+  padding: 320px 100px 720px !important;
+}
+.ad.format-9-16 .layout-im-dark .im-content {
+  justify-content: center !important;
+  height: 100% !important;
+}
+.ad.format-9-16 .layout-im-dark .im-photo-banner {
+  display: none !important;
+}
+
+/* AD 1A layout-im-yellow 9:16 — also tighten padding */
+.ad.format-9-16 .layout-im-yellow {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 0.85fr 1.15fr !important;
+}
+.ad.format-9-16 .layout-im-yellow .im-text-side {
+  padding: 60px 100px 720px !important;
+  justify-content: center !important;
+}
 </style>
 </head>
 <body>
