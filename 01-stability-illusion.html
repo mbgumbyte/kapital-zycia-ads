@@ -804,14 +804,15 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 /* 9:16: face visible (top of photo), bigger text, more horizontal padding */
 .ad.format-9-16 .layout-im-white {
   grid-template-columns: 1fr !important;
-  grid-template-rows: 1fr 1fr !important;
+  grid-template-rows: 1.1fr 0.9fr !important;
 }
 .ad.format-9-16 .layout-im-white .im-photo-side {
   background-position: center 15% !important;
-  min-height: 800px !important;
+  min-height: 1000px !important;
+  order: -1 !important;
 }
 .ad.format-9-16 .layout-im-white .im-text-side {
-  padding: 200px 80px 720px !important;
+  padding: 60px 80px 720px !important;
   justify-content: flex-start !important;
 }
 .ad.format-9-16 .layout-im-white .im-headline-white { font-size: 116px !important; }
