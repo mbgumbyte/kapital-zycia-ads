@@ -15,7 +15,108 @@
   --red: #C0392B;
   --yellow: #F4D33E; --yellow-dark: #E0BF2A;
   --burgundy: #4A1E2A; --burgundy-light: #5C2A39;
+  --im-yellow: #F5C518; --im-yellow-light: #FFE074; --im-dark-green: #0B3D2E; --im-bright: #5BD891;
+  --im-purple: #2E1A47; --im-text-dark: #0F0F0F;
 }
+
+/* ============= LAYOUT: IM-YELLOW-PHOTO (Index Masterclass yellow ad with photo) ============= */
+.layout-im-yellow { padding: 0; position: relative; height: 100%;
+  background: var(--im-yellow) !important; color: var(--im-text-dark); overflow: hidden;
+  display: grid; grid-template-columns: 1.15fr 0.85fr; }
+.ad.format-9-16 .layout-im-yellow { grid-template-columns: 1fr; grid-template-rows: 1.15fr 0.85fr; }
+.ad.format-1-1 .layout-im-yellow { grid-template-columns: 1.2fr 0.8fr; }
+.layout-im-yellow .im-text-side { padding: 80px 70px 70px; display: flex; flex-direction: column; }
+.layout-im-yellow .im-photo-side { background-size: cover; background-position: center top;
+  background-repeat: no-repeat; position: relative; }
+.layout-im-yellow .im-photo-side::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(270deg, transparent 60%, var(--im-yellow) 100%); }
+.layout-im-yellow .im-handle { position: absolute; bottom: 24px; right: 28px;
+  font-family: 'Inter', sans-serif; font-size: 16px; color: rgba(15,15,15,0.7); font-weight: 500; z-index: 2; }
+.layout-im-yellow .im-headline { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 76px; line-height: 1.0; letter-spacing: -0.025em; color: var(--im-text-dark); margin-bottom: 24px; }
+.ad.format-1-1 .layout-im-yellow .im-headline { font-size: 60px; }
+.ad.format-9-16 .layout-im-yellow .im-headline { font-size: 90px; }
+.layout-im-yellow .im-headline .highlight { background: var(--im-text-dark); color: var(--im-yellow);
+  padding: 0 14px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.layout-im-yellow .im-body { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 24px;
+  line-height: 1.45; color: rgba(15,15,15,0.85); margin-bottom: 18px; max-width: 95%; }
+.layout-im-yellow .im-body strong { font-weight: 800; color: var(--im-text-dark); }
+.layout-im-yellow .im-cta { display: inline-flex; align-items: center; gap: 12px; padding: 20px 32px;
+  background: var(--im-text-dark); color: var(--im-yellow); border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; align-self: flex-start; margin-top: 24px; }
+.layout-im-yellow .im-disclaimer { font-family: 'Inter', sans-serif; font-size: 14px;
+  color: rgba(15,15,15,0.55); font-style: italic; margin-top: 16px; max-width: 95%; line-height: 1.4; }
+
+/* ============= LAYOUT: IM-DARK-PHOTO (Dark green Index Masterclass with sticky notes) ============= */
+.layout-im-dark { padding: 70px 60px 0; position: relative; height: 100%;
+  background: var(--im-dark-green) !important; color: white; overflow: hidden;
+  display: flex; flex-direction: column; }
+.layout-im-dark::before { content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(0deg, transparent 0%, transparent 49.5%, rgba(255,255,255,0.04) 50%, transparent 50.5%),
+                    linear-gradient(90deg, transparent 0%, transparent 49.5%, rgba(255,255,255,0.04) 50%, transparent 50.5%);
+  background-size: 80px 80px; pointer-events: none; opacity: 0.6; }
+.layout-im-dark .im-content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; }
+.layout-im-dark .im-sticky { background: var(--im-yellow); color: var(--im-text-dark);
+  padding: 8px 18px; display: inline-block; font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 22px; letter-spacing: 0.02em; align-self: flex-start; transform: rotate(-2deg);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25); margin-bottom: 28px; }
+.layout-im-dark .im-headline-dark { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 78px; line-height: 1.05; letter-spacing: -0.02em; color: white; margin-bottom: 32px; }
+.ad.format-9-16 .layout-im-dark .im-headline-dark { font-size: 92px; }
+.ad.format-1-1 .layout-im-dark .im-headline-dark { font-size: 60px; }
+.layout-im-dark .im-headline-dark .accent-bright { color: var(--im-bright); }
+.layout-im-dark .im-checklist { list-style: none; padding: 0; margin: 8px 0 28px;
+  display: flex; flex-direction: column; gap: 18px; }
+.layout-im-dark .im-checklist li { font-family: 'Inter', sans-serif; font-size: 26px; line-height: 1.4;
+  padding-left: 50px; position: relative; color: white; font-weight: 500; }
+.layout-im-dark .im-checklist li::before { content: ''; position: absolute; left: 0; top: 6px;
+  width: 32px; height: 32px; border-radius: 50%; background: var(--im-bright);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B3D2E'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: 22px 22px; background-position: center; background-repeat: no-repeat; }
+.layout-im-dark .im-cta-pill { display: inline-flex; align-items: center; gap: 12px; padding: 18px 28px;
+  background: var(--im-bright); color: var(--im-dark-green); border-radius: 14px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; align-self: flex-start; margin-top: 8px;
+  box-shadow: 0 6px 24px rgba(91,216,145,0.25); }
+.layout-im-dark .im-cta-pill::before { content: '📅'; font-size: 22px; }
+.layout-im-dark .im-photo-banner { margin: auto -60px 0; height: 38%;
+  background-size: cover; background-position: center 25%; background-repeat: no-repeat;
+  position: relative; }
+.layout-im-dark .im-photo-banner::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--im-dark-green) 0%, transparent 12%, transparent 100%); }
+.ad.format-1-1 .layout-im-dark .im-photo-banner { height: 32%; }
+.ad.format-9-16 .layout-im-dark .im-photo-banner { height: 35%; }
+
+/* ============= LAYOUT: IM-WHITE-PHOTO (White BG + photo, "Investing doesn't have to be complicated" style) ============= */
+.layout-im-white { padding: 0; position: relative; height: 100%;
+  background: white !important; color: var(--im-text-dark); overflow: hidden;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; }
+.ad.format-9-16 .layout-im-white { grid-template-columns: 1fr; grid-template-rows: 1.1fr 0.9fr; }
+.layout-im-white .im-text-side { padding: 80px 60px 70px; display: flex; flex-direction: column; }
+.layout-im-white .im-photo-side { background-size: cover; background-position: center;
+  background-repeat: no-repeat; position: relative; }
+.layout-im-white .im-photo-side::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(270deg, transparent 70%, white 100%); }
+.layout-im-white .im-headline-white { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 70px; line-height: 1.05; letter-spacing: -0.02em; color: var(--im-text-dark); margin-bottom: 22px; }
+.ad.format-1-1 .layout-im-white .im-headline-white { font-size: 56px; }
+.ad.format-9-16 .layout-im-white .im-headline-white { font-size: 84px; padding-top: 30px; }
+.layout-im-white .im-headline-white .accent-green { color: #00A651; }
+.layout-im-white .im-subhead { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 32px;
+  color: #00A651; line-height: 1.25; margin-bottom: 28px; }
+.ad.format-1-1 .layout-im-white .im-subhead { font-size: 26px; }
+.layout-im-white .im-checklist-w { list-style: none; padding: 0; margin: 8px 0 24px;
+  display: flex; flex-direction: column; gap: 14px; }
+.layout-im-white .im-checklist-w li { font-family: 'Inter', sans-serif; font-size: 22px; line-height: 1.4;
+  padding-left: 42px; position: relative; color: var(--im-text-dark); font-weight: 500; }
+.layout-im-white .im-checklist-w li::before { content: ''; position: absolute; left: 0; top: 5px;
+  width: 26px; height: 26px; border-radius: 50%; background: var(--im-text-dark);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFFFFF'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: 18px 18px; background-position: center; background-repeat: no-repeat; }
+.layout-im-white .im-cta-sticky { display: inline-flex; align-items: center; gap: 12px; padding: 16px 26px;
+  background: var(--im-bright); color: var(--im-dark-green); border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; align-self: flex-start; margin-top: 16px;
+  box-shadow: 0 6px 18px rgba(0,166,81,0.2); }
+.layout-im-white .im-cta-sticky::before { content: '📅'; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
 
@@ -568,45 +669,25 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 1A">
   <div class="format-bar">
-    <span class="label">AD 1A — Bank vs AS Finanse split</span>
-    <span class="layout-tag">SPLIT-SCREEN</span>
+    <span class="label">AD 1A — Pensja stoi, plan rośnie — yellow + photo</span>
+    <span class="layout-tag">IM-YELLOW-PHOTO</span>
     <button class="active" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
   <div class="ad format-4-5">
-    <div class="layout layout-split">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="draggable" style="margin-top: 30px;">
-        <div class="eyebrow">BANK VS AS FINANSE</div>
-        <h1 class="headline">Co opłaca się <span class='accent'>bardziej</span>?</h1>
-      </div>
-      <div class="splits">
-        <div class="split-col left">
-          <div class="split-label">BANK</div>
-          <ul class="split-items"><li>Pensja w widełkach</li>
-<li>Plan rośnie co kwartał</li>
-<li>Sufit dochodowy</li>
-<li>Wynik zależy od procesów</li></ul>
+    <div class="layout-im-yellow">
+      <div class="im-text-side">
+        <div class="brand-logo draggable" style="margin-bottom:40px;">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+          <span>KAPITAŁ ŻYCIA</span>
         </div>
-        <div class="split-col right">
-          <div class="split-label">AS FINANSE</div>
-          <ul class="split-items"><li>Prowizja przy zawarciu</li>
-<li>+ w 2. i 3. roku umowy</li>
-<li>Dochód rośnie z umową</li>
-<li>Wynik zależy od Ciebie</li></ul>
-        </div>
+        <h1 class="im-headline draggable"><span class="highlight">Pensja</span> stoi.<br><span class="highlight">Plan</span> rośnie.<br>Tak działa bank.</h1>
+        <p class="im-body draggable">U nas zarabiasz <strong>3 razy</strong> z tej samej umowy. Prowizja przy zawarciu + w 2. i 3. roku trwania.</p>
+        <div class="im-cta draggable">Sprawdź ofertę →</div>
+        <p class="im-disclaimer draggable">kapitalzycia.pl/cv · Min. 4 lata w sprzedaży. B2B. 100% online lub Warszawa.</p>
       </div>
-      <div class="split-footer">Minimum 4 lata w sprzedaży. B2B. 100% online lub Warszawa.</div>
-      <div class="cta draggable">
-      <div class="cta-button">Sprawdź ofertę <span>→</span></div>
-      <div class="cta-url">kapitalzycia.pl/cv</div>
-      
-      <div class="brand-footer">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+      <div class="im-photo-side draggable" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&h=1350&fit=crop&q=85');">
+        <div class="im-handle">@kapital.zycia</div>
       </div>
-    </div>
     </div>
   </div>
   <div class="ad-actions">
@@ -627,21 +708,27 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 1B">
   <div class="format-bar">
-    <span class="label">AD 1B — UGC story — frustrated banker Q&A</span>
-    <span class="layout-tag">UGC-STORY</span>
+    <span class="label">AD 1B — Po 4 latach w banku... — dark green + sticky + photo</span>
+    <span class="layout-tag">IM-DARK-PHOTO</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="active" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-9-16 dark">
-    <div class="layout-ugc">
-      <div class="photo-fullbleed" style="background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1080&h=1920&fit=crop&fm=jpg&q=80');"></div>
-      <div class="ugc-content">
-        <div class="ugc-question-sticker draggable">Mam pytanie</div>
-        <div class="ugc-question-bubble draggable">Jak to jest, że po 4 latach w banku zarabiam prawie tyle samo co na starcie?</div>
-        <div class="ugc-message bold-answer"><strong>To się nazywa pułap prowizyjny.</strong></div><div class="ugc-message">Im więcej zamykasz, tym wyższy plan dostajesz <span class='red'>w kolejnym kwartale</span>.</div><div class="ugc-message right">Twoja pensja nigdy nie zależała od wyników – tylko od <span class='underline-red'>widełek w umowie</span>.</div><div class="ugc-message">U nas: prowizja przy zawarciu + w 2. i 3. roku trwania umowy.</div>
-        <div class="ugc-cta-row">
-          <div class="url-text"><strong>kapitalzycia.pl/cv</strong>Aplikuj na doradcę ubezpieczeniowego</div>
-          <div class="cta-button">Aplikuj</div>
+  <div class="ad format-9-16">
+    <div class="layout-im-dark">
+      <div class="im-content">
+        <div class="brand-logo draggable" style="color:white; margin-bottom:32px;">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+          <span style="color:white;">KAPITAŁ ŻYCIA</span>
         </div>
+        <div class="im-sticky draggable">CZY TO BRZMI ZNAJOMO?</div>
+        <h1 class="im-headline-dark draggable">Po 4 latach w banku<br>zarabiasz <span class="accent-bright">tyle samo</span><br>co na starcie.</h1>
+        <ul class="im-checklist draggable">
+          <li>U nas: <strong style="color:var(--im-bright);">prowizja przy zawarciu</strong> umowy</li>
+          <li>+ <strong style="color:var(--im-bright);">w 2. i w 3. roku</strong> trwania</li>
+          <li>Sprzedajesz raz — zarabiasz <strong style="color:var(--im-bright);">3 lata</strong></li>
+          <li>Wynik zależy <strong style="color:var(--im-bright);">od Ciebie</strong>, nie od planu</li>
+        </ul>
+        <div class="im-cta-pill draggable">Aplikuj — kapitalzycia.pl/cv</div>
+        <div class="im-photo-banner draggable" style="background-image: url('https://images.unsplash.com/photo-1556157382-97eda2d62296?w=1080&h=600&fit=crop&q=85');"></div>
       </div>
     </div>
   </div>
@@ -663,26 +750,27 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 1C">
   <div class="format-bar">
-    <span class="label">AD 1C — Bold statement — Atria text-only</span>
-    <span class="layout-tag">BOLD-STATEMENT</span>
+    <span class="label">AD 1C — Sprzedajesz raz, zarabiasz 3 lata — white + photo</span>
+    <span class="layout-tag">IM-WHITE-PHOTO</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="active" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-1-1 deep">
-    <div class="layout layout-bold-stmt">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="massive-statement draggable">Tu sprzedajesz <span class='accent'>raz</span>. Zarabiasz <span class='accent'>3 lata</span>.</div>
-      <div class="stmt-supporting draggable">Każda umowa generuje prowizję przy zawarciu i w 2. i 3. roku. Min. 4 lata w sprzedaży. B2B.</div>
-      <div class="cta draggable">
-      <div class="cta-button">Sprawdź jak <span>→</span></div>
-      <div class="cta-url">kapitalzycia.pl/cv</div>
-      
-      <div class="brand-footer">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
+  <div class="ad format-1-1">
+    <div class="layout-im-white">
+      <div class="im-text-side">
+        <div class="brand-logo draggable" style="margin-bottom:36px;">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+          <span>KAPITAŁ ŻYCIA</span>
+        </div>
+        <h1 class="im-headline-white draggable">Sprzedaż nie musi<br>być harówką.</h1>
+        <div class="im-subhead draggable">Sprzedajesz raz. Zarabiasz 3 lata.</div>
+        <ul class="im-checklist-w draggable">
+          <li>Prowizja przy zawarciu umowy</li>
+          <li>+ w 2. i w 3. roku trwania</li>
+          <li>B2B. 100% online lub Warszawa.</li>
+        </ul>
+        <div class="im-cta-sticky draggable">Sprawdź ofertę — kapitalzycia.pl/cv</div>
       </div>
-    </div>
+      <div class="im-photo-side draggable" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&h=1080&fit=crop&q=85');"></div>
     </div>
   </div>
   <div class="ad-actions">
