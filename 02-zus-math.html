@@ -15,7 +15,76 @@
   --red: #C0392B;
   --yellow: #F4D33E; --yellow-dark: #E0BF2A;
   --burgundy: #4A1E2A; --burgundy-light: #5C2A39;
+  --im-purple: #2E1A47; --im-purple-deep: #1F1133;
+  --im-burgundy: #4F1419; --im-mint: #5BD891; --im-mint-deep: #1F8050;
+  --im-bright: #5BD891; --im-text-dark: #0F0F0F;
 }
+
+/* ============= LAYOUT: IM-PURPLE-PHOTO (At 40+, you don't need risky bets style) ============= */
+.layout-im-purple { padding: 0; height: 100%; background: var(--im-purple) !important; color: white;
+  overflow: hidden; display: grid; grid-template-columns: 1.05fr 0.95fr; position: relative; }
+.ad.format-9-16 .layout-im-purple { grid-template-columns: 1fr; grid-template-rows: 1.2fr 0.8fr; }
+.ad.format-1-1 .layout-im-purple { grid-template-columns: 1.15fr 0.85fr; }
+.layout-im-purple .im-text-side { padding: 80px 60px 70px; display: flex; flex-direction: column; }
+.layout-im-purple .im-photo-side { background-size: cover; background-position: center; position: relative; }
+.layout-im-purple .im-photo-side::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(270deg, transparent 60%, var(--im-purple) 100%); }
+.layout-im-purple .im-headline-p { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 70px; line-height: 1.05; letter-spacing: -0.02em; color: white; margin-bottom: 22px; }
+.ad.format-1-1 .layout-im-purple .im-headline-p { font-size: 56px; }
+.ad.format-9-16 .layout-im-purple .im-headline-p { font-size: 88px; }
+.layout-im-purple .im-headline-p .accent-mint { color: var(--im-mint); }
+.layout-im-purple .im-subhead-p { font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 32px; color: #B8C5FF; line-height: 1.3; margin-bottom: 28px; }
+.ad.format-1-1 .layout-im-purple .im-subhead-p { font-size: 26px; }
+.layout-im-purple .im-checklist-p { list-style: none; padding: 0; margin: 8px 0 24px;
+  display: flex; flex-direction: column; gap: 14px; }
+.layout-im-purple .im-checklist-p li { font-family: 'Inter', sans-serif; font-size: 22px; line-height: 1.4;
+  padding-left: 42px; position: relative; color: white; font-weight: 500; }
+.layout-im-purple .im-checklist-p li::before { content: ''; position: absolute; left: 0; top: 5px;
+  width: 26px; height: 26px; border-radius: 50%; background: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232E1A47'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: 18px 18px; background-position: center; background-repeat: no-repeat; }
+.layout-im-purple .im-cta-mint { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px;
+  background: var(--im-mint); color: var(--im-purple); border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; align-self: flex-start; margin-top: 16px; }
+.layout-im-purple .im-cta-mint::before { content: '📅'; }
+
+/* ============= LAYOUT: IM-BURGUNDY-CLEAN (When it comes to your money, boring is better than broke) ============= */
+.layout-im-burgundy-c { padding: 90px 80px; height: 100%; background: var(--im-burgundy) !important;
+  color: white; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+.layout-im-burgundy-c .im-headline-b { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 88px; line-height: 1.05; letter-spacing: -0.025em; color: white; margin: auto 0 20px; }
+.ad.format-1-1 .layout-im-burgundy-c .im-headline-b { font-size: 70px; }
+.ad.format-9-16 .layout-im-burgundy-c .im-headline-b { font-size: 110px; }
+.layout-im-burgundy-c .im-headline-b .accent-mint { color: var(--im-mint); }
+.layout-im-burgundy-c .im-subhead-b { font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 28px; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 90%; line-height: 1.45; }
+.layout-im-burgundy-c .im-cta-b { display: inline-flex; align-items: center; gap: 10px; padding: 18px 28px;
+  background: var(--im-mint); color: var(--im-burgundy); border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; align-self: flex-start; }
+.layout-im-burgundy-c .im-cta-b::before { content: '📅'; }
+
+/* ============= LAYOUT: IM-MINT-PHOTO (Early retirement is possible style) ============= */
+.layout-im-mint { padding: 0; height: 100%; background: var(--im-mint) !important;
+  color: var(--im-text-dark); overflow: hidden; display: grid; grid-template-columns: 1.05fr 0.95fr; }
+.ad.format-9-16 .layout-im-mint { grid-template-columns: 1fr; grid-template-rows: 1.15fr 0.85fr; }
+.ad.format-1-1 .layout-im-mint { grid-template-columns: 1.2fr 0.8fr; }
+.layout-im-mint .im-text-side { padding: 80px 60px 70px; display: flex; flex-direction: column; }
+.layout-im-mint .im-photo-side { background-size: cover; background-position: center; position: relative; }
+.layout-im-mint .im-photo-side::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(270deg, transparent 65%, var(--im-mint) 100%); }
+.layout-im-mint .im-headline-m { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 64px; line-height: 1.08; letter-spacing: -0.02em; color: var(--im-text-dark);
+  margin: auto 0 18px; }
+.ad.format-1-1 .layout-im-mint .im-headline-m { font-size: 52px; }
+.ad.format-9-16 .layout-im-mint .im-headline-m { font-size: 78px; }
+.layout-im-mint .im-subhead-m { font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 26px; color: rgba(15,15,15,0.78); margin-bottom: 28px; max-width: 95%; line-height: 1.45; }
+.layout-im-mint .im-cta-dark { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px;
+  background: var(--im-text-dark); color: var(--im-mint); border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; align-self: flex-start; }
+.layout-im-mint .im-cta-dark::before { content: '→'; font-size: 22px; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
 
@@ -568,27 +637,27 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 2A">
   <div class="format-bar">
-    <span class="label">AD 2A — Handwritten notes — Napkin Math</span>
-    <span class="layout-tag">HANDWRITTEN-NOTES</span>
+    <span class="label">AD 2A — Z 1 polisy zarabiasz 3× — purple + photo</span>
+    <span class="layout-tag">IM-PURPLE-PHOTO</span>
     <button class="active" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-4-5 cream">
-    <div class="layout layout-notes">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="draggable" style="margin-top: 40px;">
-        <div class="notes-title">Matematyka B2B (na serwetce)</div>
-        <div class="notes-body">Boisz się ZUS-u? Policzmy uczciwie:</div>
+  <div class="ad format-4-5">
+    <div class="layout-im-purple">
+      <div class="im-text-side">
+        <div class="brand-logo draggable" style="color:white; margin-bottom:36px;">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+          <span style="color:white;">KAPITAŁ ŻYCIA</span>
+        </div>
+        <h1 class="im-headline-p draggable">Z 1 polisy<br><span class="accent-mint">3 wypłaty.</span></h1>
+        <div class="im-subhead-p draggable">Matematyka B2B, której bank Ci nie pokaże.</div>
+        <ul class="im-checklist-p draggable">
+          <li>Prowizja przy zawarciu umowy</li>
+          <li>+ w 2. i w 3. roku trwania</li>
+          <li>20 polis = <strong>60 wypłat</strong> za pracę raz</li>
+        </ul>
+        <div class="im-cta-mint draggable">Sprawdź swoje liczby</div>
       </div>
-      <ul class="notes-list"><li>ZUS płacisz tak, B2B</li><li class="">Ale z 60 wypłat, nie z 20</li></ul>
-      <div class="notes-math draggable"><span class="calc-line">20 polis × prowizja w roku 1</span><span class="calc-line">+ 20 polis × prowizja w roku 2</span><span class="calc-line">+ 20 polis × prowizja w roku 3</span><span class="calc-line"><span class='equals'>= 60 wypłat za pracę raz</span></span></div>
-      <div class="notes-cta draggable">Sprawdź swoje liczby</div>
-      <div class="cta-url" style="margin-top: 8px;">kapitalzycia.pl/cv</div>
-      <div class="brand-footer" style="margin-top: 20px;">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
+      <div class="im-photo-side draggable" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&h=1350&fit=crop&q=85');"></div>
     </div>
   </div>
   <div class="ad-actions">
@@ -609,30 +678,19 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 2B">
   <div class="format-bar">
-    <span class="label">AD 2B — Yellow alarm — 3× math</span>
-    <span class="layout-tag">YELLOW-ALARM</span>
+    <span class="label">AD 2B — Sprzedaż raz, wypłata 3 lata — burgundy clean</span>
+    <span class="layout-tag">IM-BURGUNDY-CLEAN</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="active" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-9-16 yellow">
-    <div class="layout layout-yellow">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="draggable" style="margin-top: 36px;">
-        <div class="yellow-alert-bar">MATEMATYKA · ULTIMATE GUIDE</div>
-        <h1 class="yellow-headline"><span class='accent'>3×</span> z jednej sprzedaży.</h1>
-        <div class="yellow-sub">ZUS Cię nie ostrzeże.</div>
+  <div class="ad format-9-16">
+    <div class="layout-im-burgundy-c">
+      <div class="brand-logo draggable" style="color:white;">
+        <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+        <span style="color:white;">KAPITAŁ ŻYCIA</span>
       </div>
-      <div class="draggable"><p class="yellow-body">Sprzedajesz polisę <strong>raz</strong>. Prowizja wraca przy zawarciu, w 2. i 3. roku trwania umowy.</p>
-<p class="yellow-body">Każda kolejna umowa powiększa Twój roczny dochód. ZUS płacisz tak — ale z większej bazy.</p>
-<p class="yellow-body">Ponad 4 lata w sprzedaży. B2B. 100% online.</p></div>
-      <div class="yellow-cta draggable">Sprawdź swoją matematykę →</div>
-      <div class="cta-url" style="margin-top: 14px;">kapitalzycia.pl/cv</div>
-      <div class="brand-footer" style="margin-top: 20px;">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
-      
+      <h1 class="im-headline-b draggable">Sprzedajesz<br>polisę <span class="accent-mint">raz.</span><br>Zarabiasz <span class="accent-mint">3 lata.</span></h1>
+      <div class="im-subhead-b draggable">ZUS o tym nie powie. Bank też nie. Ale matematyka jest po Twojej stronie.</div>
+      <div class="im-cta-b draggable">Sprawdź swoją matematykę</div>
     </div>
   </div>
   <div class="ad-actions">
@@ -653,27 +711,22 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 2C">
   <div class="format-bar">
-    <span class="label">AD 2C — Redacted doc — ZUS letter feel</span>
-    <span class="layout-tag">REDACTED-DOC</span>
+    <span class="label">AD 2C — Niezależność jest możliwa — mint + photo</span>
+    <span class="layout-tag">IM-MINT-PHOTO</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="active" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
   <div class="ad format-1-1">
-    <div class="layout layout-redacted">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="redacted-stamp draggable">Confidential</div>
-      <div class="draggable" style="margin-top: 30px;">
-        <div class="redacted-doc-meta">List ZUS · Klauzula poufności · 2026</div>
-        <h1 class="redacted-doc-title">Tego ZUS Ci nie powie.</h1>
+    <div class="layout-im-mint">
+      <div class="im-text-side">
+        <div class="brand-logo draggable">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+          <span>KAPITAŁ ŻYCIA</span>
+        </div>
+        <h1 class="im-headline-m draggable">Niezależność<br>finansowa jest<br>możliwa — także<br>w Polsce.</h1>
+        <div class="im-subhead-m draggable">B2B. 100% online lub Warszawa. Ponad 4 lata w sprzedaży.</div>
+        <div class="im-cta-dark draggable">Aplikuj</div>
       </div>
-      <ul class="redacted-list"><li class="">Składka emerytalna miesięcznie: <span class='redact-bar'>███████ zł</span></li><li class="">Świadczenie po 25 latach: <span class='redact-bar red'>████████</span> zł / m-c</li><li class="">Realna stopa zastąpienia: <span class='redact-bar'>██%</span></li><li class="checked">Twoja kontrola nad tym: <span class='redact-bar'>ZERO</span></li></ul>
-      <div class="redacted-cta draggable">Aplikuj i sprawdź →</div>
-      <div class="cta-url" style="margin-top: 12px;">kapitalzycia.pl/cv</div>
-      <div class="brand-footer" style="margin-top: 20px;">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
+      <div class="im-photo-side draggable" style="background-image: url('https://images.unsplash.com/photo-1556157382-97eda2d62296?w=900&h=1080&fit=crop&q=85');"></div>
     </div>
   </div>
   <div class="ad-actions">
