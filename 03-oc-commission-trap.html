@@ -901,11 +901,9 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   }
   
 function saveHTML() {
-    // Disable contentEditable so saved file is clean
     const editables = document.querySelectorAll('[contenteditable="true"]');
     editables.forEach(el => el.contentEditable = false);
-    const html = '<!DOCTYPE html>
-' + document.documentElement.outerHTML;
+    const html = '<!DOCTYPE html>' + String.fromCharCode(10) + document.documentElement.outerHTML;
     if (editMode) editables.forEach(el => el.contentEditable = true);
     const blob = new Blob([html], {type: 'text/html'});
     const url = URL.createObjectURL(blob);
@@ -915,11 +913,7 @@ function saveHTML() {
     a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
-    setTimeout(() => {
-      alert('✅ Failas atsisiųstas: ' + filename + '
-
-📎 Dabar: drag-and-drop ŠITO failo iš Downloads į Claude pokalbį — Claude pamatys pakeitimus ir commitins į repo.');
-    }, 300);
+    setTimeout(function(){ alert('Failas atsisiustas: ' + filename + '. Drag-and-drop i Claude pokalbi - Claude commitins i repo.'); }, 300);
   }
 
   async function downloadAll() {
