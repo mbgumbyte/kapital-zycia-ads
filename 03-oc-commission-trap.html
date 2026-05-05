@@ -693,7 +693,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   <span class="persona">P2 — Closer sprzedający OC/NNW</span>
   <button onclick="downloadAll()">⬇ Atsisiųsti visas</button>
   <button class="alt" onclick="toggleEdit()">✎ Redaguoti tekstą</button>
-  <button class="alt" onclick="saveHTML()">💾 Išsaugoti HTML</button>
+  <button class="alt" onclick="saveHTML()">💾 Išsaugoti & atsiųsti Claude</button>
   <button class="alt" onclick="toggleDrag()">↕ Stumti tekstą</button>
   <button class="alt" onclick="resetPositions()">↺ Atstatyti</button>
 </div>
@@ -900,22 +900,26 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     link.click();
   }
   
-  function saveHTML() {
-    // Disable contentEditable on all elements before saving
+function saveHTML() {
+    // Disable contentEditable so saved file is clean
     const editables = document.querySelectorAll('[contenteditable="true"]');
     editables.forEach(el => el.contentEditable = false);
-    // Get clean HTML
-    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-    // Restore contentEditable
+    const html = '<!DOCTYPE html>
+' + document.documentElement.outerHTML;
     if (editMode) editables.forEach(el => el.contentEditable = true);
-    // Download
     const blob = new Blob([html], {type: 'text/html'});
     const url = URL.createObjectURL(blob);
+    const filename = (document.title || 'ad').replace(/[^a-z0-9-]+/gi, '-') + '.html';
     const a = document.createElement('a');
     a.href = url;
-    a.download = (document.title || 'ad') + '.html';
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
+    setTimeout(() => {
+      alert('✅ Failas atsisiųstas: ' + filename + '
+
+📎 Dabar: drag-and-drop ŠITO failo iš Downloads į Claude pokalbį — Claude pamatys pakeitimus ir commit\'ins į repo.');
+    }, 300);
   }
 
   async function downloadAll() {
