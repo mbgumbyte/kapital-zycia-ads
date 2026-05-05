@@ -18,7 +18,7 @@
   --hero-mint: #00D17F; --hero-black: #0A0A0A; --hero-cream: #F5EFE3;
 }
 
-/* ============= LAYOUT: HERO-BG (done.poland style — full photo + bottom overlay) ============= */
+/* ============= LAYOUT: HERO-BG (done.poland — full photo, top + bottom headlines) ============= */
 .layout-hero-bg { padding: 0; height: 100%; position: relative; overflow: hidden;
   background: var(--hero-black) !important; color: white; }
 .layout-hero-bg .hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
@@ -53,6 +53,28 @@
   font-size: 16px; letter-spacing: 0.14em; color: rgba(255,255,255,0.85); text-transform: uppercase;
   display: flex; align-items: center; gap: 10px; }
 .layout-hero-bg .hero-brand-corner img { width: 32px; height: auto; }
+
+/* ============= LAYOUT: HERO-CREAM (done.poland cream variant — bold typography) ============= */
+.layout-hero-cream { padding: 80px 70px; height: 100%; position: relative; overflow: hidden;
+  background: var(--hero-cream) !important; color: var(--hero-black);
+  display: flex; flex-direction: column; }
+.ad.format-9-16 .layout-hero-cream { padding: 220px 70px 240px; }
+.layout-hero-cream .cream-brand { display: flex; align-items: center; gap: 10px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--hero-black); }
+.layout-hero-cream .cream-brand img { width: 28px; height: auto; }
+.layout-hero-cream .cream-headline { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 88px; line-height: 1.0; letter-spacing: -0.025em; color: var(--hero-black);
+  margin: auto 0 30px; max-width: 90%; }
+.ad.format-9-16 .layout-hero-cream .cream-headline { font-size: 120px; }
+.ad.format-1-1 .layout-hero-cream .cream-headline { font-size: 70px; }
+.layout-hero-cream .cream-headline .mint { color: var(--hero-mint); }
+.layout-hero-cream .cream-sub { font-family: 'Inter', sans-serif; font-weight: 500;
+  font-size: 24px; color: rgba(10,10,10,0.65); margin-bottom: 28px; max-width: 88%; line-height: 1.45; }
+.layout-hero-cream .cream-cta { display: inline-flex; align-items: center; gap: 12px; padding: 18px 30px;
+  background: var(--hero-black); color: var(--hero-cream); border-radius: 100px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; align-self: flex-start; }
+.layout-hero-cream .cream-cta::after { content: '→'; font-size: 22px; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
 
@@ -649,23 +671,19 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 4B">
   <div class="format-bar">
-    <span class="label">AD 4B — Handwritten — sieć kontaktów math</span>
-    <span class="layout-tag">HANDWRITTEN-NOTES</span>
+    <span class="label">AD 4B — 4 wypłaty z 1 klienta — cream typography</span>
+    <span class="layout-tag">HERO-CREAM</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="active" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-9-16 cream">
-    <div class="layout layout-notes">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="draggable" style="margin-top: 40px;">
-        <div class="notes-title">Twoja sieć (od 5 lat)</div>
-        <div class="notes-body">Liczę na serwetce, ile zarabiasz na 1 kontakcie:</div>
+  <div class="ad format-9-16">
+    <div class="layout-hero-cream">
+      <div class="cream-brand draggable">
+        <img src="assets/logo-flames.png" alt="Kapitał Życia">
+        <span>KAPITAŁ ŻYCIA</span>
       </div>
-      <ul class="notes-list"><li>Tej samej rozmowie</li><li>Z tej samej sieci kontaktów</li><li class="">Bez porzucania nieruchomości</li></ul>
-      <div class="notes-math draggable"><span class="calc-line">Nieruchomość × 1 prowizja = jednorazowo</span><span class="calc-line"><span class='equals'>+ Polisa życie × 3 prowizje</span></span><span class="calc-line"><span class='equals'>= 4 wypłaty z 1 klienta</span></span></div>
-      <div class="notes-cta draggable">Sprawdź jak</div>
+      <h1 class="cream-headline draggable">4 wypłaty<br>z <span class="mint">1 klienta.</span></h1>
+      <p class="cream-sub draggable">Twoja sieć kontaktów z 5 lat w branży nieruchomości pracuje dla Ciebie podwójnie: prowizja przy zawarciu polisy + odnowienie w 2. i 3. roku.</p>
+      <div class="cream-cta draggable">Sprawdź jak</div>
     </div>
   </div>
   <div class="ad-actions">
