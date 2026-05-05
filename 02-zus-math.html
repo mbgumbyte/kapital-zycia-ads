@@ -668,15 +668,25 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.format-4-5 .layout-dp-cream .dpc-brand-corner { bottom: 130px !important; right: 80px !important; }
 .ad.format-1-1 .layout-dp-cream .dpc-brand-corner { bottom: 110px !important; right: 80px !important; }
 
-/* AD 2C 9:16 — photo bigger, positioned to show top of image */
-.ad.format-9-16 .layout-im-mint { grid-template-columns: 1fr !important; grid-template-rows: 1.5fr 1fr !important; }
+/* AD 2C 9:16 — blurred photo BG, full screen, mint text overlay */
+.ad.format-9-16 .layout-im-mint { 
+  grid-template-columns: 1fr !important; 
+  grid-template-rows: 1fr !important;
+  position: relative !important;
+}
 .ad.format-9-16 .layout-im-mint .im-photo-side { 
-  background-position: center 30% !important;
-  min-height: 1100px !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  filter: blur(20px) brightness(0.5) !important;
+  transform: scale(1.1) !important;
 }
 .ad.format-9-16 .layout-im-mint .im-text-side {
-  padding-top: 60px !important;
-  padding-bottom: 720px !important;
+  position: relative !important;
+  z-index: 1 !important;
+  background: linear-gradient(180deg, rgba(91,216,145,0.92) 0%, rgba(91,216,145,0.96) 100%) !important;
+  padding: 320px 80px 720px !important;
+  justify-content: center !important;
 }
 </style>
 </head>
