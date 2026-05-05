@@ -73,11 +73,11 @@
   width: 32px; height: 32px; border-radius: 50%; background: var(--im-bright);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B3D2E'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
   background-size: 22px 22px; background-position: center; background-repeat: no-repeat; }
-.layout-im-dark .im-cta-pill { display: inline-flex; align-items: center; gap: 12px; padding: 18px 28px;
-  background: var(--im-bright); color: var(--im-dark-green); border-radius: 14px;
+.layout-im-dark .im-cta-pill { display: inline-flex; align-items: center; gap: 10px; padding: 18px 30px;
+  background: var(--im-bright); color: var(--im-dark-green); border-radius: 12px;
   font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; align-self: flex-start; margin-top: 8px;
   box-shadow: 0 6px 24px rgba(91,216,145,0.25); }
-.layout-im-dark .im-cta-pill::before { content: '📅'; font-size: 22px; }
+.layout-im-dark .im-cta-pill::after { content: '→'; font-size: 24px; }
 .layout-im-dark .im-photo-banner { margin: auto -60px 0; height: 38%;
   background-size: cover; background-position: center 25%; background-repeat: no-repeat;
   position: relative; }
@@ -112,11 +112,10 @@
   width: 26px; height: 26px; border-radius: 50%; background: var(--im-text-dark);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFFFFF'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
   background-size: 18px 18px; background-position: center; background-repeat: no-repeat; }
-.layout-im-white .im-cta-sticky { display: inline-flex; align-items: center; gap: 12px; padding: 16px 26px;
-  background: var(--im-bright); color: var(--im-dark-green); border-radius: 12px;
-  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; align-self: flex-start; margin-top: 16px;
-  box-shadow: 0 6px 18px rgba(0,166,81,0.2); }
-.layout-im-white .im-cta-sticky::before { content: '📅'; }
+.layout-im-white .im-cta-sticky { display: inline-flex; align-items: center; gap: 10px; padding: 18px 28px;
+  background: var(--im-text-dark); color: var(--im-bright); border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; align-self: flex-start; margin-top: 16px; }
+.layout-im-white .im-cta-sticky::after { content: '→'; font-size: 22px; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
 

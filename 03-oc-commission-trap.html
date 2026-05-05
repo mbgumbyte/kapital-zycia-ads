@@ -15,7 +15,112 @@
   --red: #C0392B;
   --yellow: #F4D33E; --yellow-dark: #E0BF2A;
   --burgundy: #4A1E2A; --burgundy-light: #5C2A39;
+  --fr-navy: #0E1F3D; --fr-navy-deep: #081428; --fr-navy-light: #1A2D5A;
+  --fr-gold: #D4A53D; --fr-gold-light: #F0C24A; --fr-cyan: #4A90E2;
 }
+
+/* ============= LAYOUT: FR-PERF (Performance Marketer dashboard style) ============= */
+.layout-fr-perf { padding: 0; height: 100%; position: relative; overflow: hidden;
+  background: var(--fr-navy-deep) !important; color: white; }
+.layout-fr-perf .perf-photo { position: absolute; inset: 0; background-size: cover; background-position: center;
+  filter: brightness(0.65); }
+.layout-fr-perf .perf-photo::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8,20,40,0.3) 0%, rgba(8,20,40,0.55) 50%, rgba(8,20,40,0.95) 100%); }
+.layout-fr-perf .perf-content { position: relative; z-index: 1; height: 100%;
+  padding: 70px 60px 60px; display: flex; flex-direction: column; }
+.layout-fr-perf .perf-spacer { flex: 1; }
+.layout-fr-perf .perf-overlay { background: rgba(8,20,40,0.85); backdrop-filter: blur(10px);
+  border: 1px solid rgba(212,165,61,0.3); border-radius: 8px; padding: 32px 36px; max-width: 90%; }
+.layout-fr-perf .perf-headline { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 56px;
+  line-height: 1.05; letter-spacing: -0.01em; color: white; text-transform: uppercase; margin-bottom: 14px; }
+.ad.format-1-1 .layout-fr-perf .perf-headline { font-size: 46px; }
+.ad.format-9-16 .layout-fr-perf .perf-headline { font-size: 72px; }
+.layout-fr-perf .perf-amount { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 36px;
+  color: var(--fr-gold); line-height: 1; }
+.ad.format-1-1 .layout-fr-perf .perf-amount { font-size: 30px; }
+.ad.format-9-16 .layout-fr-perf .perf-amount { font-size: 48px; }
+
+/* ============= LAYOUT: FR-HIRING (HIRING We are flowchart) ============= */
+.layout-fr-hiring { padding: 70px 60px 60px; height: 100%; position: relative; overflow: hidden;
+  background: var(--fr-navy) !important; color: white;
+  background-image:
+    radial-gradient(circle at 50% 100%, rgba(74,144,226,0.08) 0%, transparent 60%),
+    linear-gradient(180deg, var(--fr-navy) 0%, var(--fr-navy-deep) 100%) !important;
+  display: grid; grid-template-columns: 0.5fr 1.5fr; gap: 30px; align-items: stretch; }
+.ad.format-1-1 .layout-fr-hiring { grid-template-columns: 0.4fr 1.6fr; }
+.ad.format-9-16 .layout-fr-hiring { grid-template-columns: 0.45fr 1.55fr; padding: 90px 60px; }
+.layout-fr-hiring .hiring-side { display: flex; flex-direction: column; justify-content: center; position: relative; }
+.layout-fr-hiring .hiring-vertical { font-family: 'Inter', sans-serif; font-weight: 900;
+  font-size: 200px; line-height: 0.95; letter-spacing: -0.04em; color: white;
+  writing-mode: vertical-rl; transform: rotate(180deg); margin: 0 auto;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+.ad.format-1-1 .layout-fr-hiring .hiring-vertical { font-size: 150px; }
+.ad.format-9-16 .layout-fr-hiring .hiring-vertical { font-size: 260px; }
+.layout-fr-hiring .hiring-italic { font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 38px; color: var(--fr-gold); writing-mode: vertical-rl; transform: rotate(180deg);
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(180deg);
+  letter-spacing: 0.02em; }
+.layout-fr-hiring .hiring-content { display: flex; flex-direction: column; gap: 18px; padding-top: 10px; }
+.layout-fr-hiring .hiring-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.layout-fr-hiring .hiring-card { border: 1.5px solid var(--fr-gold); padding: 18px 24px; border-radius: 4px;
+  background: rgba(212,165,61,0.04); }
+.layout-fr-hiring .hiring-card-eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px;
+  letter-spacing: 0.18em; color: var(--fr-gold); text-transform: uppercase; margin-bottom: 6px; }
+.layout-fr-hiring .hiring-card-title { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 30px; line-height: 1.1; color: white; }
+.ad.format-9-16 .layout-fr-hiring .hiring-card-title { font-size: 36px; }
+.layout-fr-hiring .hiring-pill { display: inline-block; padding: 6px 14px; border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 100px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+  color: rgba(255,255,255,0.85); margin-top: 10px; }
+.layout-fr-hiring .hiring-logo { font-family: 'Playfair Display', serif; font-weight: 700;
+  color: var(--fr-gold); text-align: right; line-height: 1.1; }
+.layout-fr-hiring .hiring-logo .logo-main { font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; }
+.layout-fr-hiring .hiring-logo .logo-sub { font-size: 11px; letter-spacing: 0.16em; color: rgba(212,165,61,0.7);
+  text-transform: uppercase; margin-top: 2px; }
+.layout-fr-hiring .flowchart { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  margin: 14px 0; position: relative; }
+.layout-fr-hiring .flow-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 4px; padding: 14px 12px; text-align: center;
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; line-height: 1.3; color: white; }
+.ad.format-9-16 .layout-fr-hiring .flow-box { font-size: 16px; padding: 18px 14px; }
+.layout-fr-hiring .flow-box.center { background: var(--fr-gold); color: var(--fr-navy);
+  font-weight: 800; border-color: var(--fr-gold-light); letter-spacing: 0.04em; }
+.layout-fr-hiring .flow-box.cross { background: rgba(192,57,43,0.12); border-color: rgba(192,57,43,0.4);
+  color: rgba(255,255,255,0.7); }
+.layout-fr-hiring .flow-box.check { background: rgba(91,216,145,0.1); border-color: rgba(91,216,145,0.4); }
+.layout-fr-hiring .hiring-footer { border-top: 1px solid rgba(212,165,61,0.3); padding-top: 18px;
+  display: flex; justify-content: space-between; align-items: flex-end; margin-top: 18px; }
+.layout-fr-hiring .hiring-cta-block { color: white; }
+.layout-fr-hiring .hiring-cta-block .cta-label { font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 13px; letter-spacing: 0.16em; color: var(--fr-gold); text-transform: uppercase; margin-bottom: 4px; }
+.layout-fr-hiring .hiring-cta-block .cta-action { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 22px; color: white; letter-spacing: 0.04em; }
+.layout-fr-hiring .hiring-tagline { font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 14px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+
+/* ============= LAYOUT: FR-STATEMENT (Bold statement on dark navy) ============= */
+.layout-fr-statement { padding: 80px 70px; height: 100%; position: relative; overflow: hidden;
+  background: var(--fr-navy) !important; color: white; display: flex; flex-direction: column; }
+.layout-fr-statement::before { content: ''; position: absolute; right: -100px; bottom: -100px;
+  width: 500px; height: 500px; border-radius: 50%; border: 80px solid rgba(212,165,61,0.06);
+  pointer-events: none; }
+.layout-fr-statement .stmt-eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px;
+  letter-spacing: 0.2em; color: var(--fr-gold); text-transform: uppercase; margin-bottom: 32px; }
+.layout-fr-statement .stmt-eyebrow::before { content: '◆ '; }
+.layout-fr-statement .stmt-headline { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 96px; line-height: 1.0; letter-spacing: -0.025em; color: white; margin: auto 0 24px; }
+.ad.format-1-1 .layout-fr-statement .stmt-headline { font-size: 76px; }
+.ad.format-9-16 .layout-fr-statement .stmt-headline { font-size: 124px; }
+.layout-fr-statement .stmt-headline .gold { color: var(--fr-gold); }
+.layout-fr-statement .stmt-headline .strike { text-decoration: line-through;
+  text-decoration-color: rgba(192,57,43,0.7); text-decoration-thickness: 6px; opacity: 0.5; }
+.layout-fr-statement .stmt-sub { font-family: 'Inter', sans-serif; font-weight: 500;
+  font-size: 26px; line-height: 1.5; color: rgba(255,255,255,0.7); margin-bottom: 36px; max-width: 88%; }
+.layout-fr-statement .stmt-cta { display: inline-flex; align-items: center; gap: 12px; padding: 18px 32px;
+  background: var(--fr-gold); color: var(--fr-navy); border-radius: 4px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; align-self: flex-start;
+  letter-spacing: 0.04em; text-transform: uppercase; }
+.layout-fr-statement .stmt-cta::after { content: '→'; font-size: 22px; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
 
@@ -568,24 +673,23 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 3A">
   <div class="format-bar">
-    <span class="label">AD 3A — Chalkboard — OC vs Życie menu</span>
-    <span class="layout-tag">CHALKBOARD</span>
+    <span class="label">AD 3A — OC vs Życie — dashboard style + photo</span>
+    <span class="layout-tag">FR-PERF</span>
     <button class="active" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-4-5 dark">
-    <div class="layout layout-chalkboard">
-      <div class="chalk-frame">
-        <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-        <div class="draggable" style="margin-top: 30px;">
-          <div class="chalk-eyebrow">Cennik prowizji ubezpieczyciela</div>
-          <div class="chalk-headline">Dwa <span class='accent'>różne</span> modele.</div>
+  <div class="ad format-4-5">
+    <div class="layout-fr-perf">
+      <div class="perf-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1080&h=1350&fit=crop&q=85');"></div>
+      <div class="perf-content">
+        <div class="brand-logo draggable" style="color:white;">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+          <span style="color:white;">KAPITAŁ ŻYCIA</span>
         </div>
-        <ul class="chalk-menu draggable"><li><span>OC / NNW (jednorazowo)</span><span class="price">40-150 zł</span></li><li><span>Życie · rok 1 (przy zawarciu)</span><span class="price">✓</span></li><li><span>Życie · rok 2 (odnowienie)</span><span class="price">✓</span></li><li><span>Życie · rok 3 (odnowienie)</span><span class="price">✓✓</span></li></ul>
-        <div class="chalk-cta draggable">Sprawdź pełny cennik →</div>
-        <div class="cta-url" style="margin-top: 16px; color: rgba(255,255,255,0.7);">kapitalzycia.pl/cv</div>
+        <div class="perf-spacer"></div>
+        <div class="perf-overlay draggable">
+          <h1 class="perf-headline">Doradca<br>ubezpieczeniowy</h1>
+          <div class="perf-amount">1 polisa = 3 lata wypłat</div>
+        </div>
       </div>
     </div>
   </div>
@@ -607,20 +711,41 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 3B">
   <div class="format-bar">
-    <span class="label">AD 3B — UGC story — closer Q&A</span>
-    <span class="layout-tag">UGC-STORY</span>
+    <span class="label">AD 3B — HIRING flowchart — OC vs Życie</span>
+    <span class="layout-tag">FR-HIRING</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="active" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-9-16 dark">
-    <div class="layout-ugc">
-      <div class="photo-fullbleed" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1080&h=1920&fit=crop&fm=jpg&q=80');"></div>
-      <div class="ugc-content">
-        <div class="ugc-question-sticker draggable">Mam pytanie</div>
-        <div class="ugc-question-bubble draggable">Sprzedaję OC od 3 lat. Jak zrobić więcej z tych samych klientów?</div>
-        <div class="ugc-message bold-answer"><strong>OC = 40-150 zł i koniec.</strong></div><div class="ugc-message">Życie z elementem inwestycyjnym = prowizja <span class='red'>3 razy</span> z jednej sprzedaży.</div><div class="ugc-message right">Przy zawarciu + w 2. i 3. roku trwania umowy.</div><div class="ugc-message">Pomoc w licencji KNF + zwrot kosztów.</div>
-        <div class="ugc-cta-row">
-          <div class="url-text"><strong>kapitalzycia.pl/cv</strong>Aplikuj jeśli masz min. 2 lata doświadczenia</div>
-          <div class="cta-button">Aplikuj</div>
+  <div class="ad format-9-16">
+    <div class="layout-fr-hiring">
+      <div class="hiring-side">
+        <div class="hiring-vertical">HI<br>RING</div>
+      </div>
+      <div class="hiring-content">
+        <div class="hiring-top">
+          <div class="hiring-card draggable">
+            <div class="hiring-card-eyebrow">Rekrutacja</div>
+            <div class="hiring-card-title">Doradca<br>ubezpieczeniowy</div>
+            <div class="hiring-pill">Doświadczenie: 2+ lata</div>
+          </div>
+          <div class="hiring-logo draggable">
+            <div class="logo-main">Kapitał Życia</div>
+            <div class="logo-sub">AS Finanse Group</div>
+          </div>
+        </div>
+        <div class="flowchart draggable">
+          <div class="flow-box cross">OC<br>40–150 zł</div>
+          <div class="flow-box">NNW<br>jednorazowo</div>
+          <div class="flow-box cross">Klient<br>znika</div>
+          <div class="flow-box check">Polisa życie<br>Rok 1 ✓</div>
+          <div class="flow-box center">3 LATA<br>WYPŁAT</div>
+          <div class="flow-box check">Rok 2 + 3<br>odnowienie ✓</div>
+        </div>
+        <div class="hiring-footer draggable">
+          <div class="hiring-cta-block">
+            <div class="cta-label">Apply Now</div>
+            <div class="cta-action">Pomoc w licencji KNF · B2B</div>
+            <div class="hiring-tagline">Twoja przyszłość. Twój Kapitał Życia.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -643,30 +768,20 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 3C">
   <div class="format-bar">
-    <span class="label">AD 3C — Yellow alarm — OC trap exit</span>
-    <span class="layout-tag">YELLOW-ALARM</span>
+    <span class="label">AD 3C — OC zarabia raz. Ty 3 razy. — navy bold</span>
+    <span class="layout-tag">FR-STATEMENT</span>
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="active" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-1-1 yellow">
-    <div class="layout layout-yellow">
-      <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-      <div class="draggable" style="margin-top: 36px;">
-        <div class="yellow-alert-bar">POWÓD #1 · ULTIMATE GUIDE</div>
-        <h1 class="yellow-headline"><span class='accent'>OC</span> to ślepy zaułek.</h1>
-        <div class="yellow-sub">Ta sama branża. Inne zarobki.</div>
+  <div class="ad format-1-1">
+    <div class="layout-fr-statement">
+      <div class="brand-logo draggable" style="color:white;">
+        <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+        <span style="color:white;">KAPITAŁ ŻYCIA</span>
       </div>
-      <div class="draggable"><p class="yellow-body">OC daje <strong>40-150 zł</strong> jednorazowo. Polisa życie — prowizja przy zawarciu + w 2. i 3. roku trwania.</p>
-<p class="yellow-body">Jeden klient. Jedna rozmowa. 3 wypłaty zamiast jednej. Pomoc w licencji KNF.</p>
-<p class="yellow-body">Min. 2 lata w sprzedaży. B2B.</p></div>
-      <div class="yellow-cta draggable">Sprawdź różnicę →</div>
-      <div class="cta-url" style="margin-top: 14px;">kapitalzycia.pl/cv</div>
-      <div class="brand-footer" style="margin-top: 20px;">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
-      
+      <div class="stmt-eyebrow draggable">Rekrutacja · Doradca</div>
+      <h1 class="stmt-headline draggable"><span class="strike">OC</span> zarabia <span class="gold">raz.</span><br>Ty zarabiasz <span class="gold">3 razy.</span></h1>
+      <p class="stmt-sub draggable">Polisa życie z elementem inwestycyjnym — prowizja przy zawarciu, w 2. i w 3. roku trwania. Pomoc w licencji KNF.</p>
+      <div class="stmt-cta draggable">Apply Now</div>
     </div>
   </div>
   <div class="ad-actions">
