@@ -730,40 +730,22 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.format-4-5 .layout-im-yellow .im-headline { font-size: 92px !important; line-height: 0.98 !important; }
 .ad.format-4-5 .layout-im-yellow .im-body { font-size: 28px !important; }
 
-/* 9:16: small text top, big photo bottom with yellow fade */
+/* 9:16: photo viršuje (matoma aiškiai), tekstas apačioje */
 .ad.format-9-16 .layout-im-yellow {
   grid-template-columns: 1fr !important;
-  grid-template-rows: 0.55fr 1.45fr !important;
+  grid-template-rows: 1.05fr 0.95fr !important;
+}
+.ad.format-9-16 .layout-im-yellow .im-photo-side {
+  order: -1 !important;
+  background-position: center 25% !important;
+  min-height: 1000px !important;
 }
 .ad.format-9-16 .layout-im-yellow .im-text-side {
-  padding: 320px 80px 30px !important;
+  padding: 60px 80px 720px !important;
   justify-content: flex-start !important;
-  position: relative !important;
-  z-index: 2 !important;
 }
-.ad.format-9-16 .layout-im-yellow .im-headline { font-size: 110px !important; }
-.ad.format-9-16 .layout-im-yellow .im-body { font-size: 32px !important; }
-.ad.format-9-16 .layout-im-yellow .im-photo-side {
-  position: relative !important;
-}
-.ad.format-9-16 .layout-im-yellow .im-photo-side::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 80px;
-  background: linear-gradient(180deg, var(--im-yellow) 0%, transparent 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-.ad.format-9-16 .layout-im-yellow .im-photo-side::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 680px;
-  background: linear-gradient(0deg, var(--im-yellow) 0%, var(--im-yellow) 35%, transparent 100%);
-  z-index: 1;
-  pointer-events: none;
-}
+.ad.format-9-16 .layout-im-yellow .im-headline { font-size: 100px !important; }
+.ad.format-9-16 .layout-im-yellow .im-body { font-size: 30px !important; }
 
 /* 1:1: bigger text */
 .ad.format-1-1 .layout-im-yellow .im-headline { font-size: 76px !important; line-height: 1.0 !important; }
