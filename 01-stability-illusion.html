@@ -1055,7 +1055,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     const format = [...ad.classList].find(c => c.startsWith('format-')).replace('format-', '');
     const original = ad.style.transform;
     ad.style.transform = 'none';
-    const canvas = await html2canvas(ad, { scale: 2, useCORS: true, backgroundColor: null });
+    const canvas = await html2canvas(ad, { scale: 2, useCORS: true, backgroundColor: null, allowTaint: true, foreignObjectRendering: true, logging: false });
     ad.style.transform = original;
     const link = document.createElement('a');
     link.download = `kapital-zycia-${code.replace(/\s+/g,'-').toLowerCase()}-${format}.png`;
