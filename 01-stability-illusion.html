@@ -738,6 +738,8 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.format-9-16 .layout-im-yellow .im-text-side {
   padding: 320px 80px 30px !important;
   justify-content: flex-start !important;
+  position: relative !important;
+  z-index: 2 !important;
 }
 .ad.format-9-16 .layout-im-yellow .im-headline { font-size: 110px !important; }
 .ad.format-9-16 .layout-im-yellow .im-body { font-size: 32px !important; }
@@ -748,7 +750,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 200px;
+  height: 80px;
   background: linear-gradient(180deg, var(--im-yellow) 0%, transparent 100%);
   z-index: 1;
   pointer-events: none;
@@ -757,8 +759,8 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 720px;
-  background: linear-gradient(0deg, var(--im-yellow) 30%, transparent 100%);
+  height: 680px;
+  background: linear-gradient(0deg, var(--im-yellow) 0%, var(--im-yellow) 35%, transparent 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -879,10 +881,8 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
         <h1 class="im-headline draggable"><span class="highlight">Pensja</span> stoi.<br><span class="highlight">Plan</span> rośnie.<br>Tak działa bank.</h1>
         <p class="im-body draggable">U nas zarabiasz <strong>3 razy</strong> z tej samej umowy. Prowizja przy zawarciu + w 2. i 3. roku trwania.</p>
         <div class="im-cta draggable">Sprawdź ofertę →</div>
-        <p class="im-disclaimer draggable">kapitalzycia.pl/cv · Min. 4 lata w sprzedaży. B2B. 100% online lub Warszawa.</p>
       </div>
       <div class="im-photo-side draggable" style="background-image: url('https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=900&h=1350&fit=crop&q=85');">
-        <div class="im-handle">@kapital.zycia</div>
       </div>
     </div>
   </div>
