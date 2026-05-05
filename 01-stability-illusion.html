@@ -798,9 +798,8 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 /* === AD 1C — white + photo === */
 /* 4:5: more left padding + bigger text */
-.ad.format-4-5 .layout-im-white { grid-template-columns: 1.2fr 0.8fr !important; }
-.ad.format-4-5 .layout-im-white .im-text-side { padding: 110px 70px 110px 110px !important; }
-.ad.format-4-5 .layout-im-white .im-headline-white { font-size: 80px !important; }
+/* AD 1C 4:5 — original padding restored */
+.ad.format-4-5 .layout-im-white .im-text-side { padding: 80px 60px !important; }
 
 /* 9:16: face visible (top of photo), bigger text, more horizontal padding */
 .ad.format-9-16 .layout-im-white {
@@ -812,13 +811,16 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   min-height: 800px !important;
 }
 .ad.format-9-16 .layout-im-white .im-text-side {
-  padding: 80px 100px 720px !important;
+  padding: 200px 80px 720px !important;
+  justify-content: flex-start !important;
 }
-.ad.format-9-16 .layout-im-white .im-headline-white { font-size: 96px !important; }
-.ad.format-9-16 .layout-im-white .im-subhead { font-size: 38px !important; }
+.ad.format-9-16 .layout-im-white .im-headline-white { font-size: 116px !important; }
+.ad.format-9-16 .layout-im-white .im-subhead { font-size: 44px !important; }
+.ad.format-9-16 .layout-im-white .im-checklist-w li { font-size: 28px !important; }
 
 /* 1:1: text centered */
-.ad.format-1-1 .layout-im-white { grid-template-columns: 1fr !important; grid-template-rows: 1fr 0.6fr !important; }
+.ad.format-1-1 .layout-im-white { grid-template-columns: 1fr !important; grid-template-rows: 0.55fr 0.45fr !important; }
+.ad.format-1-1 .layout-im-white .im-photo-side { background-position: center 15% !important; min-height: 600px !important; }
 .ad.format-1-1 .layout-im-white .im-text-side {
   padding: 80px 90px !important;
   text-align: center !important;
