@@ -539,7 +539,29 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   body { background: white; padding: 0; }
 }
 
-/* META ADS SAFE ZONES — top 14% profile, bottom 14% feed CTA / 35% Reels */
+
+/* META ADS SAFE ZONES — visi tekstai sucentruoti per saugią zoną
+   9:16 Reels: top 14% (270px) profile, bottom 35% (670px) UI = saugi zona y:270→1250
+   4:5 Feed:  top ~7% (100px), bottom ~7% (100px)
+   1:1:       top ~7% (80px), bottom ~7% (80px) */
+
+.ad.format-9-16 .layout-dp-photo .dp-content,
+.ad.format-9-16 .layout-dp-cream,
+.ad.format-9-16 .layout-dp-tag .dpt-content,
+.ad.format-9-16 .layout-im-yellow .im-text-side,
+.ad.format-9-16 .layout-im-purple .im-text-side,
+.ad.format-9-16 .layout-im-mint .im-text-side,
+.ad.format-9-16 .layout-im-burgundy-c,
+.ad.format-9-16 .layout-fr-perf .perf-content,
+.ad.format-9-16 .layout-fr-flow .flow-body,
+.ad.format-9-16 .layout-fr-statement .stmt-content,
+.ad.format-9-16 .layout-yellow,
+.ad.format-9-16 .layout {
+  padding-top: 280px !important;
+  padding-bottom: 680px !important;
+  justify-content: center !important;
+}
+
 .ad.format-4-5 .layout-dp-photo .dp-content,
 .ad.format-4-5 .layout-dp-cream,
 .ad.format-4-5 .layout-dp-tag .dpt-content,
@@ -549,13 +571,33 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.format-4-5 .layout-im-burgundy-c,
 .ad.format-4-5 .layout-fr-perf .perf-content,
 .ad.format-4-5 .layout-fr-flow .flow-body,
-.ad.format-4-5 .layout-fr-statement .stmt-content { padding-top: 160px !important; padding-bottom: 160px !important; }
+.ad.format-4-5 .layout-fr-statement .stmt-content,
+.ad.format-4-5 .layout-yellow,
+.ad.format-4-5 .layout {
+  padding-top: 110px !important;
+  padding-bottom: 110px !important;
+}
 
 .ad.format-1-1 .layout-dp-photo .dp-content,
 .ad.format-1-1 .layout-dp-cream,
-.ad.format-1-1 .layout-dp-tag .dpt-content { padding-top: 80px !important; padding-bottom: 80px !important; }
+.ad.format-1-1 .layout-dp-tag .dpt-content,
+.ad.format-1-1 .layout-im-yellow .im-text-side,
+.ad.format-1-1 .layout-im-purple .im-text-side,
+.ad.format-1-1 .layout-im-mint .im-text-side,
+.ad.format-1-1 .layout-im-burgundy-c,
+.ad.format-1-1 .layout-fr-perf .perf-content,
+.ad.format-1-1 .layout-fr-flow .flow-body,
+.ad.format-1-1 .layout-fr-statement .stmt-content,
+.ad.format-1-1 .layout-yellow,
+.ad.format-1-1 .layout {
+  padding-top: 90px !important;
+  padding-bottom: 90px !important;
+}
 
-.ad.format-1-1 .layout-dp-cream .dpc-brand-corner { bottom: 80px; right: 80px; }
+/* Brand mark fixed at safe distance from edges */
+.ad.format-9-16 .layout-dp-cream .dpc-brand-corner { bottom: 700px !important; }
+.ad.format-4-5 .layout-dp-cream .dpc-brand-corner { bottom: 130px !important; right: 80px !important; }
+.ad.format-1-1 .layout-dp-cream .dpc-brand-corner { bottom: 110px !important; right: 80px !important; }
 </style>
 </head>
 <body>
