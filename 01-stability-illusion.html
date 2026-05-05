@@ -803,8 +803,14 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.format-9-16 .layout-im-white .im-checklist-w li { font-size: 28px !important; }
 
 /* 1:1: text centered */
-.ad.format-1-1 .layout-im-white { grid-template-columns: 1fr !important; grid-template-rows: 0.55fr 0.45fr !important; }
-.ad.format-1-1 .layout-im-white .im-photo-side { background-position: center 15% !important; min-height: 600px !important; }
+.ad.format-1-1 .layout-im-white {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 0.6fr 0.4fr !important;
+}
+.ad.format-1-1 .layout-im-white .im-photo-side {
+  background-position: center 15% !important;
+  min-height: 0 !important;
+}
 .ad.format-1-1 .layout-im-white .im-text-side {
   padding: 80px 90px !important;
   text-align: center !important;
