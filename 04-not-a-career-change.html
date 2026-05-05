@@ -15,7 +15,44 @@
   --red: #C0392B;
   --yellow: #F4D33E; --yellow-dark: #E0BF2A;
   --burgundy: #4A1E2A; --burgundy-light: #5C2A39;
+  --hero-mint: #00D17F; --hero-black: #0A0A0A; --hero-cream: #F5EFE3;
 }
+
+/* ============= LAYOUT: HERO-BG (done.poland style — full photo + bottom overlay) ============= */
+.layout-hero-bg { padding: 0; height: 100%; position: relative; overflow: hidden;
+  background: var(--hero-black) !important; color: white; }
+.layout-hero-bg .hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.layout-hero-bg .hero-photo::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.1) 30%, rgba(10,10,10,0.55) 70%, rgba(10,10,10,0.95) 100%); }
+.layout-hero-bg .hero-content { position: relative; z-index: 1; height: 100%;
+  padding: 70px 60px 70px; display: flex; flex-direction: column; }
+.ad.format-9-16 .layout-hero-bg .hero-content { padding: 200px 60px 220px; }
+.layout-hero-bg .hero-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.layout-hero-bg .hero-headline-top { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 56px; line-height: 1.0; letter-spacing: -0.02em; color: white; max-width: 80%;
+  margin-top: 30px; }
+.ad.format-9-16 .layout-hero-bg .hero-headline-top { font-size: 78px; }
+.ad.format-1-1 .layout-hero-bg .hero-headline-top { font-size: 48px; }
+.layout-hero-bg .hero-headline-top .mint { color: var(--hero-mint); }
+.layout-hero-bg .hero-spacer { flex: 1; }
+.layout-hero-bg .hero-bottom { display: flex; flex-direction: column; gap: 18px; }
+.layout-hero-bg .hero-headline-bottom { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 64px; line-height: 1.02; letter-spacing: -0.02em; color: white; }
+.ad.format-9-16 .layout-hero-bg .hero-headline-bottom { font-size: 88px; }
+.ad.format-1-1 .layout-hero-bg .hero-headline-bottom { font-size: 52px; }
+.layout-hero-bg .hero-headline-bottom .mint { color: var(--hero-mint); }
+.layout-hero-bg .hero-sub { font-family: 'Inter', sans-serif; font-weight: 500;
+  font-size: 22px; color: rgba(255,255,255,0.78); max-width: 90%; line-height: 1.45; }
+.layout-hero-bg .hero-cta-row { display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-top: 20px; }
+.layout-hero-bg .hero-cta { display: inline-flex; align-items: center; gap: 12px; padding: 18px 30px;
+  background: var(--hero-mint); color: var(--hero-black); border-radius: 100px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: 0.02em; }
+.layout-hero-bg .hero-cta::after { content: '→'; font-size: 22px; }
+.layout-hero-bg .hero-brand-corner { font-family: 'Inter', sans-serif; font-weight: 800;
+  font-size: 16px; letter-spacing: 0.14em; color: rgba(255,255,255,0.85); text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px; }
+.layout-hero-bg .hero-brand-corner img { width: 32px; height: auto; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px 80px; color: var(--black); }
 
@@ -568,33 +605,29 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 <div class="ad-wrapper" data-code="AD 4A">
   <div class="format-bar">
-    <span class="label">AD 4A — Hero photo — empty market 2024</span>
-    <span class="layout-tag">HERO-PHOTO</span>
+    <span class="label">AD 4A — Rynek zamarł — done.poland hero-bg</span>
+    <span class="layout-tag">HERO-BG</span>
     <button class="active" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
-  <div class="ad format-4-5 dark">
-    <div class="layout-hero-photo">
-      <div class="photo-side" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1080&h=1350&fit=crop&fm=jpg&q=80');"></div>
-      <div class="text-side">
-        <div class="brand-logo draggable">
-      <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-      <span>KAPITAŁ ŻYCIA</span>
-    </div>
-        <div class="draggable" style="margin-top: 30px;">
-          <div class="eyebrow">2024 ROK</div>
-          <h1 class="headline">Rynek <span class='accent'>zamarł</span>.</h1>
+  <div class="ad format-4-5">
+    <div class="layout-hero-bg">
+      <div class="hero-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1080&h=1350&fit=crop&q=85');"></div>
+      <div class="hero-content">
+        <div class="hero-top">
+          <h1 class="hero-headline-top draggable">Rynek <span class="mint">zamarł</span>?<br>Twoja sieć — nie.</h1>
+          <div class="hero-brand-corner draggable">
+            <img src="assets/logo-flames.png" alt="Kapitał Życia">
+            <span>KAPITAŁ ŻYCIA</span>
+          </div>
         </div>
-        <div class="draggable"><p class="body-text">Wysokie stopy. Niska zdolność kredytowa. <strong>Agenci czekali miesiącami</strong> na jedno zamknięcie.</p>
-<p class="body-text"><strong>To nie zmiana kariery.</strong> Dodajesz drugi strumień przychodu do tej samej sieci.</p>
-<p class="body-text">Jedna umowa = prowizja przy zawarciu + w 2. i 3. roku.</p></div>
-        <div class="cta draggable">
-      <div class="cta-button">Sprawdź <span>→</span></div>
-      <div class="cta-url">kapitalzycia.pl/cv</div>
-      
-      <div class="brand-footer">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
-    </div>
+        <div class="hero-spacer"></div>
+        <div class="hero-bottom">
+          <h2 class="hero-headline-bottom draggable">Drugi <span class="mint">strumień</span><br>z tej samej sieci.</h2>
+          <p class="hero-sub draggable">To nie zmiana kariery. Polisa życie z elementem inwestycyjnym — prowizja przy zawarciu + w 2. i 3. roku trwania.</p>
+          <div class="hero-cta-row">
+            <div class="hero-cta draggable">Aplikuj</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -633,10 +666,6 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
       <ul class="notes-list"><li>Tej samej rozmowie</li><li>Z tej samej sieci kontaktów</li><li class="">Bez porzucania nieruchomości</li></ul>
       <div class="notes-math draggable"><span class="calc-line">Nieruchomość × 1 prowizja = jednorazowo</span><span class="calc-line"><span class='equals'>+ Polisa życie × 3 prowizje</span></span><span class="calc-line"><span class='equals'>= 4 wypłaty z 1 klienta</span></span></div>
       <div class="notes-cta draggable">Sprawdź jak</div>
-      <div class="cta-url" style="margin-top: 8px;">kapitalzycia.pl/cv</div>
-      <div class="brand-footer" style="margin-top: 20px;">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
     </div>
   </div>
   <div class="ad-actions">
@@ -676,10 +705,6 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
       <div class="draggable"><p class="burgundy-body">Drugi strumień przychodu z <strong>tej samej sieci kontaktów</strong>, którą już masz od 5+ lat.</p>
 <p class="burgundy-body">Prowizja przy zawarciu + w 2. i 3. roku trwania umowy. B2B. 100% online.</p><div class="burgundy-signature">— Wybieramy niewiele osób z 5+ latami w branży.</div></div>
       <div class="burgundy-cta draggable">Aplikuj →</div>
-      <div class="cta-url" style="margin-top: 14px;">kapitalzycia.pl/cv</div>
-      <div class="brand-footer" style="margin-top: 20px;">
-        <span class="brand-tagline">TWOJA PRZYSZŁOŚĆ. TWÓJ KAPITAŁ ŻYCIA.</span>
-      </div>
     </div>
   </div>
   <div class="ad-actions">

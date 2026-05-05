@@ -40,11 +40,21 @@
 .ad.format-1-1 .layout-fr-perf .perf-amount { font-size: 30px; }
 .ad.format-9-16 .layout-fr-perf .perf-amount { font-size: 48px; }
 
-/* ============= LAYOUT: FR-FLOW (clean recruitment flow on navy) ============= */
-.layout-fr-flow { padding: 90px 80px; height: 100%; position: relative; overflow: hidden;
+/* ============= LAYOUT: FR-FLOW (clean recruitment flow on navy + photo) ============= */
+.layout-fr-flow { padding: 0; height: 100%; position: relative; overflow: hidden;
   background: var(--fr-navy) !important; color: white;
-  background-image: linear-gradient(180deg, var(--fr-navy) 0%, var(--fr-navy-deep) 100%) !important;
   display: flex; flex-direction: column; }
+.layout-fr-flow .flow-photo-top { height: 38%; background-size: cover; background-position: center;
+  position: relative; }
+.layout-fr-flow .flow-photo-top::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(14,31,61,0.3) 0%, rgba(14,31,61,0.85) 70%, var(--fr-navy) 100%); }
+.ad.format-1-1 .layout-fr-flow .flow-photo-top { height: 30%; }
+.ad.format-9-16 .layout-fr-flow .flow-photo-top { height: 42%; }
+.layout-fr-flow .flow-body { padding: 50px 70px 70px; flex: 1; display: flex; flex-direction: column;
+  position: relative; z-index: 1; }
+.layout-fr-flow .flow-body::before { content: ''; position: absolute; right: -150px; top: 50%;
+  width: 400px; height: 400px; border-radius: 50%; border: 60px solid rgba(212,165,61,0.05);
+  pointer-events: none; }
 .layout-fr-flow .flow-pill { display: inline-block; padding: 8px 20px; background: rgba(212,165,61,0.12);
   border: 1px solid var(--fr-gold); border-radius: 100px; color: var(--fr-gold);
   font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.18em;
@@ -74,12 +84,14 @@
   letter-spacing: 0.04em; text-transform: uppercase; margin-top: auto; }
 .layout-fr-flow .flow-cta::after { content: '→'; font-size: 24px; }
 
-/* ============= LAYOUT: FR-STATEMENT (Bold statement on dark navy) ============= */
-.layout-fr-statement { padding: 80px 70px; height: 100%; position: relative; overflow: hidden;
-  background: var(--fr-navy) !important; color: white; display: flex; flex-direction: column; }
-.layout-fr-statement::before { content: ''; position: absolute; right: -100px; bottom: -100px;
-  width: 500px; height: 500px; border-radius: 50%; border: 80px solid rgba(212,165,61,0.06);
-  pointer-events: none; }
+/* ============= LAYOUT: FR-STATEMENT (Photo BG + bold statement, Revolut style) ============= */
+.layout-fr-statement { padding: 0; height: 100%; position: relative; overflow: hidden;
+  background: var(--fr-navy) !important; color: white; }
+.layout-fr-statement .stmt-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.layout-fr-statement .stmt-photo::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(14,31,61,0.92) 0%, rgba(14,31,61,0.7) 50%, rgba(14,31,61,0.55) 100%); }
+.layout-fr-statement .stmt-content { position: relative; z-index: 1; height: 100%;
+  padding: 80px 70px; display: flex; flex-direction: column; }
 .layout-fr-statement .stmt-eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px;
   letter-spacing: 0.2em; color: var(--fr-gold); text-transform: uppercase; margin-bottom: 32px; }
 .layout-fr-statement .stmt-eyebrow::before { content: '◆ '; }
@@ -655,7 +667,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   </div>
   <div class="ad format-4-5">
     <div class="layout-fr-perf">
-      <div class="perf-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1080&h=1350&fit=crop&q=85');"></div>
+      <div class="perf-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1080&h=1350&fit=crop&q=85');"></div>
       <div class="perf-content">
         <div class="brand-logo draggable" style="color:white;">
           <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
@@ -693,33 +705,36 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   </div>
   <div class="ad format-9-16">
     <div class="layout-fr-flow">
-      <div class="brand-logo draggable" style="color:white;">
-        <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-        <span style="color:white;">KAPITAŁ ŻYCIA</span>
+      <div class="flow-photo-top draggable" style="background-image: url('https://images.unsplash.com/photo-1485875437342-9b39470b3d95?w=1080&h=900&fit=crop&q=85');"></div>
+      <div class="flow-body">
+        <div class="brand-logo draggable" style="color:white; margin-top:-90px; position:relative; z-index:2;">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+          <span style="color:white;">KAPITAŁ ŻYCIA</span>
+        </div>
+        <div class="flow-pill draggable" style="margin-top:32px;">Rekrutacja</div>
+        <h1 class="flow-headline draggable">Z 1 polisy<br><span class="gold">3 wypłaty.</span></h1>
+        <p class="flow-sub draggable">Polisa życie z elementem inwestycyjnym — prowizja przy zawarciu i przy odnowieniu w 2. i 3. roku.</p>
+        <div class="flow-row draggable">
+          <div class="flow-step">
+            <div class="step-label">Rok 1</div>
+            <div class="step-value">Prowizja</div>
+            <div class="step-check">✓</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-label">Rok 2</div>
+            <div class="step-value">Prowizja</div>
+            <div class="step-check">✓</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-label">Rok 3</div>
+            <div class="step-value">Prowizja</div>
+            <div class="step-check">✓</div>
+          </div>
+        </div>
+        <div class="flow-cta draggable">Apply Now</div>
       </div>
-      <div class="flow-pill draggable" style="margin-top:40px;">Rekrutacja</div>
-      <h1 class="flow-headline draggable">Z 1 polisy<br><span class="gold">3 wypłaty.</span></h1>
-      <p class="flow-sub draggable">Polisa życie z elementem inwestycyjnym — prowizja przy zawarciu i przy odnowieniu w 2. i 3. roku.</p>
-      <div class="flow-row draggable">
-        <div class="flow-step">
-          <div class="step-label">Rok 1</div>
-          <div class="step-value">Prowizja</div>
-          <div class="step-check">✓</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-          <div class="step-label">Rok 2</div>
-          <div class="step-value">Prowizja</div>
-          <div class="step-check">✓</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-          <div class="step-label">Rok 3</div>
-          <div class="step-value">Prowizja</div>
-          <div class="step-check">✓</div>
-        </div>
-      </div>
-      <div class="flow-cta draggable">Apply Now</div>
     </div>
   </div>
   <div class="ad-actions">
@@ -746,14 +761,17 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   </div>
   <div class="ad format-1-1">
     <div class="layout-fr-statement">
-      <div class="brand-logo draggable" style="color:white;">
-        <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
-        <span style="color:white;">KAPITAŁ ŻYCIA</span>
+      <div class="stmt-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1080&h=1080&fit=crop&q=85');"></div>
+      <div class="stmt-content">
+        <div class="brand-logo draggable" style="color:white;">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia" class="logo-flames-img">
+          <span style="color:white;">KAPITAŁ ŻYCIA</span>
+        </div>
+        <div class="stmt-eyebrow draggable">Rekrutacja · Doradca</div>
+        <h1 class="stmt-headline draggable"><span class="strike">OC</span> zarabia <span class="gold">raz.</span><br>Ty zarabiasz <span class="gold">3 razy.</span></h1>
+        <p class="stmt-sub draggable">Polisa życie z elementem inwestycyjnym — prowizja przy zawarciu, w 2. i w 3. roku trwania. Pomoc w licencji KNF.</p>
+        <div class="stmt-cta draggable">Apply Now</div>
       </div>
-      <div class="stmt-eyebrow draggable">Rekrutacja · Doradca</div>
-      <h1 class="stmt-headline draggable"><span class="strike">OC</span> zarabia <span class="gold">raz.</span><br>Ty zarabiasz <span class="gold">3 razy.</span></h1>
-      <p class="stmt-sub draggable">Polisa życie z elementem inwestycyjnym — prowizja przy zawarciu, w 2. i w 3. roku trwania. Pomoc w licencji KNF.</p>
-      <div class="stmt-cta draggable">Apply Now</div>
     </div>
   </div>
   <div class="ad-actions">
