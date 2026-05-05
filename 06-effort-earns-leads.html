@@ -538,6 +538,24 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   .ad { box-shadow: none; transform: none !important; margin: 0 !important; page-break-after: always; }
   body { background: white; padding: 0; }
 }
+
+/* META ADS SAFE ZONES — top 14% profile, bottom 14% feed CTA / 35% Reels */
+.ad.format-4-5 .layout-dp-photo .dp-content,
+.ad.format-4-5 .layout-dp-cream,
+.ad.format-4-5 .layout-dp-tag .dpt-content,
+.ad.format-4-5 .layout-im-yellow .im-text-side,
+.ad.format-4-5 .layout-im-purple .im-text-side,
+.ad.format-4-5 .layout-im-mint .im-text-side,
+.ad.format-4-5 .layout-im-burgundy-c,
+.ad.format-4-5 .layout-fr-perf .perf-content,
+.ad.format-4-5 .layout-fr-flow .flow-body,
+.ad.format-4-5 .layout-fr-statement .stmt-content { padding-top: 160px !important; padding-bottom: 160px !important; }
+
+.ad.format-1-1 .layout-dp-photo .dp-content,
+.ad.format-1-1 .layout-dp-cream,
+.ad.format-1-1 .layout-dp-tag .dpt-content { padding-top: 80px !important; padding-bottom: 80px !important; }
+
+.ad.format-1-1 .layout-dp-cream .dpc-brand-corner { bottom: 80px; right: 80px; }
 </style>
 </head>
 <body>
@@ -545,10 +563,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   <h1>AD 6 — Effort Earns Leads</h1>
   <span class="persona">P5 — Były sportowiec / mentalność zawodnika</span>
   <button onclick="downloadAll()">⬇ Atsisiųsti visas</button>
-  <button class="alt" onclick="toggleEdit()">✎ Redaguoti</button>
-  <button class="alt" onclick="toggleDrag()">↕ Stumti</button>
-  <button class="alt" onclick="resetPositions()">↺ Atstatyti</button>
-  <button class="alt" onclick="window.print()">🖨 PDF</button>
+  <button class="alt" onclick="toggleEdit()">✎ Redaguoti tekstą</button>
 </div>
 <div class="format-toolbar" id="formatToolbar">
   <button onclick="document.execCommand('bold')"><b>B</b></button>
@@ -597,17 +612,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     </div>
   </div>
   <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ PNG</button>
-    <button onclick="changeBg(this, 'white')">Balta</button>
-    <button onclick="changeBg(this, 'cream')">Kreminė</button>
-    <button onclick="changeBg(this, 'bright')">Bright</button>
-    <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'deep')">Deep</button>
-    <button onclick="changeBg(this, 'dark')">Dark</button>
-    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
-    <button onclick="changeBg(this, 'warning')">Warning</button>
-    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
-    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
+    <button onclick="downloadOne(this)">⬇ Atsisiųsti PNG</button>
   </div>
 </div>
 
@@ -633,17 +638,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     </div>
   </div>
   <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ PNG</button>
-    <button onclick="changeBg(this, 'white')">Balta</button>
-    <button onclick="changeBg(this, 'cream')">Kreminė</button>
-    <button onclick="changeBg(this, 'bright')">Bright</button>
-    <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'deep')">Deep</button>
-    <button onclick="changeBg(this, 'dark')">Dark</button>
-    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
-    <button onclick="changeBg(this, 'warning')">Warning</button>
-    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
-    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
+    <button onclick="downloadOne(this)">⬇ Atsisiųsti PNG</button>
   </div>
 </div>
 
@@ -673,17 +668,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     </div>
   </div>
   <div class="ad-actions">
-    <button onclick="downloadOne(this)">⬇ PNG</button>
-    <button onclick="changeBg(this, 'white')">Balta</button>
-    <button onclick="changeBg(this, 'cream')">Kreminė</button>
-    <button onclick="changeBg(this, 'bright')">Bright</button>
-    <button onclick="changeBg(this, 'green')">Žalia</button>
-    <button onclick="changeBg(this, 'deep')">Deep</button>
-    <button onclick="changeBg(this, 'dark')">Dark</button>
-    <button onclick="changeBg(this, 'charcoal')">Charcoal</button>
-    <button onclick="changeBg(this, 'warning')">Warning</button>
-    <button onclick="changeBg(this, 'yellow')" style="background:#F4D33E;color:#0F0F0F;">Yellow</button>
-    <button onclick="changeBg(this, 'burgundy')" style="background:#4A1E2A;color:white;">Burgundy</button>
+    <button onclick="downloadOne(this)">⬇ Atsisiųsti PNG</button>
   </div>
 </div>
 
@@ -704,7 +689,7 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   let editMode = false;
   function toggleEdit() {
     editMode = !editMode;
-    document.querySelectorAll('.ad .headline, .ad .body-text, .ad .eyebrow, .ad .quote-mega, .ad .quote-response, .ad .stat, .ad .compare-row, .ad .cta-button, .ad .cta-url, .ad .brand-tagline, .ad .disclaimer, .ad .mega-hero, .ad .mega-after, .ad .minimalist-main, .ad .footer-text, .ad .stamp, .ad .check-label, .ad .check-value, .ad .split-label, .ad .split-items li, .ad .split-footer, .ad .bar-label, .ad .warning-bar, .ad .ugc-question-sticker, .ad .ugc-question-bubble, .ad .ugc-message, .ad .url-text, .ad .numbered-headline, .ad .numbered-subtitle, .ad .numbered-item .num, .ad .numbered-item .item-text, .ad .pill-cta, .ad .massive-statement, .ad .stmt-supporting, .ad .notes-title, .ad .notes-body, .ad .notes-list li, .ad .notes-math, .ad .notes-math .calc-line, .ad .notes-cta, .ad .chalk-eyebrow, .ad .chalk-headline, .ad .chalk-menu li, .ad .chalk-cta, .ad .redacted-stamp, .ad .redacted-doc-meta, .ad .redacted-doc-title, .ad .redacted-list li, .ad .redacted-cta, .ad .watercolor-eyebrow, .ad .watercolor-headline, .ad .watercolor-body, .ad .watercolor-cta, .ad .yellow-alert-bar, .ad .yellow-headline, .ad .yellow-sub, .ad .yellow-body, .ad .yellow-cta, .ad .burgundy-eyebrow, .ad .burgundy-quote, .ad .burgundy-body, .ad .burgundy-signature, .ad .burgundy-cta').forEach(el => {
+    document.querySelectorAll('.ad .dp-headline, .ad .dpc-headline, .ad .dpt-headline, .ad .dpt-tag, .ad .dp-brand, .ad .dpc-brand-corner, .ad .dpt-brand, .ad .im-headline, .ad .im-body, .ad .im-disclaimer, .ad .im-handle, .ad .im-headline-dark, .ad .im-checklist li, .ad .im-cta-pill, .ad .im-headline-white, .ad .im-subhead, .ad .im-checklist-w li, .ad .im-cta-sticky, .ad .im-headline-p, .ad .im-subhead-p, .ad .im-checklist-p li, .ad .im-cta-mint, .ad .im-headline-b, .ad .im-subhead-b, .ad .im-cta-b, .ad .im-headline-m, .ad .im-subhead-m, .ad .im-cta-dark, .ad .perf-headline, .ad .perf-amount, .ad .flow-pill, .ad .flow-headline, .ad .flow-sub, .ad .flow-step .step-label, .ad .flow-step .step-value, .ad .flow-cta, .ad .stmt-eyebrow, .ad .stmt-headline, .ad .stmt-sub, .ad .stmt-cta, .ad .yellow-alert-bar, .ad .yellow-headline, .ad .yellow-sub, .ad .yellow-body, .ad .yellow-cta, .ad .headline, .ad .body-text, .ad .eyebrow, .ad .cta-button, .ad .cta-url, .ad .brand-tagline').forEach(el => {
       el.contentEditable = editMode;
     });
     document.getElementById('formatToolbar').classList.toggle('visible', editMode);
