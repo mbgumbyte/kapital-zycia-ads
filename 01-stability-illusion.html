@@ -768,8 +768,21 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   background-image: url('https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1080&h=1920&fit=crop&q=85');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.35) blur(2px);
+  filter: brightness(0.18) blur(6px);
   z-index: 0;
+}
+.ad.format-9-16 .layout-im-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,45,26,0.65) 0%, rgba(5,45,26,0.85) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+.ad.format-9-16 .layout-im-dark .im-content {
+  position: relative !important;
+  z-index: 2 !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
 }
 .ad.format-9-16 .layout-im-dark .im-content {
   position: relative !important;
