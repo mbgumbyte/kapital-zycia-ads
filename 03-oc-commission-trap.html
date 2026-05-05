@@ -685,6 +685,88 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 .ad.format-9-16 .layout-dp-cream .dpc-brand-corner { bottom: 700px !important; }
 .ad.format-4-5 .layout-dp-cream .dpc-brand-corner { bottom: 130px !important; right: 80px !important; }
 .ad.format-1-1 .layout-dp-cream .dpc-brand-corner { bottom: 110px !important; right: 80px !important; }
+
+/* ============= AD 3 SPECIFIC FIXES (lessons from AD 1, AD 2) ============= */
+
+/* === AD 3A — FR-PERF (dashboard photo + bottom overlay) === */
+/* 4:5 — bigger overlay, photo focused on face */
+.ad.format-4-5 .layout-fr-perf .perf-photo { background-position: center 25% !important; }
+.ad.format-4-5 .layout-fr-perf .perf-content { padding: 70px 60px 80px !important; }
+.ad.format-4-5 .layout-fr-perf .perf-headline { font-size: 64px !important; }
+.ad.format-4-5 .layout-fr-perf .perf-amount { font-size: 40px !important; }
+
+/* 9:16 — photo top half, overlay bottom (Story style) within safe zones */
+.ad.format-9-16 .layout-fr-perf { display: flex !important; flex-direction: column !important; }
+.ad.format-9-16 .layout-fr-perf .perf-photo {
+  position: relative !important;
+  height: 55% !important;
+  background-position: center 25% !important;
+}
+.ad.format-9-16 .layout-fr-perf .perf-photo::after { display: none !important; }
+.ad.format-9-16 .layout-fr-perf .perf-content {
+  position: relative !important;
+  padding: 60px 60px 720px !important;
+  flex: 1 !important;
+  justify-content: center !important;
+}
+.ad.format-9-16 .layout-fr-perf .perf-spacer { display: none !important; }
+.ad.format-9-16 .layout-fr-perf .perf-overlay { max-width: 100% !important; padding: 30px 36px !important; }
+.ad.format-9-16 .layout-fr-perf .perf-headline { font-size: 84px !important; }
+.ad.format-9-16 .layout-fr-perf .perf-amount { font-size: 48px !important; }
+
+/* 1:1 — photo top, overlay clear */
+.ad.format-1-1 .layout-fr-perf .perf-photo { background-position: center 20% !important; }
+.ad.format-1-1 .layout-fr-perf .perf-content { padding: 60px 60px 70px !important; }
+.ad.format-1-1 .layout-fr-perf .perf-headline { font-size: 52px !important; }
+
+/* === AD 3B — FR-FLOW (no photo, navy + text) === */
+/* 4:5 */
+.ad.format-4-5 .layout-fr-flow .flow-body { padding: 100px 80px !important; }
+.ad.format-4-5 .layout-fr-flow .flow-headline { font-size: 92px !important; }
+.ad.format-4-5 .layout-fr-flow .flow-sub { font-size: 28px !important; }
+
+/* 9:16 — large text centered, safe zones */
+.ad.format-9-16 .layout-fr-flow .flow-body {
+  padding: 320px 80px 720px !important;
+  justify-content: center !important;
+}
+.ad.format-9-16 .layout-fr-flow .flow-headline { font-size: 124px !important; line-height: 1.0 !important; }
+.ad.format-9-16 .layout-fr-flow .flow-sub { font-size: 32px !important; }
+.ad.format-9-16 .layout-fr-flow .flow-step .step-value { font-size: 36px !important; }
+.ad.format-9-16 .layout-fr-flow .flow-cta { font-size: 26px !important; padding: 22px 40px !important; }
+
+/* 1:1 — centered */
+.ad.format-1-1 .layout-fr-flow .flow-body {
+  padding: 90px 80px !important;
+  justify-content: center !important;
+}
+.ad.format-1-1 .layout-fr-flow .flow-headline { font-size: 76px !important; }
+.ad.format-1-1 .layout-fr-flow .flow-sub { font-size: 24px !important; }
+
+/* === AD 3C — FR-STATEMENT (photo BG full + text overlay) === */
+/* 4:5 — photo focus, bigger text */
+.ad.format-4-5 .layout-fr-statement .stmt-photo { background-position: center 25% !important; }
+.ad.format-4-5 .layout-fr-statement .stmt-content { padding: 80px 70px !important; }
+.ad.format-4-5 .layout-fr-statement .stmt-headline { font-size: 92px !important; }
+.ad.format-4-5 .layout-fr-statement .stmt-sub { font-size: 26px !important; }
+
+/* 9:16 — bigger text within safe zones */
+.ad.format-9-16 .layout-fr-statement .stmt-photo { background-position: center 25% !important; }
+.ad.format-9-16 .layout-fr-statement .stmt-content {
+  padding: 320px 80px 720px !important;
+  justify-content: center !important;
+}
+.ad.format-9-16 .layout-fr-statement .stmt-headline { font-size: 124px !important; line-height: 1.0 !important; }
+.ad.format-9-16 .layout-fr-statement .stmt-sub { font-size: 32px !important; }
+
+/* 1:1 — text centered */
+.ad.format-1-1 .layout-fr-statement .stmt-photo { background-position: center 20% !important; }
+.ad.format-1-1 .layout-fr-statement .stmt-content {
+  padding: 90px 80px !important;
+  justify-content: center !important;
+}
+.ad.format-1-1 .layout-fr-statement .stmt-headline { font-size: 76px !important; }
+.ad.format-1-1 .layout-fr-statement .stmt-sub { font-size: 24px !important; }
 </style>
 </head>
 <body>
