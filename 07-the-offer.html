@@ -743,8 +743,13 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
   let editMode = false;
   function toggleEdit() {
     editMode = !editMode;
-    document.querySelectorAll('.ad .dp-headline, .ad .dpc-headline, .ad .dpt-headline, .ad .dpt-tag, .ad .dp-brand, .ad .dpc-brand-corner, .ad .dpt-brand, .ad .im-headline, .ad .im-body, .ad .im-disclaimer, .ad .im-handle, .ad .im-headline-dark, .ad .im-checklist li, .ad .im-cta-pill, .ad .im-headline-white, .ad .im-subhead, .ad .im-checklist-w li, .ad .im-cta-sticky, .ad .im-headline-p, .ad .im-subhead-p, .ad .im-checklist-p li, .ad .im-cta-mint, .ad .im-headline-b, .ad .im-subhead-b, .ad .im-cta-b, .ad .im-headline-m, .ad .im-subhead-m, .ad .im-cta-dark, .ad .perf-headline, .ad .perf-amount, .ad .flow-pill, .ad .flow-headline, .ad .flow-sub, .ad .flow-step .step-label, .ad .flow-step .step-value, .ad .flow-cta, .ad .stmt-eyebrow, .ad .stmt-headline, .ad .stmt-sub, .ad .stmt-cta, .ad .yellow-alert-bar, .ad .yellow-headline, .ad .yellow-sub, .ad .yellow-body, .ad .yellow-cta, .ad .headline, .ad .body-text, .ad .eyebrow, .ad .cta-button, .ad .cta-url, .ad .brand-tagline').forEach(el => {
-      el.contentEditable = editMode;
+    // Make all text-containing elements in ads editable (excludes images/structural-only)
+    document.querySelectorAll('.ad .draggable, .ad h1, .ad h2, .ad h3, .ad p, .ad li, .ad div, .ad span').forEach(el => {
+      if (el.querySelector('img')) return;
+      if (el.classList.contains('hero-photo') || el.classList.contains('dp-photo') || el.classList.contains('photo-fullbleed') || el.classList.contains('photo-side') || el.classList.contains('photo-bg-layer') || el.classList.contains('flow-photo-top') || el.classList.contains('stmt-photo') || el.classList.contains('perf-photo') || el.classList.contains('im-photo-side') || el.classList.contains('im-photo-banner')) return;
+      if (el.children.length === 0 || (el.children.length > 0 && Array.from(el.children).every(c => ['SPAN','STRONG','BR','EM','B'].includes(c.tagName)))) {
+        el.contentEditable = editMode;
+      }
     });
     document.getElementById('formatToolbar').classList.toggle('visible', editMode);
   }
