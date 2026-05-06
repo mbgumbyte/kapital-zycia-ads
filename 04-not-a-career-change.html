@@ -682,6 +682,128 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
 
 /* Brand text spacing improvement */
 .brand-logo span, .dp-brand span, .dpc-brand-corner span, .dpt-brand span, .cream-brand span { letter-spacing: 0.12em !important; }
+
+/* ============= TOM CROSSHILL STYLE LAYOUTS ============= */
+
+:root {
+  --tom-yellow: #F5C518; --tom-purple: #2E1A47; --tom-darkgreen: #0B3D2E;
+  --tom-mint: #5BD891; --tom-black: #0F0F0F;
+}
+
+/* ===== TOM 1: YELLOW + PHOTO ===== */
+.layout-tom-yellow { padding: 0; height: 100%; position: relative; overflow: hidden;
+  background: var(--tom-yellow) !important; color: var(--tom-black);
+  display: grid; grid-template-columns: 1.1fr 0.9fr; }
+.ad.format-9-16 .layout-tom-yellow { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+.ad.format-1-1 .layout-tom-yellow { grid-template-columns: 1.15fr 0.85fr; }
+.layout-tom-yellow .tom-text { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+.ad.format-9-16 .layout-tom-yellow .tom-text { padding: 250px 80px 50px !important; justify-content: flex-end; }
+.layout-tom-yellow .tom-photo { background-size: cover; background-position: center; position: relative; }
+.layout-tom-yellow .tom-photo::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(270deg, transparent 60%, var(--tom-yellow) 100%); }
+.ad.format-9-16 .layout-tom-yellow .tom-photo::after {
+  background: linear-gradient(0deg, transparent 60%, var(--tom-yellow) 100%); }
+.layout-tom-yellow .tom-eyebrow { background: var(--tom-black); color: var(--tom-yellow);
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.12em;
+  padding: 8px 18px; align-self: flex-start; margin-bottom: 24px; text-transform: uppercase; }
+.layout-tom-yellow .tom-headline { font-family: 'Inter', sans-serif; font-weight: 900;
+  font-size: 80px; line-height: 0.95; letter-spacing: -0.025em; color: var(--tom-black); margin-bottom: 28px; }
+.ad.format-9-16 .layout-tom-yellow .tom-headline { font-size: 110px; }
+.ad.format-1-1 .layout-tom-yellow .tom-headline { font-size: 64px; }
+.layout-tom-yellow .tom-headline .underline { background: var(--tom-yellow); padding: 0 6px;
+  border-bottom: 6px solid var(--tom-black); }
+.layout-tom-yellow .tom-cta { display: inline-flex; align-items: center; gap: 12px;
+  background: var(--tom-black); color: var(--tom-yellow); padding: 18px 32px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; align-self: flex-start;
+  border-radius: 8px; margin-top: 16px; }
+.layout-tom-yellow .tom-cta::after { content: '→'; font-size: 24px; }
+.layout-tom-yellow .tom-brand { display: flex; align-items: center; gap: 10px; margin-top: 24px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.16em;
+  color: var(--tom-black); text-transform: uppercase; }
+.layout-tom-yellow .tom-brand img { width: 28px; height: auto; }
+
+/* ===== TOM 2: DARK PURPLE + BOLD + CHECKLIST + PHOTO ===== */
+.layout-tom-purple { padding: 0; height: 100%; position: relative; overflow: hidden;
+  background: var(--tom-purple) !important; color: white;
+  display: grid; grid-template-columns: 1.15fr 0.85fr; }
+.ad.format-9-16 .layout-tom-purple { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+.ad.format-1-1 .layout-tom-purple { grid-template-columns: 1.2fr 0.8fr; }
+.layout-tom-purple .tom-text { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+.ad.format-9-16 .layout-tom-purple .tom-text { padding: 250px 80px 50px !important; justify-content: flex-end; }
+.layout-tom-purple .tom-photo { background-size: cover; background-position: center; position: relative; }
+.layout-tom-purple .tom-photo::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(270deg, transparent 60%, var(--tom-purple) 100%); }
+.ad.format-9-16 .layout-tom-purple .tom-photo::after {
+  background: linear-gradient(0deg, transparent 60%, var(--tom-purple) 100%); }
+.layout-tom-purple .tom-headline { font-family: 'Inter', sans-serif; font-weight: 900;
+  font-size: 78px; line-height: 0.98; letter-spacing: -0.025em; color: white; margin-bottom: 22px; }
+.ad.format-9-16 .layout-tom-purple .tom-headline { font-size: 108px; }
+.ad.format-1-1 .layout-tom-purple .tom-headline { font-size: 60px; }
+.layout-tom-purple .tom-headline .mint { color: var(--tom-mint); }
+.layout-tom-purple .tom-sub { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px;
+  color: var(--tom-mint); line-height: 1.3; margin-bottom: 28px; }
+.ad.format-9-16 .layout-tom-purple .tom-sub { font-size: 38px; }
+.layout-tom-purple .tom-checklist { list-style: none; padding: 0; margin: 0 0 24px;
+  display: flex; flex-direction: column; gap: 14px; }
+.layout-tom-purple .tom-checklist li { font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 22px; padding-left: 42px; position: relative; color: white; line-height: 1.4; }
+.ad.format-9-16 .layout-tom-purple .tom-checklist li { font-size: 28px; padding-left: 50px; }
+.layout-tom-purple .tom-checklist li::before { content: ''; position: absolute; left: 0; top: 4px;
+  width: 26px; height: 26px; border-radius: 50%; background: var(--tom-mint);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232E1A47'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: 18px 18px; background-position: center; background-repeat: no-repeat; }
+.ad.format-9-16 .layout-tom-purple .tom-checklist li::before { width: 32px; height: 32px; background-size: 22px 22px; }
+.layout-tom-purple .tom-cta { display: inline-flex; align-items: center; gap: 12px;
+  background: var(--tom-mint); color: var(--tom-purple); padding: 18px 32px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; align-self: flex-start;
+  border-radius: 8px; margin-top: 16px; }
+.layout-tom-purple .tom-cta::after { content: '→'; font-size: 24px; }
+.layout-tom-purple .tom-brand { display: flex; align-items: center; gap: 10px; margin-top: 24px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.16em;
+  color: white; text-transform: uppercase; }
+.layout-tom-purple .tom-brand img { width: 28px; height: auto; }
+
+/* ===== TOM 3: DARK GREEN + STICKY BANNER + PHOTO ===== */
+.layout-tom-darkgreen { padding: 0; height: 100%; position: relative; overflow: hidden;
+  background: var(--tom-darkgreen) !important; color: white;
+  display: grid; grid-template-columns: 1.15fr 0.85fr; }
+.ad.format-9-16 .layout-tom-darkgreen { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+.ad.format-1-1 .layout-tom-darkgreen { grid-template-columns: 1.2fr 0.8fr; }
+.layout-tom-darkgreen .tom-text { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+.ad.format-9-16 .layout-tom-darkgreen .tom-text { padding: 250px 80px 50px !important; justify-content: flex-end; }
+.layout-tom-darkgreen .tom-photo { background-size: cover; background-position: center; position: relative; }
+.layout-tom-darkgreen .tom-photo::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(270deg, transparent 60%, var(--tom-darkgreen) 100%); }
+.ad.format-9-16 .layout-tom-darkgreen .tom-photo::after {
+  background: linear-gradient(0deg, transparent 60%, var(--tom-darkgreen) 100%); }
+.layout-tom-darkgreen .tom-sticky { background: var(--tom-mint); color: var(--tom-darkgreen);
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 0.12em;
+  padding: 10px 22px; align-self: flex-start; margin-bottom: 24px; text-transform: uppercase;
+  transform: rotate(-1deg); box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+.layout-tom-darkgreen .tom-headline { font-family: 'Inter', sans-serif; font-weight: 900;
+  font-size: 78px; line-height: 0.98; letter-spacing: -0.025em; color: white; margin-bottom: 22px; }
+.ad.format-9-16 .layout-tom-darkgreen .tom-headline { font-size: 108px; }
+.ad.format-1-1 .layout-tom-darkgreen .tom-headline { font-size: 60px; }
+.layout-tom-darkgreen .tom-headline .mint { color: var(--tom-mint); }
+.layout-tom-darkgreen .tom-checklist { list-style: none; padding: 0; margin: 8px 0 24px;
+  display: flex; flex-direction: column; gap: 14px; }
+.layout-tom-darkgreen .tom-checklist li { font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 22px; padding-left: 42px; position: relative; color: white; line-height: 1.4; }
+.ad.format-9-16 .layout-tom-darkgreen .tom-checklist li { font-size: 28px; padding-left: 50px; }
+.layout-tom-darkgreen .tom-checklist li::before { content: ''; position: absolute; left: 0; top: 4px;
+  width: 26px; height: 26px; border-radius: 50%; background: var(--tom-mint);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230B3D2E'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: 18px 18px; background-position: center; background-repeat: no-repeat; }
+.ad.format-9-16 .layout-tom-darkgreen .tom-checklist li::before { width: 32px; height: 32px; background-size: 22px 22px; }
+.layout-tom-darkgreen .tom-cta { display: inline-flex; align-items: center; gap: 12px;
+  background: var(--tom-mint); color: var(--tom-darkgreen); padding: 18px 32px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; align-self: flex-start;
+  border-radius: 8px; margin-top: 16px; }
+.layout-tom-darkgreen .tom-cta::after { content: '→'; font-size: 24px; }
+.layout-tom-darkgreen .tom-brand { display: flex; align-items: center; gap: 10px; margin-top: 24px;
+  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.16em;
+  color: white; text-transform: uppercase; }
+.layout-tom-darkgreen .tom-brand img { width: 28px; height: auto; }
 </style>
 </head>
 <body>
@@ -717,16 +839,17 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     <button class="active" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
   <div class="ad format-4-5">
-    <div class="layout-dp-photo">
-      <div class="dp-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1080&h=1350&fit=crop&q=85');"></div>
-      <div class="dp-content">
-        <h1 class="dp-headline draggable">Rynek <span class="mint">zamarł</span>?<br>Twoja sieć — nie.</h1>
-        <div class="dp-spacer"></div>
-        <div class="dp-brand draggable">
+    <div class="layout-tom-yellow">
+      <div class="tom-text">
+        <div class="tom-eyebrow draggable">Rekrutacja · Agenci</div>
+        <h1 class="tom-headline draggable">Rynek nieruchomości <span class="underline">zwolnił</span>?<br>Twoja sieć — nie.</h1>
+        <div class="tom-cta draggable">Aplikuj</div>
+        <div class="tom-brand draggable">
           <img src="assets/logo-flames.png" alt="Kapitał Życia">
           <span>Kapitał Życia</span>
         </div>
       </div>
+      <div class="tom-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&h=1350&fit=crop&q=85');"></div>
     </div>
   </div>
   <div class="ad-actions">
@@ -742,11 +865,21 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="active" onclick="setFormat(this, '9-16')">9:16</button><button class="" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
   <div class="ad format-9-16">
-    <div class="layout-dp-cream">
-      <h1 class="dpc-headline draggable">4 wypłaty<br>z <span class="mint">1 klienta.</span></h1>
-      <div class="dpc-brand-corner draggable">
-        <img src="assets/logo-flames.png" alt="Kapitał Życia">
-        <span>Kapitał Życia</span>
+    <div class="layout-tom-purple">
+      <div class="tom-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1080&h=960&fit=crop&q=85');"></div>
+      <div class="tom-text">
+        <h1 class="tom-headline draggable">4 wypłaty<br>z <span class="mint">1 klienta.</span></h1>
+        <div class="tom-sub draggable">Twoja sieć kontaktów pracuje podwójnie</div>
+        <ul class="tom-checklist draggable">
+          <li>Prowizja przy zawarciu umowy</li>
+          <li>+ w 2. i 3. roku trwania</li>
+          <li>Bez porzucania nieruchomości</li>
+        </ul>
+        <div class="tom-cta draggable">Aplikuj</div>
+        <div class="tom-brand draggable">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia">
+          <span>Kapitał Życia</span>
+        </div>
       </div>
     </div>
   </div>
@@ -763,18 +896,22 @@ body { font-family: 'Inter', sans-serif; background: #e8e8e8; padding: 40px 20px
     <button class="" onclick="setFormat(this, '4-5')">4:5</button><button class="" onclick="setFormat(this, '9-16')">9:16</button><button class="active" onclick="setFormat(this, '1-1')">1:1</button>
   </div>
   <div class="ad format-1-1">
-    <div class="layout-dp-tag">
-      <div class="dp-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1080&h=1080&fit=crop&q=85');"></div>
-      <div class="dpt-content">
-        <div class="dpt-tag draggable">Rekrutacja</div>
-        <div class="dpt-bottom">
-          <h1 class="dpt-headline draggable">Nie zmieniaj kariery.<br>Dodaj <span class="mint">drugi strumień</span>.</h1>
-          <div class="dpt-brand draggable">
-            <img src="assets/logo-flames.png" alt="Kapitał Życia">
-            <span>Kapitał Życia</span>
-          </div>
+    <div class="layout-tom-darkgreen">
+      <div class="tom-text">
+        <div class="tom-sticky draggable">CZY TO BRZMI ZNAJOMO?</div>
+        <h1 class="tom-headline draggable">Czekasz miesiącami<br>na <span class="mint">jedno zamknięcie</span>?</h1>
+        <ul class="tom-checklist draggable">
+          <li>Dodaj drugi strumień, nie zmieniaj kariery</li>
+          <li>1 polisa = 3 wypłaty z 1 klienta</li>
+          <li>B2B, 100% online, pomoc w licencji</li>
+        </ul>
+        <div class="tom-cta draggable">Aplikuj</div>
+        <div class="tom-brand draggable">
+          <img src="assets/logo-flames.png" alt="Kapitał Życia">
+          <span>Kapitał Życia</span>
         </div>
       </div>
+      <div class="tom-photo draggable" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&h=1080&fit=crop&q=85');"></div>
     </div>
   </div>
   <div class="ad-actions">
